@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plato Pod — augmented-reality tactical simulation</title>
+<meta name="description" content="Physical robots and virtual force share one arena. Plato Pod runs mixed-reality tactical simulation from a desk arena to an outdoor exercise.">
+<meta property="og:title" content="Plato Pod">
+<meta property="og:description" content="Physical robots and virtual force share one arena.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://platopod.com/">
+<meta property="og:image" content="https://platopod.com/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* platopod.com — "the arena" idiom. See CLAUDE.md before changing the
+     palette or the colour rule: blue is interactive AND blue force, red is
+     the adversary and nothing else, green is a completed or measured fact. */
+  :root {
+    --bg: #0B0E13;   --surface: #141922; --raised: #1B212C;
+    --line: #232A36; --line-soft: #1B2029;
+    --ink: #E7ECF3;  --ink-2: #93A0B2;   --ink-3: #6B7686;
+    --blue: #3D8BFD; --blue-dim: #16304f;
+    --red: #D9534F;
+    --good: #2EA36B;
+    --warn: #C98A1B;
+    --col: 1140px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--col); margin: 0 auto; padding: 0 24px; }
+
+  /* Chrome: mono, uppercase, tracked. Body copy is never mono. */
+  .chrome {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  /* ── Header ───────────────────────────────────────── */
+  header {
+    border-bottom: 1px solid var(--line); position: sticky; top: 0;
+    background: var(--bg); z-index: 20;
+  }
+  header .wrap { display: flex; align-items: center; gap: 28px; height: 64px; }
+  .mark { display: flex; align-items: center; gap: 9px; font-weight: 600; letter-spacing: -.01em; }
+  .mark svg { display: block; }
+  nav { margin-left: auto; display: flex; gap: 24px; }
+  nav a { color: var(--ink-2); font-size: 14px; }
+  nav a:hover { color: var(--ink); text-decoration: none; }
+  @media (max-width: 700px) { nav { display: none; } }
+
+  /* ── Sections ─────────────────────────────────────── */
+  section { border-bottom: 1px solid var(--line); padding: 84px 0; }
+  section.tight { padding: 56px 0; }
+  .eyebrow { margin-bottom: 14px; }
+  h2 {
+    font-size: 30px; font-weight: 600; letter-spacing: -.02em;
+    line-height: 1.2; margin-bottom: 14px;
+  }
+  h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  p.lead { color: var(--ink-2); font-size: 17px; max-width: 62ch; }
+  p { color: var(--ink-2); max-width: 68ch; }
+  p + p { margin-top: 12px; }
+
+  /* ── Hero ─────────────────────────────────────────── */
+  #hero { padding: 92px 0 84px; }
+  #hero .grid {
+    display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center;
+  }
+  #hero h1 {
+    font-size: 46px; line-height: 1.08; font-weight: 600;
+    letter-spacing: -.028em; margin-bottom: 18px;
+  }
+  #hero h1 em { font-style: normal; color: var(--blue); }
+  .cta { display: flex; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 11px 20px; border-radius: 6px;
+    font-weight: 500; font-size: 15px; border: 1px solid var(--line);
+    background: var(--raised); color: var(--ink);
+  }
+  .btn:hover { background: #222936; text-decoration: none; }
+  .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .btn.primary:hover { background: #4f97fd; }
+  @media (max-width: 860px) {
+    #hero .grid { grid-template-columns: 1fr; gap: 36px; }
+    #hero h1 { font-size: 34px; }
+  }
+
+  /* Arena diagram */
+  figure.arena { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+  figure.arena svg { display: block; width: 100%; height: auto; }
+  figure.arena figcaption {
+    border-top: 1px solid var(--line); padding: 10px 14px;
+    display: flex; gap: 18px; flex-wrap: wrap;
+  }
+  .key { display: flex; align-items: center; gap: 6px; }
+  .key i { width: 8px; height: 8px; border-radius: 2px; display: block; }
+
+  /* ── Capability grid ──────────────────────────────── */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+           background: var(--line); border: 1px solid var(--line);
+           border-radius: 8px; overflow: hidden; margin-top: 34px; }
+  .card { background: var(--surface); padding: 22px; }
+  .card p { font-size: 14.5px; margin-top: 4px; }
+  .card .chrome { margin-bottom: 10px; display: block; }
+  @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } }
+
+  /* ── Scale ────────────────────────────────────────── */
+  .scales { display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+            background: var(--line); border: 1px solid var(--line);
+            border-radius: 8px; overflow: hidden; margin-top: 34px; }
+  .scale { background: var(--surface); padding: 26px; }
+  .scale dl { margin-top: 16px; display: grid; grid-template-columns: auto 1fr;
+              gap: 7px 16px; font-size: 14px; }
+  .scale dt { color: var(--ink-3); font-family: "IBM Plex Mono", monospace;
+              font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+              padding-top: 3px; }
+  .scale dd { color: var(--ink-2); }
+  @media (max-width: 860px) { .scales { grid-template-columns: 1fr; } }
+
+  /* ── Result strip ─────────────────────────────────── */
+  .result {
+    display: flex; gap: 40px; flex-wrap: wrap; margin-top: 30px;
+    border: 1px solid var(--line); border-radius: 8px;
+    background: var(--surface); padding: 22px 26px;
+  }
+  .result div strong {
+    display: block; font-size: 26px; font-weight: 600; letter-spacing: -.02em;
+    color: var(--good); font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Classroom ────────────────────────────────────── */
+  #classroom { background: var(--surface); }
+  #classroom code {
+    font-family: "IBM Plex Mono", monospace; font-size: 13px;
+    color: var(--ink); background: var(--raised);
+    padding: 1px 6px; border-radius: 3px;
+  }
+  ul.plain { margin-top: 18px; list-style: none; display: grid; gap: 10px; }
+  ul.plain li { color: var(--ink-2); font-size: 14.5px; padding-left: 16px; position: relative; }
+  ul.plain li::before {
+    content: ""; position: absolute; left: 0; top: 10px;
+    width: 6px; height: 1px; background: var(--ink-3);
+  }
+
+  /* ── Contact ──────────────────────────────────────── */
+  #contact .box {
+    border: 1px solid var(--line); border-radius: 8px; background: var(--surface);
+    padding: 30px; margin-top: 26px; max-width: 640px;
+  }
+
+  footer { padding: 34px 0 48px; }
+  footer .wrap { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  footer .chrome { color: var(--ink-3); }
+  footer .sp { margin-left: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="mark" href="/" aria-label="Plato Pod home">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+        <rect x="1" y="1" width="16" height="16" rx="2" fill="none" stroke="#3D8BFD" stroke-width="1.5"/>
+        <circle cx="6" cy="12" r="2.1" fill="#3D8BFD"/>
+        <circle cx="12" cy="6" r="2.1" fill="#D9534F"/>
+      </svg>
+      Plato&nbsp;Pod
+    </a>
+    <nav>
+      <a href="#capability">Capability</a>
+      <a href="#scale">Scale</a>
+      <a href="#classroom">Classroom</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section id="hero">
+  <div class="wrap grid">
+    <div>
+      <div class="chrome eyebrow">Augmented-reality tactical simulation</div>
+      <h1>Physical robots and <em>virtual force</em> share one arena.</h1>
+      <p class="lead">
+        Plato Pod puts real robots, simulated units, sensor effects and
+        engagement rules into the same space, at the same time. A pod that
+        drives across a desk is fighting an adversary that is not there, over
+        terrain that is not there, under rules that are.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="#contact">Request a briefing</a>
+        <a class="btn" href="#capability">What it does</a>
+      </div>
+    </div>
+
+    <figure class="arena">
+      <!-- Schematic, not a screenshot. Blue force, red force, hidden mines. -->
+      <svg viewBox="0 0 420 300" role="img"
+           aria-label="Top-down schematic of the arena: a blue pod, a red pod, obstacles and hidden mines.">
+        <rect width="420" height="300" fill="#141922"/>
+        <g stroke="#1B2029" stroke-width="1">
+          <path d="M30 .5V300M90 .5V300M150 .5V300M210 .5V300M270 .5V300M330 .5V300M390 .5V300"/>
+          <path d="M.5 30H420M.5 90H420M.5 150H420M.5 210H420M.5 270H420"/>
+        </g>
+        <rect x="30" y="30" width="360" height="240" fill="none" stroke="#232A36" stroke-width="1.5"/>
+
+        <!-- swept ground -->
+        <path d="M70 230 L140 190 L215 205 L290 160" fill="none" stroke="#3D8BFD"
+              stroke-opacity=".22" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+
+        <!-- obstacles -->
+        <circle cx="150" cy="105" r="13" fill="#232A36"/>
+        <circle cx="255" cy="235" r="13" fill="#232A36"/>
+        <circle cx="325" cy="95"  r="13" fill="#232A36"/>
+
+        <!-- mines: one found, two still hidden -->
+        <circle cx="140" cy="190" r="9" fill="none" stroke="#2EA36B" stroke-width="2"/>
+        <circle cx="140" cy="190" r="2.5" fill="#2EA36B"/>
+        <circle cx="330" cy="215" r="2.5" fill="#6B7686"/>
+        <circle cx="205" cy="60"  r="2.5" fill="#6B7686"/>
+
+        <!-- blue pod, with heading -->
+        <g transform="translate(290 160)">
+          <circle r="11" fill="#3D8BFD"/>
+          <path d="M0 0 L22 -12" stroke="#3D8BFD" stroke-width="2"/>
+        </g>
+        <!-- red pod -->
+        <g transform="translate(120 95)">
+          <circle r="11" fill="#D9534F"/>
+          <path d="M0 0 L-20 14" stroke="#D9534F" stroke-width="2"/>
+        </g>
+
+        <!-- line of sight, broken by an obstacle -->
+        <path d="M131 103 L139 106" stroke="#6B7686" stroke-width="1" stroke-dasharray="3 4"/>
+        <path d="M163 112 L279 156" stroke="#6B7686" stroke-width="1" stroke-dasharray="3 4"/>
+      </svg>
+      <figcaption>
+        <span class="key chrome"><i style="background:#3D8BFD"></i>Blue force</span>
+        <span class="key chrome"><i style="background:#D9534F"></i>Red force</span>
+        <span class="key chrome"><i style="background:#2EA36B"></i>Found</span>
+        <span class="key chrome"><i style="background:#232A36"></i>Obstacle</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="capability">
+  <div class="wrap">
+    <div class="chrome eyebrow">Capability</div>
+    <h2>A tactical layer, not a robot demo</h2>
+    <p class="lead">
+      The robots are the cheap part. What makes an exercise worth running is
+      everything the robots cannot see.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <span class="chrome">Engagement</span>
+        <h3>Fire, damage, health</h3>
+        <p>A central evaluator resolves every shot against weapon
+        characteristics, line of sight and the target's state. Damage
+        degrades mobility and the ability to return fire.</p>
+      </div>
+      <div class="card">
+        <span class="chrome">Rules of engagement</span>
+        <h3>Weapons hold, tight, free</h3>
+        <p>Fire is checked against the posture in force, with civilian and
+        friendly checks applied before a round is ever resolved.</p>
+      </div>
+      <div class="card">
+        <span class="chrome">Line of sight</span>
+        <h3>Terrain that blocks</h3>
+        <p>Visibility is evaluated against cover and elevation — by a fast 2D
+        ray model, or by a Gazebo lidar backend behind the same interface.</p>
+      </div>
+      <div class="card">
+        <span class="chrome">Electronic warfare</span>
+        <h3>Jamming and dead zones</h3>
+        <p>Emitters, jammed regions and communications dead zones are part of
+        the world state, so a unit can be cut off without being touched.</p>
+      </div>
+      <div class="card">
+        <span class="chrome">Sensing</span>
+        <h3>Ten sensor models</h3>
+        <p>Gas with stateful detector dynamics, lidar, sonar, thermal,
+        rangefinder, IED detection, direction finding, GPS, UAV camera and
+        friend-or-foe.</p>
+      </div>
+      <div class="card">
+        <span class="chrome">Interoperability</span>
+        <h3>Cursor on Target</h3>
+        <p>Positions, zones, sensor readings and engagement events bridge to
+        ATAK, so an exercise appears where the rest of the picture already
+        does.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="scale">
+  <div class="wrap">
+    <div class="chrome eyebrow">Scale</div>
+    <h2>The same platform on a desk and in a field</h2>
+    <p class="lead">
+      Only the localisation changes. The tactical layer above it — engagement,
+      sensing, rules, logistics — is identical, so a scenario rehearsed on a
+      tabletop is the scenario you take outside.
+    </p>
+
+    <div class="scales">
+      <div class="scale">
+        <span class="chrome">Indoor</span>
+        <h3>Desk arena</h3>
+        <dl>
+          <dt>Platform</dt><dd>Small differential-drive pods</dd>
+          <dt>Position</dt><dd>Overhead camera reading fiducial markers</dd>
+          <dt>Arena</dt><dd>Boundary and origin fitted from corner markers</dd>
+          <dt>Use</dt><dd>Development, teaching, rehearsal</dd>
+        </dl>
+      </div>
+      <div class="scale">
+        <span class="chrome">Outdoor</span>
+        <h3>Field exercise</h3>
+        <dl>
+          <dt>Platform</dt><dd>Dismounted units and vehicles</dd>
+          <dt>Position</dt><dd>GNSS and inertial measurement</dd>
+          <dt>Arena</dt><dd>Georeferenced to WGS84</dd>
+          <dt>Use</dt><dd>Larger-scale exercise with the same rules</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="built">
+  <div class="wrap">
+    <div class="chrome eyebrow">Demonstrated</div>
+    <h2>Working scenarios, measured</h2>
+    <p class="lead">
+      Three scenarios run today on the desk arena. The figures below are from
+      an instrumented run, not an estimate.
+    </p>
+
+    <div class="result">
+      <div>
+        <strong>6 / 6</strong>
+        <span class="chrome">Hidden mines located</span>
+      </div>
+      <div>
+        <strong>97%</strong>
+        <span class="chrome">Arena covered</span>
+      </div>
+      <div>
+        <strong>69.5 s</strong>
+        <span class="chrome">Two pods, cooperative sweep</span>
+      </div>
+    </div>
+
+    <ul class="plain">
+      <li><strong style="color:var(--ink)">Pursuit.</strong> One pod evades,
+        one pursues, both planning routes through the free space rather than
+        driving at each other through obstacles.</li>
+      <li><strong style="color:var(--ink)">Route following.</strong> Draw a
+        path in the browser and a pod drives it, stopping if two routes
+        cross.</li>
+      <li><strong style="color:var(--ink)">Cooperative search.</strong> Two
+        pods divide the arena and sweep it for hazards neither can see until
+        a detector passes over one.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="classroom">
+  <div class="wrap">
+    <div class="chrome eyebrow">For classrooms</div>
+    <h2>Every scenario is an exercise with one seam</h2>
+    <p class="lead">
+      The same platform is used for teaching. Each scenario's behaviour is a
+      pure function with tests that run without the robotics stack, so a
+      student replaces a strategy, not an architecture.
+    </p>
+    <ul class="plain">
+      <li><code>chase</code> and <code>flee</code> — decide a heading each
+        tick for pursuit and evasion.</li>
+      <li><code>follow</code> — turn a route and a pose into a velocity.</li>
+      <li><code>assign_targets</code> — decide which robot searches where.
+        This single function is the whole of the cooperation in the sweep,
+        and the obvious first exercise.</li>
+    </ul>
+    <p style="margin-top:18px">
+      Teams can be compared directly: the console times each run and keeps the
+      best, so a class competes on a measured result rather than an
+      impression.
+    </p>
+  </div>
+</section>
+
+<section id="contact" class="tight">
+  <div class="wrap">
+    <div class="chrome eyebrow">Contact</div>
+    <h2>Request a briefing</h2>
+    <p class="lead">
+      For evaluation, collaboration or classroom use, describe what you are
+      trying to rehearse and we will tell you honestly whether the platform
+      does it yet.
+    </p>
+    <div class="box">
+      <a class="btn primary" href="mailto:hello@platopod.com?subject=Plato%20Pod%20briefing">
+        hello@platopod.com
+      </a>
+      <p style="margin-top:14px;font-size:14px">
+        Plato Pod is developed at UNSW Canberra.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="chrome">Plato Pod</span>
+    <span class="chrome">platopod.com</span>
+    <span class="chrome sp">No cookies, no tracking</span>
+  </div>
+</footer>
+
+</body>
+</html>
