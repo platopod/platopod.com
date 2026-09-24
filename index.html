@@ -130,9 +130,10 @@
 
   /* the run itself, recorded */
   .measured { padding: 92px 0 0; }
+  /* Sits in the text column, not full bleed, so its edges line up with the
+     heading above it. */
   .film { margin-top: 40px; background: var(--panel); }
   .film video { display: block; width: 100%; height: auto; }
-  .film figcaption { color: var(--ink-3); padding-top: 14px; padding-bottom: 22px; }
 
   /* contact */
   .contact { padding: 92px 0 100px; }
@@ -292,16 +293,15 @@
       The desk arena, recorded. Hazards are hidden from the robots until a
       detector passes over one.
     </p>
+    <figure class="film">
+      <video id="film" playsinline muted loop preload="metadata"
+             poster="img/sweep-poster.jpg"
+             aria-label="Two pods sweeping a desk arena for hidden hazards, recorded at twice speed.">
+        <source src="img/sweep.webm" type="video/webm">
+        <source src="img/sweep.mp4" type="video/mp4">
+      </video>
+    </figure>
   </div>
-  <figure class="film">
-    <video id="film" playsinline muted loop preload="metadata"
-           poster="img/sweep-poster.jpg"
-           aria-label="Two pods sweeping a desk arena for hidden hazards.">
-      <source src="img/sweep.webm" type="video/webm">
-      <source src="img/sweep.mp4" type="video/mp4">
-    </video>
-    <figcaption class="w">Recorded at twice speed.</figcaption>
-  </figure>
 </section>
 
 <section class="contact" id="contact">
