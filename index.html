@@ -3,505 +3,381 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plato Pod — augmented-reality tactical simulation</title>
-<meta name="description" content="Physical robots and virtual force share one arena. Plato Pod runs mixed-reality tactical simulation from a desk arena to an outdoor exercise.">
+<title>Plato Pod</title>
+<meta name="description" content="Physical robots and virtual force in one arena. Mixed-reality tactical simulation, from a desk to a field.">
 <meta property="og:title" content="Plato Pod">
-<meta property="og:description" content="Physical robots and virtual force share one arena.">
+<meta property="og:description" content="Physical robots and virtual force in one arena.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://platopod.com/">
 <meta property="og:image" content="https://platopod.com/img/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-  /* platopod.com — "the arena" idiom. See CLAUDE.md before changing the
-     palette or the colour rule: blue is interactive AND blue force, red is
-     the adversary and nothing else, green is a completed or measured fact. */
+  /* platopod.com
+     One idea: a white page in which the only dark thing is the arena. The
+     product's world is the single object; everything else is type and
+     hairlines. Read CLAUDE.md before adding a surface, a border or a card —
+     the restraint is the design, and a second box starts an arms race. */
   :root {
-    --bg: #0B0E13;   --surface: #141922; --raised: #1B212C;
-    --line: #232A36; --line-soft: #1B2029;
-    --ink: #E7ECF3;  --ink-2: #93A0B2;   --ink-3: #6B7686;
-    --blue: #3D8BFD; --blue-dim: #16304f;
-    --red: #D9534F;
-    --good: #2EA36B;
-    --warn: #C98A1B;
-    --col: 1140px;
+    --paper: #FFFFFF;
+    --ink:   #0B0B0C;
+    --ink-2: #56595F;
+    --ink-3: #9A9DA3;
+    --rule:  #E4E4E2;
+    --panel: #0B0E13;
+    --blue:  #1D4ED8;
+    --red:   #DC2626;
+    --measure: 34rem;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
-    background: var(--bg); color: var(--ink);
-    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-    font-size: 16px; line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+    background: var(--paper); color: var(--ink);
+    font-family: Archivo, ui-sans-serif, system-ui, sans-serif;
+    font-size: 17px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
   }
-  .wrap { max-width: var(--col); margin: 0 auto; padding: 0 24px; }
+  .w { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 640px) { .w { padding: 0 20px; } }
 
-  /* Chrome: mono, uppercase, tracked. Body copy is never mono. */
-  .chrome {
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+  .mono {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
     color: var(--ink-3);
   }
 
-  a { color: var(--blue); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  /* masthead */
+  .mast { padding: 26px 0; }
+  .mast .w { display: flex; align-items: center; }
+  .mast b { font-weight: 600; letter-spacing: -.015em; }
+  .mast nav { margin-left: auto; display: flex; gap: 26px; }
+  .mast nav a { font-size: 15px; color: var(--ink-2); }
+  .mast nav a:hover { color: var(--ink); }
+  @media (max-width: 560px) { .mast nav { display: none; } }
 
-  /* ── Header ───────────────────────────────────────── */
-  header {
-    border-bottom: 1px solid var(--line); position: sticky; top: 0;
-    background: var(--bg); z-index: 20;
+  /* opening statement */
+  .open { padding: 44px 0 60px; }
+  .open h1 {
+    font-weight: 500; font-size: clamp(40px, 7.4vw, 92px);
+    line-height: .97; letter-spacing: -.045em; max-width: 15ch;
   }
-  header .wrap { display: flex; align-items: center; gap: 28px; height: 64px; }
-  .mark { display: flex; align-items: center; gap: 9px; font-weight: 600; letter-spacing: -.01em; }
-  .mark svg { display: block; }
-  nav { margin-left: auto; display: flex; gap: 24px; }
-  nav a { color: var(--ink-2); font-size: 14px; }
-  nav a:hover { color: var(--ink); text-decoration: none; }
-  @media (max-width: 700px) { nav { display: none; } }
+  .open h1 span { color: var(--ink-3); }
+  .open p {
+    margin-top: 30px; max-width: var(--measure);
+    font-size: 19px; color: var(--ink-2);
+  }
 
-  /* ── Sections ─────────────────────────────────────── */
-  section { border-bottom: 1px solid var(--line); padding: 84px 0; }
-  section.tight { padding: 56px 0; }
-  .eyebrow { margin-bottom: 14px; }
+  /* the arena — the one dark object on the page */
+  .arena { background: var(--panel); }
+  .arena svg { display: block; width: 100%; height: auto; }
+  .legend { display: flex; gap: 26px; flex-wrap: wrap; padding: 15px 0 24px; }
+  .legend span { color: #6E747E; }
+  .legend i {
+    width: 7px; height: 7px; border-radius: 50%;
+    display: inline-block; margin-right: 7px; vertical-align: 1px;
+  }
+
+  /* headings shared by the lower sections */
   h2 {
-    font-size: 30px; font-weight: 600; letter-spacing: -.02em;
-    line-height: 1.2; margin-bottom: 14px;
+    font-weight: 500; font-size: clamp(27px, 3.5vw, 38px);
+    letter-spacing: -.034em; line-height: 1.08; max-width: 19ch;
   }
-  h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-  p.lead { color: var(--ink-2); font-size: 17px; max-width: 62ch; }
-  p { color: var(--ink-2); max-width: 68ch; }
-  p + p { margin-top: 12px; }
+  p.sub { margin-top: 16px; max-width: var(--measure); color: var(--ink-2); }
+  .note { margin-top: 22px; color: var(--ink-3); font-size: 15px;
+          max-width: var(--measure); }
 
-  /* ── Hero ─────────────────────────────────────────── */
-  #hero { padding: 92px 0 84px; }
-  #hero .grid {
-    display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center;
+  /* numbered index */
+  .idx { padding: 92px 0 0; }
+  dl.rows { margin-top: 46px; border-top: 1px solid var(--rule); }
+  dl.rows > div {
+    display: grid; grid-template-columns: 3rem 12.5rem 1fr; gap: 28px;
+    padding: 21px 0; border-bottom: 1px solid var(--rule); align-items: baseline;
   }
-  #hero h1 {
-    font-size: 46px; line-height: 1.08; font-weight: 600;
-    letter-spacing: -.028em; margin-bottom: 18px;
-  }
-  #hero h1 em { font-style: normal; color: var(--blue); }
-  .cta { display: flex; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
-  .btn {
-    display: inline-block; padding: 11px 20px; border-radius: 6px;
-    font-weight: 500; font-size: 15px; border: 1px solid var(--line);
-    background: var(--raised); color: var(--ink);
-  }
-  .btn:hover { background: #222936; text-decoration: none; }
-  .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
-  .btn.primary:hover { background: #4f97fd; }
-  @media (max-width: 860px) {
-    #hero .grid { grid-template-columns: 1fr; gap: 36px; }
-    #hero h1 { font-size: 34px; }
+  dl.rows .n { color: var(--ink-3); font-size: 13px;
+               font-family: "IBM Plex Mono", monospace; }
+  dl.rows dt { font-weight: 500; letter-spacing: -.012em; }
+  dl.rows dd { color: var(--ink-2); font-size: 16px; }
+  @media (max-width: 760px) {
+    dl.rows > div { grid-template-columns: 2.2rem 1fr; gap: 4px 16px; }
+    dl.rows dd { grid-column: 2; }
   }
 
-  /* Arena diagram */
-  figure.arena { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
-  figure.arena svg { display: block; width: 100%; height: auto; }
-  figure.arena figcaption {
-    border-top: 1px solid var(--line); padding: 10px 14px;
-    display: flex; gap: 18px; flex-wrap: wrap;
+  /* two-up */
+  .blk { padding: 92px 0 0; }
+  .two {
+    margin-top: 46px; display: grid; grid-template-columns: 1fr 1fr;
+    gap: 56px; border-top: 1px solid var(--rule); padding-top: 28px;
   }
-  .key { display: flex; align-items: center; gap: 6px; }
-  .key i { width: 8px; height: 8px; border-radius: 2px; display: block; }
+  .two h3 { font-size: 17px; font-weight: 500; margin-bottom: 12px; }
+  .two ul { list-style: none; }
+  .two li {
+    color: var(--ink-2); font-size: 15px; padding: 8px 0;
+    border-bottom: 1px solid var(--rule); display: flex; gap: 18px;
+  }
+  .two li b { font-weight: 400; color: var(--ink); min-width: 6.5rem; }
+  @media (max-width: 760px) { .two { grid-template-columns: 1fr; gap: 34px; } }
 
-  /* ── Capability grid ──────────────────────────────── */
-  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-           background: var(--line); border: 1px solid var(--line);
-           border-radius: 8px; overflow: hidden; margin-top: 34px; }
-  .card { background: var(--surface); padding: 22px; }
-  .card p { font-size: 14.5px; margin-top: 4px; }
-  .card .chrome { margin-bottom: 10px; display: block; }
-  @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } }
+  /* the measured claim, as a sentence rather than a scoreboard */
+  .measured { padding: 92px 0 0; }
+  .measured p.big {
+    font-weight: 500; font-size: clamp(23px, 3.1vw, 33px);
+    letter-spacing: -.03em; line-height: 1.26; max-width: 25ch;
+  }
+  .measured p.big em { font-style: normal; color: var(--ink-3); }
 
-  /* ── Scale ────────────────────────────────────────── */
-  .scales { display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-            background: var(--line); border: 1px solid var(--line);
-            border-radius: 8px; overflow: hidden; margin-top: 34px; }
-  .scale { background: var(--surface); padding: 26px; }
-  .scale dl { margin-top: 16px; display: grid; grid-template-columns: auto 1fr;
-              gap: 7px 16px; font-size: 14px; }
-  .scale dt { color: var(--ink-3); font-family: "IBM Plex Mono", monospace;
-              font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
-              padding-top: 3px; }
-  .scale dd { color: var(--ink-2); }
-  @media (max-width: 860px) { .scales { grid-template-columns: 1fr; } }
+  /* contact */
+  .contact { padding: 92px 0 100px; }
+  form { margin-top: 38px; max-width: 34rem; }
+  .f { margin-bottom: 26px; }
+  .f label { display: block; margin-bottom: 9px; }
+  .f input, .f textarea {
+    width: 100%; border: 0; border-bottom: 1px solid var(--rule);
+    background: transparent; color: var(--ink); font: inherit;
+    font-size: 17px; padding: 6px 0;
+  }
+  .f textarea { resize: vertical; min-height: 46px; line-height: 1.5; }
+  .f input:focus, .f textarea:focus { outline: none; border-color: var(--ink); }
+  button {
+    font: inherit; font-size: 16px; font-weight: 500; cursor: pointer;
+    background: var(--ink); color: var(--paper); border: 0;
+    padding: 13px 28px; border-radius: 2px; letter-spacing: -.01em;
+  }
+  button:hover:not([disabled]) { background: var(--blue); }
+  button[disabled] { background: var(--ink-3); cursor: default; }
+  #note { margin-top: 16px; font-size: 15px; color: var(--ink-2); min-height: 1px; }
+  #note.bad { color: var(--red); }
 
-  /* ── Result strip ─────────────────────────────────── */
-  .result {
-    display: flex; gap: 40px; flex-wrap: wrap; margin-top: 30px;
-    border: 1px solid var(--line); border-radius: 8px;
-    background: var(--surface); padding: 22px 26px;
-  }
-  .result div strong {
-    display: block; font-size: 26px; font-weight: 600; letter-spacing: -.02em;
-    color: var(--good); font-variant-numeric: tabular-nums;
-  }
-
-  /* ── Classroom ────────────────────────────────────── */
-  #classroom { background: var(--surface); }
-  #classroom code {
-    font-family: "IBM Plex Mono", monospace; font-size: 13px;
-    color: var(--ink); background: var(--raised);
-    padding: 1px 6px; border-radius: 3px;
-  }
-  ul.plain { margin-top: 18px; list-style: none; display: grid; gap: 10px; }
-  ul.plain li { color: var(--ink-2); font-size: 14.5px; padding-left: 16px; position: relative; }
-  ul.plain li::before {
-    content: ""; position: absolute; left: 0; top: 10px;
-    width: 6px; height: 1px; background: var(--ink-3);
-  }
-
-  /* ── Contact ──────────────────────────────────────── */
-  #contact .box {
-    border: 1px solid var(--line); border-radius: 8px; background: var(--surface);
-    padding: 30px; margin-top: 26px; max-width: 640px;
-  }
-
-  /* Contact form */
-  .field { margin-bottom: 14px; }
-  .field label {
-    display: block; margin-bottom: 5px;
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--ink-3);
-  }
-  .field input, .field textarea {
-    width: 100%; padding: 10px 12px; border-radius: 6px;
-    background: var(--bg); border: 1px solid var(--line);
-    color: var(--ink); font: inherit; font-size: 15px;
-  }
-  .field textarea { resize: vertical; min-height: 92px; }
-  .field input:focus, .field textarea:focus {
-    outline: none; border-color: var(--blue);
-  }
-  #briefing button { cursor: pointer; }
-  #briefing button[disabled] { opacity: .45; cursor: default; }
-  #f-note { margin-top: 12px; font-size: 14px; min-height: 1px; }
-  #f-note.ok { color: var(--good); }
-  #f-note.bad { color: var(--warn); }
-
-  footer { padding: 34px 0 48px; }
-  footer .wrap { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
-  footer .chrome { color: var(--ink-3); }
-  footer .sp { margin-left: auto; }
+  .foot { border-top: 1px solid var(--rule); padding: 22px 0 42px; margin-top: 8px; }
+  .foot .w { display: flex; gap: 22px; flex-wrap: wrap; }
+  .foot .r { margin-left: auto; }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <a class="mark" href="/" aria-label="Plato Pod home">
-      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
-        <rect x="1" y="1" width="16" height="16" rx="2" fill="none" stroke="#3D8BFD" stroke-width="1.5"/>
-        <circle cx="6" cy="12" r="2.1" fill="#3D8BFD"/>
-        <circle cx="12" cy="6" r="2.1" fill="#D9534F"/>
-      </svg>
-      Plato&nbsp;Pod
-    </a>
+<header class="mast">
+  <div class="w">
+    <b>Plato Pod</b>
     <nav>
-      <a href="#capability">Capability</a>
+      <a href="#what">What it does</a>
       <a href="#scale">Scale</a>
-      <a href="#classroom">Classroom</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
 
-<section id="hero">
-  <div class="wrap grid">
-    <div>
-      <div class="chrome eyebrow">Augmented-reality tactical simulation</div>
-      <h1>Physical robots and <em>virtual force</em> share one arena.</h1>
-      <p class="lead">
-        Plato Pod puts real robots, simulated units, sensor effects and
-        engagement rules into the same space, at the same time. A pod that
-        drives across a desk is fighting an adversary that is not there, over
-        terrain that is not there, under rules that are.
-      </p>
-      <div class="cta">
-        <a class="btn primary" href="#contact">Request a briefing</a>
-        <a class="btn" href="#capability">What it does</a>
-      </div>
-    </div>
-
-    <figure class="arena">
-      <!-- Schematic, not a screenshot. Blue force, red force, hidden mines. -->
-      <svg viewBox="0 0 420 300" role="img"
-           aria-label="Top-down schematic of the arena: a blue pod, a red pod, obstacles and hidden mines.">
-        <rect width="420" height="300" fill="#141922"/>
-        <g stroke="#1B2029" stroke-width="1">
-          <path d="M30 .5V300M90 .5V300M150 .5V300M210 .5V300M270 .5V300M330 .5V300M390 .5V300"/>
-          <path d="M.5 30H420M.5 90H420M.5 150H420M.5 210H420M.5 270H420"/>
-        </g>
-        <rect x="30" y="30" width="360" height="240" fill="none" stroke="#232A36" stroke-width="1.5"/>
-
-        <!-- swept ground -->
-        <path d="M70 230 L140 190 L215 205 L290 160" fill="none" stroke="#3D8BFD"
-              stroke-opacity=".22" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
-
-        <!-- obstacles -->
-        <circle cx="150" cy="105" r="13" fill="#232A36"/>
-        <circle cx="255" cy="235" r="13" fill="#232A36"/>
-        <circle cx="325" cy="95"  r="13" fill="#232A36"/>
-
-        <!-- mines: one found, two still hidden -->
-        <circle cx="140" cy="190" r="9" fill="none" stroke="#2EA36B" stroke-width="2"/>
-        <circle cx="140" cy="190" r="2.5" fill="#2EA36B"/>
-        <circle cx="330" cy="215" r="2.5" fill="#6B7686"/>
-        <circle cx="205" cy="60"  r="2.5" fill="#6B7686"/>
-
-        <!-- blue pod, with heading -->
-        <g transform="translate(290 160)">
-          <circle r="11" fill="#3D8BFD"/>
-          <path d="M0 0 L22 -12" stroke="#3D8BFD" stroke-width="2"/>
-        </g>
-        <!-- red pod -->
-        <g transform="translate(120 95)">
-          <circle r="11" fill="#D9534F"/>
-          <path d="M0 0 L-20 14" stroke="#D9534F" stroke-width="2"/>
-        </g>
-
-        <!-- line of sight, broken by an obstacle -->
-        <path d="M131 103 L139 106" stroke="#6B7686" stroke-width="1" stroke-dasharray="3 4"/>
-        <path d="M163 112 L279 156" stroke="#6B7686" stroke-width="1" stroke-dasharray="3 4"/>
-      </svg>
-      <figcaption>
-        <span class="key chrome"><i style="background:#3D8BFD"></i>Blue force</span>
-        <span class="key chrome"><i style="background:#D9534F"></i>Red force</span>
-        <span class="key chrome"><i style="background:#2EA36B"></i>Found</span>
-        <span class="key chrome"><i style="background:#232A36"></i>Obstacle</span>
-      </figcaption>
-    </figure>
+<section class="open">
+  <div class="w">
+    <h1>Real robots. <span>Virtual force.</span> One arena.</h1>
+    <p>
+      A pod drives across a desk, fighting an adversary that is not there,
+      over terrain that is not there, under rules that are.
+    </p>
   </div>
 </section>
 
-<section id="capability">
-  <div class="wrap">
-    <div class="chrome eyebrow">Capability</div>
-    <h2>A tactical layer, not a robot demo</h2>
-    <p class="lead">
-      The robots are the cheap part. What makes an exercise worth running is
-      everything the robots cannot see.
+<div class="arena">
+  <div class="w">
+    <svg viewBox="0 0 1016 372" role="img"
+         aria-label="The arena seen from above: a blue pod and a red pod, obstacles, ground already swept, and one located hazard.">
+      <g stroke="#161B23" stroke-width="1">
+        <path d="M127 0V372M254 0V372M381 0V372M508 0V372M635 0V372M762 0V372M889 0V372"/>
+        <path d="M0 93H1016M0 186H1016M0 279H1016"/>
+      </g>
+
+      <path d="M160 296 L318 242 L500 264 L676 192 L840 148" fill="none"
+            stroke="#1D4ED8" stroke-opacity=".17" stroke-width="46"
+            stroke-linecap="round" stroke-linejoin="round"/>
+
+      <circle cx="408" cy="114" r="17" fill="#1B2029"/>
+      <circle cx="636" cy="302" r="17" fill="#1B2029"/>
+      <circle cx="862" cy="92"  r="17" fill="#1B2029"/>
+
+      <circle cx="318" cy="242" r="13" fill="none" stroke="#2EA36B" stroke-width="2"/>
+      <circle cx="318" cy="242" r="3" fill="#2EA36B"/>
+      <circle cx="818" cy="266" r="3" fill="#3A4150"/>
+      <circle cx="540" cy="74"  r="3" fill="#3A4150"/>
+
+      <path d="M392 128 L406 135" stroke="#3A4150" stroke-width="1" stroke-dasharray="2 6"/>
+      <path d="M429 148 L826 144" stroke="#3A4150" stroke-width="1" stroke-dasharray="2 6"/>
+
+      <g transform="translate(840 148)">
+        <circle r="15" fill="#1D4ED8"/>
+        <path d="M0 0 L34 -16" stroke="#1D4ED8" stroke-width="2.5"/>
+      </g>
+      <g transform="translate(378 136)">
+        <circle r="15" fill="#DC2626"/>
+        <path d="M0 0 L-32 18" stroke="#DC2626" stroke-width="2.5"/>
+      </g>
+    </svg>
+    <div class="legend mono">
+      <span><i style="background:#1D4ED8"></i>Blue force</span>
+      <span><i style="background:#DC2626"></i>Red force</span>
+      <span><i style="background:#2EA36B"></i>Located</span>
+      <span><i style="background:#1B2029"></i>Obstacle</span>
+    </div>
+  </div>
+</div>
+
+<section class="idx" id="what">
+  <div class="w">
+    <h2>The robots are the cheap part.</h2>
+    <p class="sub">
+      What makes an exercise worth running is everything the robots cannot
+      see. All of it is evaluated against one world, every tick.
     </p>
 
-    <div class="cards">
-      <div class="card">
-        <span class="chrome">Engagement</span>
-        <h3>Fire, damage, health</h3>
-        <p>A central evaluator resolves every shot against weapon
-        characteristics, line of sight and the target's state. Damage
-        degrades mobility and the ability to return fire.</p>
+    <dl class="rows">
+      <div>
+        <span class="n">01</span>
+        <dt>Engagement</dt>
+        <dd>Every shot resolved against weapon, line of sight and target
+            state. Damage degrades mobility and the ability to return fire.</dd>
       </div>
-      <div class="card">
-        <span class="chrome">Rules of engagement</span>
-        <h3>Weapons hold, tight, free</h3>
-        <p>Fire is checked against the posture in force, with civilian and
-        friendly checks applied before a round is ever resolved.</p>
+      <div>
+        <span class="n">02</span>
+        <dt>Rules of engagement</dt>
+        <dd>Weapons hold, tight or free, with civilian and friendly checks
+            applied before a round is resolved.</dd>
       </div>
-      <div class="card">
-        <span class="chrome">Line of sight</span>
-        <h3>Terrain that blocks</h3>
-        <p>Visibility is evaluated against cover and elevation — by a fast 2D
-        ray model, or by a Gazebo lidar backend behind the same interface.</p>
+      <div>
+        <span class="n">03</span>
+        <dt>Line of sight</dt>
+        <dd>Cover and elevation block observation — a fast ray model, or a
+            lidar backend behind the same interface.</dd>
       </div>
-      <div class="card">
-        <span class="chrome">Electronic warfare</span>
-        <h3>Jamming and dead zones</h3>
-        <p>Emitters, jammed regions and communications dead zones are part of
-        the world state, so a unit can be cut off without being touched.</p>
+      <div>
+        <span class="n">04</span>
+        <dt>Electronic warfare</dt>
+        <dd>Emitters, jammed regions and communications dead zones. A unit
+            can be cut off without being touched.</dd>
       </div>
-      <div class="card">
-        <span class="chrome">Sensing</span>
-        <h3>Ten sensor models</h3>
-        <p>Gas with stateful detector dynamics, lidar, sonar, thermal,
-        rangefinder, IED detection, direction finding, GPS, UAV camera and
-        friend-or-foe.</p>
+      <div>
+        <span class="n">05</span>
+        <dt>Sensing</dt>
+        <dd>Gas with stateful detector dynamics, lidar, sonar, thermal,
+            rangefinder, IED detection, direction finding, GNSS, UAV camera,
+            friend-or-foe.</dd>
       </div>
-      <div class="card">
-        <span class="chrome">Interoperability</span>
-        <h3>Cursor on Target</h3>
-        <p>Positions, zones, sensor readings and engagement events bridge to
-        ATAK, so an exercise appears where the rest of the picture already
-        does.</p>
+      <div>
+        <span class="n">06</span>
+        <dt>Logistics</dt>
+        <dd>Fuel, ammunition and water, consumed and resupplied, with
+            weather and visibility over the top.</dd>
       </div>
-    </div>
+      <div>
+        <span class="n">07</span>
+        <dt>Interoperability</dt>
+        <dd>Cursor on Target: positions, zones, sensor readings and
+            engagement events bridge to ATAK.</dd>
+      </div>
+    </dl>
   </div>
 </section>
 
-<section id="scale">
-  <div class="wrap">
-    <div class="chrome eyebrow">Scale</div>
-    <h2>The same platform on a desk and in a field</h2>
-    <p class="lead">
-      Only the localisation changes. The tactical layer above it — engagement,
-      sensing, rules, logistics — is identical, so a scenario rehearsed on a
-      tabletop is the scenario you take outside.
+<section class="blk" id="scale">
+  <div class="w">
+    <h2>The same platform on a desk and in a field.</h2>
+    <p class="sub">
+      Only the localisation changes. The layer above it is identical, so what
+      you rehearse on a tabletop is what you take outside.
     </p>
-
-    <div class="scales">
-      <div class="scale">
-        <span class="chrome">Indoor</span>
+    <div class="two">
+      <div>
         <h3>Desk arena</h3>
-        <dl>
-          <dt>Platform</dt><dd>Small differential-drive pods</dd>
-          <dt>Position</dt><dd>Overhead camera reading fiducial markers</dd>
-          <dt>Arena</dt><dd>Boundary and origin fitted from corner markers</dd>
-          <dt>Use</dt><dd>Development, teaching, rehearsal</dd>
-        </dl>
-      </div>
-      <div class="scale">
-        <span class="chrome">Outdoor</span>
-        <h3>Field exercise</h3>
-        <dl>
-          <dt>Platform</dt><dd>Dismounted units and vehicles</dd>
-          <dt>Position</dt><dd>GNSS and inertial measurement</dd>
-          <dt>Arena</dt><dd>Georeferenced to WGS84</dd>
-          <dt>Use</dt><dd>Larger-scale exercise with the same rules</dd>
-        </dl>
-      </div>
-    </div>
-    <p style="margin-top:18px;font-size:14px">
-      The outdoor path — GNSS and inertial localisation, georeferenced to
-      WGS84 — is built into the platform and offered as an option. The
-      measured results on this page are from the desk arena.
-    </p>
-  </div>
-</section>
-
-<section id="built">
-  <div class="wrap">
-    <div class="chrome eyebrow">Demonstrated</div>
-    <h2>Working scenarios, measured</h2>
-    <p class="lead">
-      Three scenarios run today on the desk arena. The figures below are from
-      an instrumented run, not an estimate.
-    </p>
-
-    <div class="result">
-      <div>
-        <strong>6 / 6</strong>
-        <span class="chrome">Hidden mines located</span>
+        <ul>
+          <li><b>Platform</b> Differential-drive pods</li>
+          <li><b>Position</b> Overhead camera, fiducial markers</li>
+          <li><b>Frame</b> Fitted from the corner markers</li>
+        </ul>
       </div>
       <div>
-        <strong>97%</strong>
-        <span class="chrome">Arena covered</span>
-      </div>
-      <div>
-        <strong>69.5 s</strong>
-        <span class="chrome">Two pods, cooperative sweep</span>
+        <h3>Field</h3>
+        <ul>
+          <li><b>Platform</b> Dismounted units and vehicles</li>
+          <li><b>Position</b> GNSS and inertial</li>
+          <li><b>Frame</b> Georeferenced to WGS84</li>
+        </ul>
       </div>
     </div>
-
-    <ul class="plain">
-      <li><strong style="color:var(--ink)">Pursuit.</strong> One pod evades,
-        one pursues, both planning routes through the free space rather than
-        driving at each other through obstacles.</li>
-      <li><strong style="color:var(--ink)">Route following.</strong> Draw a
-        path in the browser and a pod drives it, stopping if two routes
-        cross.</li>
-      <li><strong style="color:var(--ink)">Cooperative search.</strong> Two
-        pods divide the arena and sweep it for hazards neither can see until
-        a detector passes over one.</li>
-    </ul>
-  </div>
-</section>
-
-<section id="classroom">
-  <div class="wrap">
-    <div class="chrome eyebrow">For classrooms</div>
-    <h2>Every scenario is an exercise with one seam</h2>
-    <p class="lead">
-      The same platform is used for teaching. Each scenario's behaviour is a
-      pure function with tests that run without the robotics stack, so a
-      student replaces a strategy, not an architecture.
-    </p>
-    <ul class="plain">
-      <li><code>chase</code> and <code>flee</code> — decide a heading each
-        tick for pursuit and evasion.</li>
-      <li><code>follow</code> — turn a route and a pose into a velocity.</li>
-      <li><code>assign_targets</code> — decide which robot searches where.
-        This single function is the whole of the cooperation in the sweep,
-        and the obvious first exercise.</li>
-    </ul>
-    <p style="margin-top:18px">
-      Teams can be compared directly: the console times each run and keeps the
-      best, so a class competes on a measured result rather than an
-      impression.
+    <p class="note">
+      The field path is built into the platform and offered as an option. The
+      figures below are from the desk arena.
     </p>
   </div>
 </section>
 
-<section id="contact" class="tight">
-  <div class="wrap">
-    <div class="chrome eyebrow">Contact</div>
-    <h2>Request a briefing</h2>
-    <p class="lead">
-      For evaluation, collaboration or classroom use, describe what you are
-      trying to rehearse and we will tell you honestly whether the platform
-      does it yet.
+<section class="measured">
+  <div class="w">
+    <p class="big">
+      Two pods swept the arena in <em>69.5&nbsp;seconds</em>, covering
+      97&nbsp;per&nbsp;cent of it and locating all six hidden hazards.
     </p>
-    <div class="box">
-      <!-- Formspree, as orbly.to uses. The endpoint lives in the action and
-           NOWHERE else, so there is one thing to edit. Until REPLACE_ME is
-           swapped for the real form id the script below refuses to submit
-           and says so: a form that posts into the void loses enquiries
-           without anyone noticing, which is worse than no form at all. -->
-      <form id="briefing" action="https://formspree.io/f/mvkgqbdb" method="POST">
-        <div class="field">
-          <label for="f-name">Name</label>
-          <input id="f-name" name="name" type="text" autocomplete="name" required>
-        </div>
-        <div class="field">
-          <label for="f-org">Organisation</label>
-          <input id="f-org" name="organisation" type="text" autocomplete="organization">
-        </div>
-        <div class="field">
-          <label for="f-email">Email</label>
-          <input id="f-email" name="email" type="email" autocomplete="email" required>
-        </div>
-        <div class="field">
-          <label for="f-msg">What are you trying to rehearse?</label>
-          <textarea id="f-msg" name="message" rows="4" required></textarea>
-        </div>
-        <!-- honeypot: real people leave this empty -->
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
-               aria-hidden="true" style="position:absolute;left:-9999px">
-        <button class="btn primary" type="submit">Send</button>
-        <p id="f-note" role="status"></p>
-      </form>
-      <p style="margin-top:16px;font-size:14px">
-        Plato Pod is developed at UNSW Canberra.
-      </p>
-    </div>
+    <p class="note">
+      One instrumented run, not an average. Pursuit and route following run on
+      the same arena, and each scenario's behaviour is a single function —
+      which is also what makes them student exercises.
+    </p>
   </div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <span class="chrome">Plato Pod</span>
-    <span class="chrome">platopod.com</span>
-    <span class="chrome sp">No cookies, no tracking</span>
+<section class="contact" id="contact">
+  <div class="w">
+    <h2>Request a briefing.</h2>
+    <p class="sub">
+      Tell us what you are trying to rehearse and we will say honestly whether
+      the platform does it yet.
+    </p>
+
+    <form id="briefing" action="https://formspree.io/f/mvkgqbdb" method="POST">
+      <div class="f">
+        <label class="mono" for="f-name">Name</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required>
+      </div>
+      <div class="f">
+        <label class="mono" for="f-org">Organisation</label>
+        <input id="f-org" name="organisation" type="text" autocomplete="organization">
+      </div>
+      <div class="f">
+        <label class="mono" for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" required>
+      </div>
+      <div class="f">
+        <label class="mono" for="f-msg">What are you trying to rehearse?</label>
+        <textarea id="f-msg" name="message" rows="3" required></textarea>
+      </div>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+             aria-hidden="true" style="position:absolute;left:-9999px">
+      <button type="submit">Send</button>
+      <p id="note" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="w mono">
+    <span>Plato Pod</span>
+    <span>UNSW Canberra</span>
+    <span class="r">No cookies, no tracking</span>
   </div>
 </footer>
 
 <script>
 // Progressive enhancement only. With JavaScript off the form is an ordinary
-// POST to Formspree and still works -- nothing on this page lives in here.
+// POST to Formspree and still works — nothing on this page lives in here.
 (function () {
   var form = document.getElementById('briefing');
   if (!form) return;
-  var note = document.getElementById('f-note');
+  var note = document.getElementById('note');
   var button = form.querySelector('button[type=submit]');
-  var UNSET = form.getAttribute('action').indexOf('REPLACE_ME') !== -1;
 
-  if (UNSET) {
-    // Refuse rather than post into the void. Deploying with the placeholder
-    // would accept enquiries and drop them silently.
+  if (form.getAttribute('action').indexOf('REPLACE_ME') !== -1) {
+    // Refuse rather than post into the void: a form wired to a placeholder
+    // accepts enquiries and drops them, and the failure is invisible.
     button.disabled = true;
     note.className = 'bad';
     note.textContent = 'This form is not connected yet.';
@@ -521,7 +397,6 @@
     }).then(function (r) {
       if (!r.ok) throw new Error(r.status);
       form.reset();
-      note.className = 'ok';
       note.textContent = 'Thank you — we will be in touch.';
     }).catch(function () {
       note.className = 'bad';
