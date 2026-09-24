@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Plato Pod</title>
-<meta name="description" content="Physical robots and virtual force in one arena. Mixed-reality tactical simulation, from a desk to a field.">
+<meta name="description" content="Physical robots and virtual force in one arena. Mixed-reality tactical simulation on a desk arena.">
 <meta property="og:title" content="Plato Pod">
 <meta property="og:description" content="Physical robots and virtual force in one arena.">
 <meta property="og:type" content="website">
@@ -30,13 +30,20 @@
     --blue:  #1D4ED8;
     --red:   #DC2626;
     --measure: 34rem;
+
+    /* Three sizes. That is the whole scale, and it is a constraint worth
+       keeping: everything else is carried by weight, colour, tracking and
+       space. Nine sizes is what the first pass had, and it read as noise. */
+    --t1: clamp(38px, 6.6vw, 78px);   /* the opening line, once */
+    --t2: clamp(21px, 2.5vw, 27px);   /* section heads, the measured line */
+    --t3: 17px;                        /* everything else */
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
     background: var(--paper); color: var(--ink);
     font-family: Archivo, ui-sans-serif, system-ui, sans-serif;
-    font-size: 17px; line-height: 1.55;
+    font-size: var(--t3); line-height: 1.55;
     -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
   }
   .w { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
@@ -45,38 +52,37 @@
   a { color: inherit; text-decoration: none; }
   :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 
-  .mono {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
-    color: var(--ink-3);
-  }
+  .lbl { color: var(--ink-3); }
+  .num { font-family: "IBM Plex Mono", ui-monospace, monospace;
+         color: var(--ink-3); }
 
   /* masthead */
   .mast { padding: 26px 0; }
   .mast .w { display: flex; align-items: center; }
   .mast b { font-weight: 600; letter-spacing: -.015em; }
   .mast nav { margin-left: auto; display: flex; gap: 26px; }
-  .mast nav a { font-size: 15px; color: var(--ink-2); }
+  .mast nav a { color: var(--ink-2); }
   .mast nav a:hover { color: var(--ink); }
   @media (max-width: 560px) { .mast nav { display: none; } }
 
   /* opening statement */
   .open { padding: 44px 0 60px; }
   .open h1 {
-    font-weight: 500; font-size: clamp(40px, 7.4vw, 92px);
+    font-weight: 500; font-size: var(--t1);
     line-height: .97; letter-spacing: -.045em; max-width: 15ch;
   }
   .open h1 span { color: var(--ink-3); }
   .open p {
-    margin-top: 30px; max-width: var(--measure);
-    font-size: 19px; color: var(--ink-2);
+    margin-top: 30px; max-width: var(--measure); color: var(--ink-2);
   }
 
   /* the arena — the one dark object on the page */
   .arena { background: var(--panel); }
-  .arena svg { display: block; width: 100%; height: auto; }
+  .arena canvas { display: block; width: 100%; height: auto; }
   .legend { display: flex; gap: 26px; flex-wrap: wrap; padding: 15px 0 24px; }
   .legend span { color: #6E747E; }
+  .legend #sweep-read { margin-left: auto;
+                        font-family: "IBM Plex Mono", ui-monospace, monospace; }
   .legend i {
     width: 7px; height: 7px; border-radius: 50%;
     display: inline-block; margin-right: 7px; vertical-align: 1px;
@@ -84,11 +90,11 @@
 
   /* headings shared by the lower sections */
   h2 {
-    font-weight: 500; font-size: clamp(27px, 3.5vw, 38px);
-    letter-spacing: -.034em; line-height: 1.08; max-width: 19ch;
+    font-weight: 500; font-size: var(--t2);
+    letter-spacing: -.028em; line-height: 1.12; max-width: 21ch;
   }
   p.sub { margin-top: 16px; max-width: var(--measure); color: var(--ink-2); }
-  .note { margin-top: 22px; color: var(--ink-3); font-size: 15px;
+  .note { margin-top: 22px; color: var(--ink-3);
           max-width: var(--measure); }
 
   /* numbered index */
@@ -98,10 +104,10 @@
     display: grid; grid-template-columns: 3rem 12.5rem 1fr; gap: 28px;
     padding: 21px 0; border-bottom: 1px solid var(--rule); align-items: baseline;
   }
-  dl.rows .n { color: var(--ink-3); font-size: 13px;
-               font-family: "IBM Plex Mono", monospace; }
+  dl.rows .n { color: var(--ink-3);
+               font-family: "IBM Plex Mono", ui-monospace, monospace; }
   dl.rows dt { font-weight: 500; letter-spacing: -.012em; }
-  dl.rows dd { color: var(--ink-2); font-size: 16px; }
+  dl.rows dd { color: var(--ink-2); }
   @media (max-width: 760px) {
     dl.rows > div { grid-template-columns: 2.2rem 1fr; gap: 4px 16px; }
     dl.rows dd { grid-column: 2; }
@@ -113,10 +119,10 @@
     margin-top: 46px; display: grid; grid-template-columns: 1fr 1fr;
     gap: 56px; border-top: 1px solid var(--rule); padding-top: 28px;
   }
-  .two h3 { font-size: 17px; font-weight: 500; margin-bottom: 12px; }
+  .two h3 { font-weight: 500; margin-bottom: 12px; }
   .two ul { list-style: none; }
   .two li {
-    color: var(--ink-2); font-size: 15px; padding: 8px 0;
+    color: var(--ink-2); padding: 9px 0;
     border-bottom: 1px solid var(--rule); display: flex; gap: 18px;
   }
   .two li b { font-weight: 400; color: var(--ink); min-width: 6.5rem; }
@@ -125,8 +131,8 @@
   /* the measured claim, as a sentence rather than a scoreboard */
   .measured { padding: 92px 0 0; }
   .measured p.big {
-    font-weight: 500; font-size: clamp(23px, 3.1vw, 33px);
-    letter-spacing: -.03em; line-height: 1.26; max-width: 25ch;
+    font-weight: 500; font-size: var(--t2);
+    letter-spacing: -.028em; line-height: 1.3; max-width: 27ch;
   }
   .measured p.big em { font-style: normal; color: var(--ink-3); }
 
@@ -138,18 +144,18 @@
   .f input, .f textarea {
     width: 100%; border: 0; border-bottom: 1px solid var(--rule);
     background: transparent; color: var(--ink); font: inherit;
-    font-size: 17px; padding: 6px 0;
+    padding: 7px 0;
   }
   .f textarea { resize: vertical; min-height: 46px; line-height: 1.5; }
   .f input:focus, .f textarea:focus { outline: none; border-color: var(--ink); }
   button {
-    font: inherit; font-size: 16px; font-weight: 500; cursor: pointer;
+    font: inherit; font-weight: 500; cursor: pointer;
     background: var(--ink); color: var(--paper); border: 0;
     padding: 13px 28px; border-radius: 2px; letter-spacing: -.01em;
   }
   button:hover:not([disabled]) { background: var(--blue); }
   button[disabled] { background: var(--ink-3); cursor: default; }
-  #note { margin-top: 16px; font-size: 15px; color: var(--ink-2); min-height: 1px; }
+  #note { margin-top: 16px; color: var(--ink-2); min-height: 1px; }
   #note.bad { color: var(--red); }
 
   .foot { border-top: 1px solid var(--rule); padding: 22px 0 42px; margin-top: 8px; }
@@ -182,45 +188,13 @@
 
 <div class="arena">
   <div class="w">
-    <svg viewBox="0 0 1016 372" role="img"
-         aria-label="The arena seen from above: a blue pod and a red pod, obstacles, ground already swept, and one located hazard.">
-      <g stroke="#161B23" stroke-width="1">
-        <path d="M127 0V372M254 0V372M381 0V372M508 0V372M635 0V372M762 0V372M889 0V372"/>
-        <path d="M0 93H1016M0 186H1016M0 279H1016"/>
-      </g>
-
-      <path d="M160 296 L318 242 L500 264 L676 192 L840 148" fill="none"
-            stroke="#1D4ED8" stroke-opacity=".17" stroke-width="46"
-            stroke-linecap="round" stroke-linejoin="round"/>
-
-      <circle cx="408" cy="114" r="17" fill="#1B2029"/>
-      <circle cx="636" cy="302" r="17" fill="#1B2029"/>
-      <circle cx="862" cy="92"  r="17" fill="#1B2029"/>
-
-      <circle cx="318" cy="242" r="13" fill="none" stroke="#2EA36B" stroke-width="2"/>
-      <circle cx="318" cy="242" r="3" fill="#2EA36B"/>
-      <circle cx="818" cy="266" r="3" fill="#3A4150"/>
-      <circle cx="540" cy="74"  r="3" fill="#3A4150"/>
-
-      <path d="M392 128 L406 135" stroke="#3A4150" stroke-width="1" stroke-dasharray="2 6"/>
-      <path d="M429 148 L826 144" stroke="#3A4150" stroke-width="1" stroke-dasharray="2 6"/>
-
-      <g transform="translate(840 148)">
-        <circle r="15" fill="#1D4ED8"/>
-        <path d="M0 0 L34 -16" stroke="#1D4ED8" stroke-width="2.5"/>
-      </g>
-      <g transform="translate(378 136)">
-        <circle r="15" fill="#DC2626"/>
-        <path d="M0 0 L-32 18" stroke="#DC2626" stroke-width="2.5"/>
-      </g>
-    </svg>
-    <div class="legend mono">
+    <canvas id="sweep" aria-label="Two pods sweeping the arena for hidden hazards. Ground already covered fills in behind them; a hazard turns green when a detector passes over it."></canvas>
+    <div class="legend">
       <span><i style="background:#1D4ED8"></i>Blue force</span>
       <span><i style="background:#DC2626"></i>Red force</span>
       <span><i style="background:#2EA36B"></i>Located</span>
-      <span><i style="background:#1B2029"></i>Obstacle</span>
-    </div>
-  </div>
+      <span id="sweep-read"></span>
+    </div></div>
 </div>
 
 <section class="idx" id="what">
@@ -228,7 +202,7 @@
     <h2>The robots are the cheap part.</h2>
     <p class="sub">
       What makes an exercise worth running is everything the robots cannot
-      see. All of it is evaluated against one world, every tick.
+      see. All of it against one world, not seven.
     </p>
 
     <dl class="rows">
@@ -241,20 +215,22 @@
       <div>
         <span class="n">02</span>
         <dt>Rules of engagement</dt>
-        <dd>Weapons hold, tight or free, with civilian and friendly checks
-            applied before a round is resolved.</dd>
+        <dd>Weapons hold, tight or free. Civilian and friendly checks are
+            evaluated before a round resolves and carried on the outcome.</dd>
       </div>
       <div>
         <span class="n">03</span>
         <dt>Line of sight</dt>
-        <dd>Cover and elevation block observation — a fast ray model, or a
-            lidar backend behind the same interface.</dd>
+        <dd>Cover blocks observation, and the same model handles terrain when an
+            elevation field is loaded. A fast ray model or a Gazebo lidar
+            backend, behind one service contract.</dd>
       </div>
       <div>
         <span class="n">04</span>
         <dt>Electronic warfare</dt>
-        <dd>Emitters, jammed regions and communications dead zones. A unit
-            can be cut off without being touched.</dd>
+        <dd>Emitters, jammed regions and communications dead zones are modelled
+            and published as world state, so a link can be evaluated against
+            the world rather than assumed.</dd>
       </div>
       <div>
         <span class="n">05</span>
@@ -266,8 +242,8 @@
       <div>
         <span class="n">06</span>
         <dt>Logistics</dt>
-        <dd>Fuel, ammunition and water, consumed and resupplied, with
-            weather and visibility over the top.</dd>
+        <dd>Fuel, ammunition and water modelled per unit, and a unit out of fuel
+            stops. Weather and visibility are evaluated on every engagement.</dd>
       </div>
       <div>
         <span class="n">07</span>
@@ -281,14 +257,14 @@
 
 <section class="blk" id="scale">
   <div class="w">
-    <h2>The same platform on a desk and in a field.</h2>
+    <h2>Built to leave the desk.</h2>
     <p class="sub">
-      Only the localisation changes. The layer above it is identical, so what
-      you rehearse on a tabletop is what you take outside.
+      The tactical layer does not know how a robot is located. It reads poses
+      through one interface, and localisation is a provider behind it.
     </p>
     <div class="two">
       <div>
-        <h3>Desk arena</h3>
+        <h3>Today</h3>
         <ul>
           <li><b>Platform</b> Differential-drive pods</li>
           <li><b>Position</b> Overhead camera, fiducial markers</li>
@@ -296,17 +272,17 @@
         </ul>
       </div>
       <div>
-        <h3>Field</h3>
-        <ul>
-          <li><b>Platform</b> Dismounted units and vehicles</li>
-          <li><b>Position</b> GNSS and inertial</li>
-          <li><b>Frame</b> Georeferenced to WGS84</li>
-        </ul>
+        <h3>Next</h3>
+        <p>
+          A GNSS and inertial provider drops in where the camera one sits.
+          That provider is not written yet. The WGS84 georeferencing it would
+          feed is built and tested; the outdoor scale is a design the
+          architecture allows for, not a capability to be counted on today.
+        </p>
       </div>
     </div>
     <p class="note">
-      The field path is built into the platform and offered as an option. The
-      figures below are from the desk arena.
+      Everything below was measured on the desk arena.
     </p>
   </div>
 </section>
@@ -314,13 +290,15 @@
 <section class="measured">
   <div class="w">
     <p class="big">
-      Two pods swept the arena in <em>69.5&nbsp;seconds</em>, covering
-      97&nbsp;per&nbsp;cent of it and locating all six hidden hazards.
+      Two pods, coordinating, ran a 0.7 by 0.8&nbsp;metre arena to its
+      <em>97&nbsp;per&nbsp;cent</em> coverage target in 70 seconds, and
+      located every hazard in it.
     </p>
     <p class="note">
-      One instrumented run, not an average. Pursuit and route following run on
-      the same arena, and each scenario's behaviour is a single function —
-      which is also what makes them student exercises.
+      One instrumented run, and a fast one — two to four minutes is the
+      usual. Pursuit and route following run on the same arena. A scenario's
+      strategy is one or two pure functions with tests that need no robot,
+      which is what makes them student exercises.
     </p>
   </div>
 </section>
@@ -329,25 +307,25 @@
   <div class="w">
     <h2>Request a briefing.</h2>
     <p class="sub">
-      Tell us what you are trying to rehearse and we will say honestly whether
-      the platform does it yet.
+      Tell us what you are trying to rehearse and we will tell you whether the
+      platform does it yet.
     </p>
 
     <form id="briefing" action="https://formspree.io/f/mvkgqbdb" method="POST">
       <div class="f">
-        <label class="mono" for="f-name">Name</label>
+        <label class="lbl" for="f-name">Name</label>
         <input id="f-name" name="name" type="text" autocomplete="name" required>
       </div>
       <div class="f">
-        <label class="mono" for="f-org">Organisation</label>
+        <label class="lbl" for="f-org">Organisation</label>
         <input id="f-org" name="organisation" type="text" autocomplete="organization">
       </div>
       <div class="f">
-        <label class="mono" for="f-email">Email</label>
+        <label class="lbl" for="f-email">Email</label>
         <input id="f-email" name="email" type="email" autocomplete="email" required>
       </div>
       <div class="f">
-        <label class="mono" for="f-msg">What are you trying to rehearse?</label>
+        <label class="lbl" for="f-msg">What are you trying to rehearse?</label>
         <textarea id="f-msg" name="message" rows="3" required></textarea>
       </div>
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
@@ -361,10 +339,200 @@
 <footer class="foot">
   <div class="w mono">
     <span>Plato Pod</span>
-    <span>UNSW Canberra</span>
-    <span class="r">No cookies, no tracking</span>
+    <span class="r">No analytics. Enquiries go to Formspree.</span>
   </div>
 </footer>
+
+<script>
+// The arena, sweeping itself.
+//
+// This is the platform's own cooperative search, cut down to what a hero
+// image needs: a grid of cells nobody has covered, two pods that each take
+// the nearest uncovered cell to themselves, and a rule keeping them apart so
+// they do not sweep the arena nose to tail at half the rate. That separation
+// rule is the whole of the cooperation in the real sweep_node too.
+//
+// Hazards are hidden until a detector passes within range, exactly as they
+// are on the arena: the animation cannot reveal what the pods have not
+// found, because it does not draw them until found.
+(function () {
+  var cv = document.getElementById('sweep');
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d');
+  var read = document.getElementById('sweep-read');
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Tuned by running the loop headlessly across seeds, not by eye: at
+  // SPEED 1.35 / DETECT 34 a full sweep took 58 seconds, which is a minute
+  // of hero animation nobody watches. These finish in about 15 and located
+  // all six hazards on every seed tried.
+  var CELL = 26, DETECT = 56, SPEED = 3.0, SEPARATION = 190, DONE = 0.97;
+  var W = 0, H = 0, cols = 0, rows = 0, swept = null, pods = [], mines = [], t0 = 0, raf = 0;
+
+  function size() {
+    var w = cv.parentElement.clientWidth;
+    var h = Math.max(230, Math.min(360, Math.round(w * 0.34)));
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    cv.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    W = w; H = h;
+  }
+
+  function reset() {
+    cols = Math.ceil(W / CELL); rows = Math.ceil(H / CELL);
+    swept = new Uint8Array(cols * rows);
+    pods = [
+      { x: W * 0.10, y: H * 0.74, a: 0, col: '#1D4ED8', tgt: null },
+      { x: W * 0.90, y: H * 0.26, a: Math.PI, col: '#DC2626', tgt: null }
+    ];
+    mines = [];
+    for (var i = 0; i < 6; i++) {
+      mines.push({ x: 70 + Math.random() * (W - 140),
+                   y: 40 + Math.random() * (H - 80), found: false });
+    }
+    t0 = performance.now();
+  }
+
+  function covered() {
+    var n = 0;
+    for (var i = 0; i < swept.length; i++) if (swept[i]) n++;
+    return n / swept.length;
+  }
+
+  // Nearest uncovered cell to this pod, skipping anything the other pod has
+  // already claimed and anything too close to it.
+  function claim(pod, taken) {
+    var best = null, bestD = Infinity;
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        if (swept[r * cols + c]) continue;
+        var x = c * CELL + CELL / 2, y = r * CELL + CELL / 2;
+        var d = Math.hypot(x - pod.x, y - pod.y);
+        if (d >= bestD) continue;
+        if (taken && Math.hypot(x - taken.x, y - taken.y) < SEPARATION) continue;
+        bestD = d; best = { x: x, y: y };
+      }
+    }
+    return best;
+  }
+
+  function step() {
+    for (var i = 0; i < pods.length; i++) {
+      var p = pods[i], other = pods[1 - i];
+      if (!p.tgt || Math.hypot(p.tgt.x - p.x, p.tgt.y - p.y) < CELL * 0.7) {
+        p.tgt = claim(p, other.tgt) || claim(p, null);
+      }
+      if (!p.tgt) continue;
+      var want = Math.atan2(p.tgt.y - p.y, p.tgt.x - p.x);
+      var turn = Math.atan2(Math.sin(want - p.a), Math.cos(want - p.a));
+      p.a += Math.max(-0.14, Math.min(0.14, turn));      // a pod cannot pivot
+      p.x += Math.cos(p.a) * SPEED; p.y += Math.sin(p.a) * SPEED;
+
+      var cc = Math.floor(p.x / CELL), cr = Math.floor(p.y / CELL);
+      var reach = Math.ceil(DETECT / CELL);
+      for (var r = cr - reach; r <= cr + reach; r++) {
+        for (var c = cc - reach; c <= cc + reach; c++) {
+          if (r < 0 || c < 0 || r >= rows || c >= cols) continue;
+          var dx = c * CELL + CELL / 2 - p.x, dy = r * CELL + CELL / 2 - p.y;
+          if (dx * dx + dy * dy <= DETECT * DETECT) swept[r * cols + c] = 1;
+        }
+      }
+      for (var m = 0; m < mines.length; m++) {
+        if (!mines[m].found &&
+            Math.hypot(mines[m].x - p.x, mines[m].y - p.y) <= DETECT) {
+          mines[m].found = true;
+        }
+      }
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#0B0E13'; ctx.fillRect(0, 0, W, H);
+
+    ctx.strokeStyle = '#161B23'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (var gx = CELL * 5; gx < W; gx += CELL * 5) { ctx.moveTo(gx + .5, 0); ctx.lineTo(gx + .5, H); }
+    for (var gy = CELL * 3; gy < H; gy += CELL * 3) { ctx.moveTo(0, gy + .5); ctx.lineTo(W, gy + .5); }
+    ctx.stroke();
+
+    ctx.fillStyle = 'rgba(29,78,216,0.17)';
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        if (swept[r * cols + c]) ctx.fillRect(c * CELL, r * CELL, CELL + 1, CELL + 1);
+      }
+    }
+
+    for (var m = 0; m < mines.length; m++) {
+      if (!mines[m].found) continue;
+      ctx.beginPath(); ctx.arc(mines[m].x, mines[m].y, 11, 0, 6.2832);
+      ctx.strokeStyle = '#2EA36B'; ctx.lineWidth = 2; ctx.stroke();
+      ctx.beginPath(); ctx.arc(mines[m].x, mines[m].y, 2.5, 0, 6.2832);
+      ctx.fillStyle = '#2EA36B'; ctx.fill();
+    }
+
+    for (var i = 0; i < pods.length; i++) {
+      var p = pods[i];
+      ctx.beginPath(); ctx.arc(p.x, p.y, 12, 0, 6.2832);
+      ctx.fillStyle = p.col; ctx.fill();
+      ctx.beginPath(); ctx.moveTo(p.x, p.y);
+      ctx.lineTo(p.x + Math.cos(p.a) * 26, p.y + Math.sin(p.a) * 26);
+      ctx.strokeStyle = p.col; ctx.lineWidth = 2.5; ctx.stroke();
+    }
+  }
+
+  function report(done) {
+    if (!read) return;
+    var found = mines.filter(function (m) { return m.found; }).length;
+    read.textContent = done
+      ? 'Swept in ' + ((performance.now() - t0) / 1000).toFixed(1) + 's'
+      : Math.round(covered() * 100) + '% swept, ' + found + ' of 6 found';
+  }
+
+  function frame() {
+    step(); draw();
+    var c = covered();
+    if (c >= DONE) {
+      report(true);
+      raf = 0;
+      setTimeout(function () { reset(); raf = requestAnimationFrame(frame); }, 2600);
+      return;
+    }
+    report(false);
+    raf = requestAnimationFrame(frame);
+  }
+
+  function start() {
+    if (raf) cancelAnimationFrame(raf);
+    size(); reset();
+    if (still) {
+      // Someone who has asked for less motion still gets the picture: run it
+      // to completion without animating, and leave the result on screen.
+      for (var i = 0; i < 6000 && covered() < DONE; i++) step();
+      draw(); report(true);
+      return;
+    }
+    raf = requestAnimationFrame(frame);
+  }
+
+  var resizeT;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeT); resizeT = setTimeout(start, 180);
+  });
+
+  // Do not burn a phone's battery animating something nobody is looking at.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { if (!raf && !still) start(); }
+        else if (raf) { cancelAnimationFrame(raf); raf = 0; }
+      });
+    }, { threshold: 0.05 }).observe(cv);
+  }
+  start();
+})();
+</script>
 
 <script>
 // Progressive enhancement only. With JavaScript off the form is an ordinary
