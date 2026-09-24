@@ -162,6 +162,29 @@
     padding: 30px; margin-top: 26px; max-width: 640px;
   }
 
+  /* Contact form */
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block; margin-bottom: 5px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .field input, .field textarea {
+    width: 100%; padding: 10px 12px; border-radius: 6px;
+    background: var(--bg); border: 1px solid var(--line);
+    color: var(--ink); font: inherit; font-size: 15px;
+  }
+  .field textarea { resize: vertical; min-height: 92px; }
+  .field input:focus, .field textarea:focus {
+    outline: none; border-color: var(--blue);
+  }
+  #briefing button { cursor: pointer; }
+  #briefing button[disabled] { opacity: .45; cursor: default; }
+  #f-note { margin-top: 12px; font-size: 14px; min-height: 1px; }
+  #f-note.ok { color: var(--good); }
+  #f-note.bad { color: var(--warn); }
+
   footer { padding: 34px 0 48px; }
   footer .wrap { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
   footer .chrome { color: var(--ink-3); }
@@ -342,6 +365,11 @@
         </dl>
       </div>
     </div>
+    <p style="margin-top:18px;font-size:14px">
+      The outdoor path — GNSS and inertial localisation, georeferenced to
+      WGS84 — is built into the platform and offered as an option. The
+      measured results on this page are from the desk arena.
+    </p>
   </div>
 </section>
 
@@ -418,10 +446,35 @@
       does it yet.
     </p>
     <div class="box">
-      <a class="btn primary" href="mailto:hello@platopod.com?subject=Plato%20Pod%20briefing">
-        hello@platopod.com
-      </a>
-      <p style="margin-top:14px;font-size:14px">
+      <!-- Formspree, as orbly.to uses. The endpoint lives in the action and
+           NOWHERE else, so there is one thing to edit. Until REPLACE_ME is
+           swapped for the real form id the script below refuses to submit
+           and says so: a form that posts into the void loses enquiries
+           without anyone noticing, which is worse than no form at all. -->
+      <form id="briefing" action="https://formspree.io/f/REPLACE_ME" method="POST">
+        <div class="field">
+          <label for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-org">Organisation</label>
+          <input id="f-org" name="organisation" type="text" autocomplete="organization">
+        </div>
+        <div class="field">
+          <label for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="f-msg">What are you trying to rehearse?</label>
+          <textarea id="f-msg" name="message" rows="4" required></textarea>
+        </div>
+        <!-- honeypot: real people leave this empty -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+               aria-hidden="true" style="position:absolute;left:-9999px">
+        <button class="btn primary" type="submit">Send</button>
+        <p id="f-note" role="status"></p>
+      </form>
+      <p style="margin-top:16px;font-size:14px">
         Plato Pod is developed at UNSW Canberra.
       </p>
     </div>
@@ -435,6 +488,49 @@
     <span class="chrome sp">No cookies, no tracking</span>
   </div>
 </footer>
+
+<script>
+// Progressive enhancement only. With JavaScript off the form is an ordinary
+// POST to Formspree and still works -- nothing on this page lives in here.
+(function () {
+  var form = document.getElementById('briefing');
+  if (!form) return;
+  var note = document.getElementById('f-note');
+  var button = form.querySelector('button[type=submit]');
+  var UNSET = form.getAttribute('action').indexOf('REPLACE_ME') !== -1;
+
+  if (UNSET) {
+    // Refuse rather than post into the void. Deploying with the placeholder
+    // would accept enquiries and drop them silently.
+    button.disabled = true;
+    note.className = 'bad';
+    note.textContent = 'This form is not connected yet.';
+    form.addEventListener('submit', function (e) { e.preventDefault(); });
+    return;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    button.disabled = true;
+    note.className = '';
+    note.textContent = 'Sending…';
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' }
+    }).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      form.reset();
+      note.className = 'ok';
+      note.textContent = 'Thank you — we will be in touch.';
+    }).catch(function () {
+      note.className = 'bad';
+      note.textContent = 'That did not send. Please try again shortly.';
+      button.disabled = false;
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
