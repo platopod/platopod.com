@@ -15,8 +15,6 @@ operational detail.
 | `404.html` | Not-found page, served by GitHub Pages. |
 | `CNAME` | Custom domain for GitHub Pages. |
 | `img/` | Photographs and preview images. The one exception to single-file. |
-| `CONTENT.md` | Factual source of truth. Every claim on the page traces here. |
-| `CLAUDE.md` | Project instructions, design system and task queue. |
 
 ## Working on it
 
@@ -26,8 +24,9 @@ No build step, no dependencies, no server. Open `index.html`, or:
 
 Then <http://localhost:8000>.
 
-Before changing copy, read `CONTENT.md`. Items marked **TO CONFIRM** are not
-yet settled and must not be written around.
+Every claim on the page traces to a content notes file kept with the
+platform's source, not in this public repository. Check it before changing
+copy.
 
 ## Deployment
 
