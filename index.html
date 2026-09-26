@@ -120,6 +120,7 @@
     gap: 56px; border-top: 1px solid var(--rule); padding-top: 28px;
   }
   .two h3 { font-weight: 500; margin-bottom: 12px; }
+  .two p + p { margin-top: 16px; }
   .two ul { list-style: none; }
   .two li {
     color: var(--ink-2); padding: 9px 0;
@@ -169,6 +170,7 @@
     <b>Plato Pod</b>
     <nav>
       <a href="#what">What it does</a>
+      <a href="#how">How it works</a>
       <a href="#scale">Scale</a>
       <a href="#uses">Uses</a>
       <a href="#contact">Contact</a>
@@ -221,9 +223,9 @@
       <div>
         <span class="n">03</span>
         <dt>Line of sight</dt>
-        <dd>Cover blocks observation, and the same model handles terrain when an
-            elevation field is loaded. A fast ray model or a Gazebo lidar
-            backend, behind one service contract.</dd>
+        <dd>Cover blocks observation. A fast ray model or a Gazebo lidar
+            backend, behind one service contract. The model accepts terrain
+            elevation; nothing feeds it one yet.</dd>
       </div>
       <div>
         <span class="n">04</span>
@@ -250,6 +252,56 @@
         <dt>Interoperability</dt>
         <dd>Cursor on Target: positions, zones, sensor readings and
             engagement events bridge to ATAK.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section class="idx" id="how">
+  <div class="w">
+    <h2>From a marker to a map.</h2>
+    <p class="sub">
+      Every pod carries a printed marker. Everything else follows from where
+      one camera sees it.
+    </p>
+
+    <dl class="rows">
+      <div>
+        <span class="n">01</span>
+        <dt>Locate</dt>
+        <dd>An overhead camera reads the marker on each pod and turns it into a
+            position and heading in metres, many times a second.</dd>
+      </div>
+      <div>
+        <span class="n">02</span>
+        <dt>Frame</dt>
+        <dd>Four more markers mark the corners. The arena is fitted from their
+            geometry rather than from which marker is where, so they go down in
+            any order and the arena re-fits itself when one moves.</dd>
+      </div>
+      <div>
+        <span class="n">03</span>
+        <dt>One world</dt>
+        <dd>Pods and virtual units read the same world: cover, civilians,
+            hazards, jamming, weather and rules of engagement. Scenario logic
+            cannot tell a robot from a virtual unit, which is why a few pods
+            can stand in for a larger force.</dd>
+      </div>
+      <div>
+        <span class="n">04</span>
+        <dt>Command</dt>
+        <dd>Commands from the console or from student code are checked before
+            they move anything: a damaged unit slows, one out of fuel stops.
+            Every pod also guards itself. It will not leave the arena, cross a
+            declared obstacle or drive into another robot, and it stops if its
+            radio link goes quiet.</dd>
+      </div>
+      <div>
+        <span class="n">05</span>
+        <dt>Picture</dt>
+        <dd>The exercise shows in a browser as camera, top-down view or map, and
+            on ATAK phones and tablets, placed on real ground at whatever scale
+            the exercise sets.</dd>
       </div>
     </dl>
   </div>
@@ -325,6 +377,10 @@
           engagement events bridge to ATAK, so the exercise appears where the
           rest of the picture already does.
         </p>
+        <p>
+          An umpire can release a gas plume, shift the wind or call a strike
+          mid-exercise, and every connected console sees the change.
+        </p>
       </div>
       <div>
         <h3>Teaching</h3>
@@ -336,6 +392,11 @@
           robots are each one or two pure functions with tests that run
           without a robot — a student writes a strategy, not a stack, and
           watches it lose to someone else's on the floor.
+        </p>
+        <p>
+          Student code drives the arena from Python over the network, with no
+          robotics stack to install. A graded search for a gas source ships
+          with reference solutions at three levels.
         </p>
       </div>
     </div>
