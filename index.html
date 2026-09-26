@@ -139,14 +139,8 @@
   /* the kit, rendered: on the page's white, with the arena the dark object */
   .kit { padding: 92px 0 0; }
   .render { margin-top: 40px; }
-  .render video, .render img, .stills img { display: block; width: 100%; height: auto; }
+  .render video { display: block; width: 100%; height: auto; }
   figcaption { margin-top: 12px; color: var(--ink-2); font-size: 15px; max-width: 42rem; }
-  .stills {
-    margin-top: 46px; display: grid; grid-template-columns: 1fr 1fr;
-    gap: 34px 40px; border-top: 1px solid var(--rule); padding-top: 28px;
-  }
-  .stills figure { margin: 0; }
-  @media (max-width: 760px) { .stills { grid-template-columns: 1fr; } }
 
   /* contact */
   .contact { padding: 92px 0 100px; }
@@ -326,62 +320,22 @@
     <p class="sub">
       The desk kit being built: a light stand at the arena's edge carries the
       camera and a small projector in one printed housing, and the projector
-      draws the exercise onto the arena around the pods. These are renders of
-      that design, not photographs; the projector is not fitted yet.
+      draws the exercise onto the arena around the pods. This is a render of
+      that design, not a recording; the projector is not fitted yet.
     </p>
     <figure class="render">
       <video class="autoplay" playsinline muted loop preload="metadata"
-             poster="img/kit-platform.jpg"
-             aria-label="Render of the desk kit: the arena on the floor, the light stand at its edge, and the camera and projector housing on top.">
-        <source src="img/kit-turntable.webm" type="video/webm">
-        <source src="img/kit-turntable.mp4" type="video/mp4">
+             poster="img/kit-orbit-poster.jpg"
+             aria-label="Render of the desk kit, turning once around: the arena on the floor with two pods driving loops through a projected gas plume, and the light stand at its edge carrying the camera and projector housing.">
+        <source src="img/kit-orbit.webm" type="video/webm">
+        <source src="img/kit-orbit.mp4" type="video/mp4">
       </video>
       <figcaption>
-        The whole kit. Corner markers fix the arena; the projector lights it
-        from the stand.
+        Once round the kit. Corner markers fix the arena; the projector lights
+        it from the stand, drawing a gas plume from the platform's own model
+        and a ring round each pod in its team's colour.
       </figcaption>
     </figure>
-    <figure class="render">
-      <video class="autoplay" playsinline muted loop preload="metadata"
-             poster="img/kit-search-poster.jpg"
-             aria-label="Render of a gas-plume search: two pods track a plume upwind and the source is marked when the first reaches it.">
-        <source src="img/kit-search.webm" type="video/webm">
-        <source src="img/kit-search.mp4" type="video/mp4">
-      </video>
-      <figcaption>
-        A gas-plume search as the projector would draw it. Blue works up the
-        plume to its source; red zig-zags across the wind until it meets the
-        plume's edge. The plume is the platform's own model, contoured by the
-        same code that sends it to ATAK.
-      </figcaption>
-    </figure>
-    <div class="stills">
-      <figure>
-        <img src="img/kit-pod.jpg" loading="lazy" width="1600" height="1000"
-             alt="Render of a pod: a round purple body, a wheel in its side slot, and a printed marker on the lid.">
-        <figcaption>A pod, 70 mm across, with its marker on the lid, and
-          the ring the projector draws round it in its team's colour.</figcaption>
-      </figure>
-      <figure>
-        <img src="img/kit-corner.jpg" loading="lazy" width="1600" height="1000"
-             alt="Render of a corner marker: a low round puck with a printed marker set into its top.">
-        <figcaption>A corner marker. Four of them define the arena, placed
-          in any order.</figcaption>
-      </figure>
-      <figure>
-        <img src="img/kit-housing.jpg" loading="lazy" width="1600" height="1000"
-             alt="Render of the printed housing: a cradle holding the projector nose-down, with the camera on a bracket ahead of its lens.">
-        <figcaption>The housing, designed to print as two parts: the
-          projector hangs nose-down in a cradle, the camera just ahead of its
-          lens.</figcaption>
-      </figure>
-      <figure>
-        <img src="img/kit-camera.jpg" loading="lazy" width="1600" height="1200"
-             alt="Render from the camera's own position: the whole arena in view, all four corner markers and both pods.">
-        <figcaption>What the camera sees, rendered from its own position and
-          lens: all four corners and every pod in one frame.</figcaption>
-      </figure>
-    </div>
   </div>
 </section>
 
