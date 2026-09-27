@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teaching — Plato Pod</title>
+<meta name="description" content="Teaching with Plato Pod: real robots, simulated sensors, exercises from a first loop to cooperative planning, and a plain-English track.">
+<meta property="og:title" content="Teaching — Plato Pod">
+<meta property="og:description" content="Teaching with Plato Pod: real robots, simulated sensors, exercises from a first loop to cooperative planning, and a plain-English track.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://platopod.com/teaching.html">
+<meta property="og:image" content="https://platopod.com/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<header class="mast">
+  <div class="w">
+    <a class="brand" href="index.html">Plato<span>Pod</span></a>
+    <nav>
+      <a href="teaching.html" aria-current="page">Teaching</a>
+      <a href="military.html">Military</a>
+      <a href="technical.html">Technical</a>
+      <a href="about.html">About</a>
+      <a href="history.html">History</a>
+    </nav>
+    <a class="btn solid" href="index.html#contact">Get in touch</a>
+  </div>
+</header>
+
+<main>
+
+<article class="article">
+  <div class="read article-head">
+    <p class="kicker">Teaching</p>
+    <h1>Robots that <span class="accent">answer back.</span></h1>
+    <p class="lede">A program on a screen can be wrong without anyone noticing. A robot that
+      drives into a wall cannot. Plato Pod gives students real robots to program, a world of
+      simulated sensors around them, and problems that need decisions and plans rather than
+      a single right answer.</p>
+  </div>
+
+  <figure class="wide">
+    <div class="frame">
+      <video class="autoplay" playsinline muted loop preload="metadata" poster="img/sweep-poster.jpg"
+             aria-label="Recording of the browser console during a cooperative sweep: two pods cover the arena and the ground they have searched fills in.">
+        <source src="img/sweep.webm" type="video/webm">
+        <source src="img/sweep.mp4" type="video/mp4">
+      </video>
+    </div>
+    <figcaption>A recorded run of the cooperative sweep. Two pods shared out a
+      0.73&nbsp;×&nbsp;0.80&nbsp;m arena and found all six hidden mines in 69.5&nbsp;seconds,
+      stopping when 97% of the ground was covered. That was a fast run; two to four minutes
+      is usual.</figcaption>
+  </figure>
+
+  <div class="read">
+    <h2>Problems worth solving</h2>
+    <p>Each exercise is a problem with more than one good answer. The strategy behind it is a
+      single function with its own tests, so a student can replace it without touching
+      anything else.</p>
+  </div>
+
+  <div class="read">
+    <div class="cards">
+      <div><p class="tag">Pursuit</p><h3>Tag</h3>
+        <p>One pod evades, one pursues, both planning a way round the obstacles.</p></div>
+      <div><p class="tag">Control</p><h3>Follow a path</h3>
+        <p>Draw a route in the browser and a pod drives it. Steering well is harder than it
+          looks.</p></div>
+      <div><p class="tag">Cooperation</p><h3>Cover the ground</h3>
+        <p>The vacuum-cleaner problem: two pods divide the arena between them so no ground is
+          missed and none is swept twice.</p></div>
+      <div><p class="tag">Search</p><h3>Find the gas source</h3>
+        <p>Follow a simulated gas sensor to a leak. A graded exercise, with reference
+          solutions from a random walk up to a search that respects rules of
+          engagement.</p></div>
+      <div><p class="tag">Teams</p><h3>Capture the flag</h3>
+        <p>Two teams, their zones and a flag laid out on the arena, for students to plan
+          around.</p></div>
+      <div><p class="tag">Sensing</p><h3>Make sense of sensors</h3>
+        <p>Sonar, radar, lidar, gas and more, each with adjustable noise, so a student learns
+          what a real sensor does and does not tell them.</p></div>
+      <div class="span2"><p class="tag">No code</p><h3>The plain-English track</h3>
+        <p>Not every learner needs to program. On this track students describe a strategy in
+          plain English — how to sweep a room, how to take a flag — and the pods carry it
+          out. Getting it right means thinking logically and in the abstract, anticipating
+          what could go wrong, and saying exactly what they mean. It suits students without
+          an engineering background, and mid-career officers.</p></div>
+    </div>
+  </div>
+
+  <div class="read">
+    <h2>What student code looks like</h2>
+    <p>Students drive pods from Python with a small library, with no robotics software to
+      install. Here a pod reads its sonar and turns away from anything closer than
+      20&nbsp;cm:</p>
+    <pre><code>from platopod import Arena
+
+arena = Arena("ws://arena.local:8080/api/control")
+POD = 1
+
+arena.subscribe_sensors(POD, ["sonar"])
+
+while True:
+    sonar = arena.get_sensor(POD, "sonar")
+    if sonar:
+        ahead = sonar["ranges"][0]              <span class="c"># beam 0 points straight ahead</span>
+        if ahead &lt; 0.20:                        <span class="c"># something within 20 cm</span>
+            arena.cmd_vel(POD, 0.0, 1.2)        <span class="c"># turn on the spot</span>
+        else:
+            arena.cmd_vel(POD, 0.10, 0.0)       <span class="c"># drive on at 10 cm/s</span>
+    arena.sleep(0.1)</code></pre>
+    <p class="note-line">The same interface is plain JSON over a WebSocket, so any language
+      that can open one can drive the arena.</p>
+
+    <h2>From first loop to planning</h2>
+    <p>The same arena carries a class from a first loop that reads a sensor, through
+      feedback control and path planning, to robots that cooperate and decide under
+      uncertainty. The robots do not change; the problems do.</p>
+  </div>
+</article>
+
+</main>
+
+<footer class="foot">
+  <div class="w">
+    <div>
+      <b>Plato Pod</b>
+      Real robots, virtual force, one arena.<br>
+      Office 302, Building 16, UNSW Canberra at ADFA<br>
+      <a data-user="a.lenskiy" data-domain="unsw.edu.au" data-show
+         href="index.html#contact">a.lenskiy [at] unsw.edu.au</a>
+    </div>
+    <div>
+      <b>Pages</b>
+      <a href="teaching.html">Teaching</a>
+      <a href="military.html">Military</a>
+      <a href="technical.html">Technical</a>
+    </div>
+    <div>
+      <b>Us</b>
+      <a href="about.html">About</a>
+      <a href="history.html">History</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

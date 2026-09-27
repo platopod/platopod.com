@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical — Plato Pod</title>
+<meta name="description" content="How Plato Pod is built: the pods, the camera, the server, and one interface any language can use.">
+<meta property="og:title" content="Technical — Plato Pod">
+<meta property="og:description" content="How Plato Pod is built: the pods, the camera, the server, and one interface any language can use.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://platopod.com/technical.html">
+<meta property="og:image" content="https://platopod.com/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<header class="mast">
+  <div class="w">
+    <a class="brand" href="index.html">Plato<span>Pod</span></a>
+    <nav>
+      <a href="teaching.html">Teaching</a>
+      <a href="military.html">Military</a>
+      <a href="technical.html" aria-current="page">Technical</a>
+      <a href="about.html">About</a>
+      <a href="history.html">History</a>
+    </nav>
+    <a class="btn solid" href="index.html#contact">Get in touch</a>
+  </div>
+</header>
+
+<main>
+
+<article class="article">
+  <div class="read article-head">
+    <p class="kicker">Technical</p>
+    <h1>How Plato Pod is built.</h1>
+    <p class="lede">Small robots, one camera, and a server that builds a world around them.
+      Everything a student or an umpire touches goes through one interface, and any piece
+      can be replaced without the others noticing.</p>
+  </div>
+
+  <figure class="wide">
+    <div class="diagram"><svg viewBox="0 0 960 430" role="img" aria-labelledby="dg-t dg-d">
+  <title id="dg-t">How the parts connect</title>
+  <desc id="dg-d">Pods and an overhead camera on the desk connect to a server running ROS 2,
+    which serves a browser console and student code over a WebSocket, and ATAK devices over
+    Cursor on Target.</desc>
+  <style>
+    .bx { fill: #FAF6F1; stroke: #E7DFD4; stroke-width: 1.5; }
+    .sv { fill: #EEF2FA; stroke: #C9D5EE; stroke-width: 1.5; }
+    .ch { fill: #FFFFFF; stroke: #C9D5EE; }
+    .t  { font: 600 17px Archivo, sans-serif; fill: #17140F; }
+    .s  { font: 400 13.5px Archivo, sans-serif; fill: #57514A; }
+    .c  { font: 500 13px Archivo, sans-serif; fill: #1F4FB8; }
+    .h  { font: 400 12px "IBM Plex Mono", monospace; fill: #8A8279; letter-spacing: .06em; }
+    .ln { stroke: #1F4FB8; stroke-width: 1.8; fill: none; marker-end: url(#ar); }
+    .lb { font: 400 12.5px "IBM Plex Mono", monospace; fill: #1F4FB8; }
+  </style>
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+    orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F4FB8"/></marker></defs>
+
+  <text class="h" x="20" y="24">ON THE DESK</text>
+  <rect class="bx" x="20" y="44" width="210" height="104" rx="14"/>
+  <rect class="bx" x="20" y="186" width="210" height="104" rx="14"/>
+  <text class="t" x="40" y="222">Pods</text>
+  <text class="s" x="40" y="246">ESP32-S3, two motors with</text>
+  <text class="s" x="40" y="266">encoders, a printed marker</text>
+  <text class="t" x="40" y="80">Overhead camera</text>
+  <text class="s" x="40" y="104">Reads every marker,</text>
+  <text class="s" x="40" y="124">many times a second</text>
+
+  <text class="h" x="330" y="24">SERVER · ROS 2</text>
+  <rect class="sv" x="330" y="44" width="300" height="366" rx="16"/>
+  <g>
+    <rect class="ch" x="350" y="64"  width="126" height="40" rx="10"/><text class="c" x="364" y="89">Vision</text>
+    <rect class="ch" x="486" y="64"  width="126" height="40" rx="10"/><text class="c" x="500" y="89">Registry</text>
+    <rect class="ch" x="350" y="114" width="126" height="40" rx="10"/><text class="c" x="364" y="139">Arena model</text>
+    <rect class="ch" x="486" y="114" width="126" height="40" rx="10"/><text class="c" x="500" y="139">World state</text>
+    <rect class="ch" x="350" y="164" width="126" height="40" rx="10"/><text class="c" x="364" y="189">Sensors</text>
+    <rect class="ch" x="486" y="164" width="126" height="40" rx="10"/><text class="c" x="500" y="189">Engagement</text>
+    <rect class="ch" x="350" y="214" width="126" height="40" rx="10"/><text class="c" x="364" y="239">OPFOR</text>
+    <rect class="ch" x="486" y="214" width="126" height="40" rx="10"/><text class="c" x="500" y="239">Scenarios</text>
+    <rect class="ch" x="350" y="264" width="126" height="40" rx="10"/><text class="c" x="364" y="289">Pod bridges</text>
+    <rect class="ch" x="486" y="264" width="126" height="40" rx="10"/><text class="c" x="500" y="289">Simulator</text>
+    <rect class="ch" x="350" y="314" width="262" height="40" rx="10"/><text class="c" x="364" y="339">API gateway</text>
+    <rect class="ch" x="350" y="362" width="262" height="36" rx="10"/><text class="c" x="364" y="385">ATAK bridge</text>
+  </g>
+
+  <text class="h" x="740" y="24">PEOPLE</text>
+  <rect class="bx" x="740" y="44" width="200" height="90" rx="14"/>
+  <text class="t" x="760" y="80">Browser console</text>
+  <text class="s" x="760" y="104">Camera, top-down view, map</text>
+  <rect class="bx" x="740" y="154" width="200" height="90" rx="14"/>
+  <text class="t" x="760" y="190">Student code</text>
+  <text class="s" x="760" y="214">Python, or any language</text>
+  <rect class="bx" x="740" y="320" width="200" height="90" rx="14"/>
+  <text class="t" x="760" y="356">ATAK</text>
+  <text class="s" x="760" y="380">Phones and tablets</text>
+
+  <path class="ln" d="M232 250 L346 284" marker-start="url(#ar)"/>
+  <text class="lb" x="238" y="294">Bluetooth LE</text>
+  <path class="ln" d="M232 90 L346 84"/>
+  <text class="lb" x="262" y="78">video</text>
+  <path class="ln" d="M614 330 L736 94" marker-start="url(#ar)"/>
+  <path class="ln" d="M614 336 L736 200" marker-start="url(#ar)"/>
+  <text class="lb" x="648" y="150">WebSocket</text>
+  <text class="lb" x="648" y="166">JSON</text>
+  <path class="ln" d="M614 380 L736 366"/>
+  <text class="lb" x="644" y="404">Cursor on Target</text>
+</svg></div>
+    <figcaption>The pods and camera on the desk, the server between them, and the people
+      who use it. Every box in the server is a separate process with a typed message
+      contract.</figcaption>
+  </figure>
+
+  <div class="read">
+    <h2>The pods</h2>
+    <p>Each pod is a round robot 70&nbsp;mm across: a 3D-printed body split by two wheel
+      slots, a custom circuit board with an ESP32-S3, two geared motors with wheel
+      encoders, and a small lithium battery charged over USB-C. A marker printed on the lid
+      is how the camera finds it.</p>
+    <p>The pod does little thinking of its own, on purpose. It takes wheel commands over
+      Bluetooth, closes a speed loop on its encoders, and stops if no command arrives for
+      600&nbsp;ms. The intelligence lives on the server, where it can be read, changed and
+      tested.</p>
+  </div>
+
+  <figure class="wide">
+    <div class="pair">
+      <img src="img/pod-open.jpg" alt="A pod with its lid off: the purple printed body, the green circuit board and a wheel." loading="lazy">
+      <img src="img/pod-side.jpg" alt="A pod from the side: a rubber wheel with a white three-spoke hub in the body's slot." loading="lazy">
+    </div>
+    <figcaption>A pod opened up, and from the side.</figcaption>
+  </figure>
+
+  <figure class="wide">
+    <div class="pair">
+      <img src="img/pcb-top.jpg" alt="Render of the pod's circuit board, top side, with the ESP32-S3 module." loading="lazy">
+      <img src="img/pcb-bottom.jpg" alt="Render of the pod's circuit board, underside." loading="lazy">
+    </div>
+    <figcaption>The pod's circuit board, top and underside.</figcaption>
+  </figure>
+
+  <div class="read">
+    <h2>Seeing the arena</h2>
+    <p>One overhead camera reads the marker on every pod and turns it into a position and a
+      heading in metres, many times a second. Four more markers sit on the corners. The
+      arena is fitted from their geometry rather than from which marker is where, so they
+      go down in any order, and the arena re-fits itself when one is moved.</p>
+    <p>From the same picture the console draws a top-down view at a constant scale, so what
+      the camera sees at an angle can be read like a map.</p>
+  </div>
+
+  <figure class="wide">
+    <div class="pair">
+      <img src="img/console-overlay.jpg" alt="The camera's picture with the arena outline, a red pod, a blue pod and a dashed circle for a virtual unit drawn over it." loading="lazy">
+      <img src="img/console-topdown.jpg" alt="The same arena rectified to a top-down view." loading="lazy">
+    </div>
+    <figcaption>The console: the camera's view with the arena drawn over it, and the same
+      scene rectified to a top-down view. The dashed circle is a virtual unit.</figcaption>
+  </figure>
+
+  <div class="read">
+    <h2>A world around the pods</h2>
+    <p>Physical pods and virtual units read the same world, and scenario logic cannot tell
+      them apart. The server simulates what the robots carry and what surrounds them.</p>
+    <ul class="facts">
+      <li><b>Sensors</b><span>Eleven, simulated: gas with a real detector's lag, GNSS in metres
+        or latitude and longitude, sonar, radar, lidar, thermal, rangefinder, IED detector,
+        direction finding, UAV camera and friend-or-foe. Each pod's set, and each sensor's
+        noise, can be changed while an exercise runs.</span></li>
+      <li><b>Engagement</b><span>Every shot resolved against weapon, line of sight, cover and
+        the target's armour. Damage slows a unit and degrades its fire, however it is
+        driven.</span></li>
+      <li><b>Rules and adversary</b><span>Rules of engagement checked before a round resolves,
+        and an opposing force that patrols, observes, engages and withdraws on its
+        own.</span></li>
+      <li><b>Umpire</b><span>Gas releases, wind shifts and strikes injected mid-exercise, seen
+        at once by sensors and maps.</span></li>
+      <li><b>Safety</b><span>Whatever drives it, a pod will not leave the arena, cross a
+        declared obstacle or drive into another robot.</span></li>
+    </ul>
+
+    <h2>One interface, any language</h2>
+    <p>Everything a client does — drive a pod, read a sensor, receive an engagement, inject
+      an umpire event — travels over one WebSocket as JSON, so code in any language can use
+      the arena. A small Python library wraps it for students. Inside the server, the parts
+      exchange typed ROS&nbsp;2 messages, so any of them can be rewritten in Python, C++,
+      MATLAB, Rust or Java. The exercise also reaches ATAK over Cursor on Target.</p>
+
+    <h2>How it is run</h2>
+    <ul class="facts">
+      <li><b>Server</b><span>ROS&nbsp;2 Jazzy and Python, in Docker on an ordinary x86 PC. A GPU
+        is used when present and never required.</span></li>
+      <li><b>Console</b><span>A web page: nothing to install.</span></li>
+      <li><b>Tests</b><span>Over two thousand unit tests, and a suite that launches the whole
+        system and drives it the way clients do.</span></li>
+    </ul>
+  </div>
+</article>
+
+</main>
+
+<footer class="foot">
+  <div class="w">
+    <div>
+      <b>Plato Pod</b>
+      Real robots, virtual force, one arena.<br>
+      Office 302, Building 16, UNSW Canberra at ADFA<br>
+      <a data-user="a.lenskiy" data-domain="unsw.edu.au" data-show
+         href="index.html#contact">a.lenskiy [at] unsw.edu.au</a>
+    </div>
+    <div>
+      <b>Pages</b>
+      <a href="teaching.html">Teaching</a>
+      <a href="military.html">Military</a>
+      <a href="technical.html">Technical</a>
+    </div>
+    <div>
+      <b>Us</b>
+      <a href="about.html">About</a>
+      <a href="history.html">History</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
