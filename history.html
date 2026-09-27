@@ -50,34 +50,91 @@
       <p class="where">KoreaTech, Korea</p>
       <p>The first platform was built at the Korea University of Technology and Education
         to make programming classes less about memorising a language and more about making
-        something move. One camera watched the whole table, and a computer-vision algorithm
-        turned what it saw into the robots' sensors, so a line follower, a maze, a vacuum
-        cleaner and a game of tag could all be set without extra hardware. The robots ran on
-        the Robot Operating System and were reached over the network, so students could
-        program them from anywhere.</p>
-      <p class="names">Artem Lenskiy, Heo Junho, Kim Dongyun and Park Junsu, “Educational
-        platform for learning programming via controlling mobile robots”,
-        <a href="https://ieeexplore.ieee.org/abstract/document/7062695">IEEE Xplore</a>.</p>
+        something move. Off-the-shelf robots ran in a table-top arena with real walls and
+        real obstacles. One overhead camera watched the whole table, and a computer-vision
+        algorithm turned what it saw into the robots' sensors, so a line follower, a maze, a
+        vacuum cleaner and a game of tag could all be set without extra hardware. The robots
+        ran on the Robot Operating System and were reached over the network, so students
+        could program them from anywhere.</p>
+      <p class="names">Team: Heo Junho, Kim Dongyun and Park Junsu, with Artem Lenskiy.
+        Published as “Educational platform for learning programming via controlling mobile
+        robots”, <a href="https://ieeexplore.ieee.org/abstract/document/7062695">IEEE
+        Xplore</a>.</p>
     </div>
+  </div>
+
+  <figure class="wide">
+    <div class="pair even">
+      <video class="autoplay" playsinline muted loop preload="metadata" poster="img/gen1-exhibition-poster.jpg"
+             aria-label="The first platform at an exhibition: robots moving through a maze of wooden blocks, the project poster, and a monitor showing the tracked robots.">
+        <source src="img/gen1-exhibition.webm" type="video/webm">
+        <source src="img/gen1-exhibition.mp4" type="video/mp4">
+      </video>
+      <img src="img/gen1-team.jpg" alt="Four team members standing beside a poster for the Mobile Robot Platform for Education, with the maze arena in front of them." loading="lazy">
+    </div>
+    <figcaption>The first platform on show: off-the-shelf robots in a maze of real blocks
+      under one camera, and the team with their poster.</figcaption>
+  </figure>
+
+  <div class="read">
 
     <div class="stage">
       <span class="dot">2</span>
-      <h2>The second platform</h2>
+      <h2>Robots of our own</h2>
       <p class="where">KoreaTech, Korea</p>
-      <p>A second version followed at KoreaTech.</p>
+      <p>The second platform replaced the off-the-shelf robots with a differential-drive
+        robot designed in-house, 9&nbsp;cm in radius and 6&nbsp;cm high, driven over a
+        Bluetooth link. A mini PC became the server, and the arena became something to
+        assemble, with the camera on its own post above it.</p>
+      <p class="names">Team: Konho Park, Kyongjae Kim, Jongyoun Lim and Raminta
+        Olbutaite.</p>
     </div>
+  </div>
+
+  <figure class="wide">
+    <div class="pair even">
+      <img src="img/gen2-render.jpg" alt="Render of the second platform: a rectangular arena framed by rails, with a camera on a post at one end." loading="lazy">
+      <img src="img/gen2-lab.jpg" alt="The second platform in a teaching lab: the arena on a desk between computer workstations, with the camera on a tripod." loading="lazy">
+    </div>
+    <figcaption>The assemblable arena, as designed and in the lab.</figcaption>
+  </figure>
+
+  <figure class="wide">
+    <div class="pair even">
+      <img src="img/gen2-robot.jpg" alt="The second-generation robot opened up: a round yellow shell holding its circuit board, beside the arena's corner post." loading="lazy">
+      <img src="img/gen2-board.jpg" alt="The second-generation robot's green system board." loading="lazy">
+    </div>
+    <figcaption>The in-house robot and its system board.</figcaption>
+  </figure>
+
+  <div class="read">
 
     <div class="stage">
       <span class="dot">3</span>
       <h2>A world around the robots</h2>
       <p class="where">UNSW Canberra, Australia</p>
-      <p>At UNSW Canberra the platform became what it is today: new pods on Bluetooth, a
-        server built on ROS&nbsp;2, and around the robots a simulated world of sensors,
-        hazards, virtual units and an opposing force, shared with ATAK. It is built for the
-        classroom and for rehearsal alike.</p>
+      <p>At UNSW Canberra the platform became what it is today. The pods shrank to
+        70&nbsp;mm across, on ESP32 boards over Bluetooth. The arena no longer needs walls:
+        its boundary comes from markers on the corners, and the obstacles are virtual. And
+        around the robots grew a simulated world of sensors, hazards, virtual units and an
+        opposing force on a server built on ROS&nbsp;2, shared with ATAK, for the classroom
+        and for rehearsal alike.</p>
+      <p class="names">Team: Artem Lenskiy and Rhianne Chng. See <a href="about.html">About</a>.</p>
       <p><a href="technical.html">How today’s platform is built →</a></p>
     </div>
   </div>
+
+  <figure class="wide">
+    <div class="frame">
+      <video class="autoplay" playsinline muted loop preload="metadata" poster="img/gen3-console-poster.jpg"
+             aria-label="An earlier build of the console: a 3D view of the arena with pods and a simulated field shaded across it, and the overhead camera's picture in the corner.">
+        <source src="img/gen3-console.webm" type="video/webm">
+        <source src="img/gen3-console.mp4" type="video/mp4">
+      </video>
+    </div>
+    <figcaption>An earlier build of the current console: the arena in 3D with a simulated
+      field shaded across it, and the overhead camera's picture in the corner.</figcaption>
+  </figure>
 </article>
 
 </main>
