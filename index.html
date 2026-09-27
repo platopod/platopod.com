@@ -136,6 +136,9 @@
   .film { margin-top: 40px; background: var(--panel); }
   .film video { display: block; width: 100%; height: auto; }
 
+  /* a closing paragraph under a list of rows: body text, so body contrast */
+  .after { margin-top: 28px; max-width: 42rem; color: var(--ink-2); }
+
   /* the kit, rendered: on the page's white, with the arena the dark object */
   .kit { padding: 92px 0 0; }
   .render { margin-top: 40px; }
@@ -175,11 +178,11 @@
   <div class="w">
     <b>Plato Pod</b>
     <nav>
-      <a href="#what">What it does</a>
+      <a href="#platform">Platform</a>
       <a href="#how">How it works</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#military">Military</a>
       <a href="#kit">The kit</a>
-      <a href="#scale">Scale</a>
-      <a href="#uses">Uses</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -206,59 +209,61 @@
     </div></div>
 </div>
 
-<section class="idx" id="what">
+<section class="idx" id="platform">
   <div class="w">
     <h2>The robots are the cheap part.</h2>
     <p class="sub">
       What makes an exercise worth running is everything the robots cannot
-      see. All of it against one world, not seven.
+      see. The platform supplies it once, for every unit on the floor.
     </p>
 
     <dl class="rows">
       <div>
         <span class="n">01</span>
-        <dt>Engagement</dt>
-        <dd>Every shot resolved against weapon, line of sight and target
-            state. Damage degrades mobility and the ability to return fire.</dd>
+        <dt>Mixed forces</dt>
+        <dd>Physical pods and virtual units share one world, so a few
+            robots stand in for a larger force.</dd>
       </div>
       <div>
         <span class="n">02</span>
-        <dt>Rules of engagement</dt>
-        <dd>Weapons hold, tight or free. Civilian and friendly checks are
-            evaluated before a round resolves and carried on the outcome.</dd>
+        <dt>Sensors</dt>
+        <dd>Eleven simulated sensors, from gas with a real detector's lag
+            to sonar, radar and GNSS. Each pod's set, and each sensor's noise,
+            can be changed while an exercise runs.</dd>
       </div>
       <div>
         <span class="n">03</span>
-        <dt>Line of sight</dt>
-        <dd>Cover blocks observation. A fast ray model or a Gazebo lidar
-            backend, behind one service contract. The model accepts terrain
-            elevation; nothing feeds it one yet.</dd>
+        <dt>Engagement</dt>
+        <dd>Every shot is resolved against weapon, line of sight, cover
+            and the target's armour. Damage slows a unit and degrades its
+            fire, whatever is driving it.</dd>
       </div>
       <div>
         <span class="n">04</span>
-        <dt>Electronic warfare</dt>
-        <dd>Emitters, jammed regions and communications dead zones are modelled
-            and published as world state, so a link can be evaluated against
-            the world rather than assumed.</dd>
+        <dt>Rules and adversary</dt>
+        <dd>Rules of engagement are checked before a round
+            resolves. An autonomous opposing force patrols, observes, engages
+            and withdraws on its own.</dd>
       </div>
       <div>
         <span class="n">05</span>
-        <dt>Sensing</dt>
-        <dd>Gas with stateful detector dynamics, lidar, sonar, thermal,
-            rangefinder, IED detection, direction finding, GNSS, UAV camera,
-            friend-or-foe.</dd>
+        <dt>Umpire</dt>
+        <dd>Release a gas plume, shift the wind or call a strike
+            mid-exercise; sensors and maps see it at once.</dd>
       </div>
       <div>
         <span class="n">06</span>
-        <dt>Logistics</dt>
-        <dd>Fuel, ammunition and water modelled per unit, and a unit out of fuel
-            stops. Weather and visibility are evaluated on every engagement.</dd>
+        <dt>Any language</dt>
+        <dd>Everything travels over one WebSocket as JSON, so code in
+            any language can drive the arena, and a Python library ships for
+            students. Inside, the platform's parts exchange typed messages
+            that any ROS&nbsp;2 language can implement.</dd>
       </div>
       <div>
         <span class="n">07</span>
-        <dt>Interoperability</dt>
-        <dd>Cursor on Target: positions, zones, sensor readings and
-            engagement events bridge to ATAK.</dd>
+        <dt>ATAK</dt>
+        <dd>Positions, zones, sensor readings, engagements and casualties
+            appear on ATAK, on real ground.</dd>
       </div>
     </dl>
   </div>
@@ -297,11 +302,11 @@
       <div>
         <span class="n">04</span>
         <dt>Command</dt>
-        <dd>Commands from the console or from student code are checked before
-            they move anything: a damaged unit slows, one out of fuel stops.
-            Every pod also guards itself. It will not leave the arena, cross a
-            declared obstacle or drive into another robot, and it stops if its
-            radio link goes quiet.</dd>
+        <dd>A damaged unit slows and a destroyed one stops, however it is
+            driven. Commands from the console or from student code are also
+            checked for fuel and speed. Every pod also guards itself: it will
+            not leave the arena, cross a declared obstacle or drive into
+            another robot, and it stops if its radio link goes quiet.</dd>
       </div>
       <div>
         <span class="n">05</span>
@@ -309,6 +314,109 @@
         <dd>The exercise shows in a browser as camera, top-down view or map, and
             on ATAK phones and tablets, placed on real ground at whatever scale
             the exercise sets.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section class="idx" id="teaching">
+  <div class="w">
+    <h2>A strategy, not a stack.</h2>
+    <p class="sub">
+      Each exercise isolates one idea in a function a student can write, test
+      without a robot, then watch succeed or lose on the floor.
+    </p>
+
+    <dl class="rows">
+      <div>
+        <span class="n">01</span>
+        <dt>Follow a path</dt>
+        <dd>Feedback control. The route follower is pure pursuit with
+            its integral and derivative terms exposed, so a wrong gain
+            visibly oscillates.</dd>
+      </div>
+      <div>
+        <span class="n">02</span>
+        <dt>Tag</dt>
+        <dd>Pursuit and evasion. One pod flees, one chases, and both plan
+            round obstacles.</dd>
+      </div>
+      <div>
+        <span class="n">03</span>
+        <dt>Sweep</dt>
+        <dd>Coverage and task allocation. Two pods divide an arena between
+            them to find hidden hazards: the problem a robot vacuum cleaner
+            solves.</dd>
+      </div>
+      <div>
+        <span class="n">04</span>
+        <dt>Find the source</dt>
+        <dd>Sensor-driven search. A graded gas-source search ships
+            with reference solutions at three levels, from a random walk to a
+            search that respects rules of engagement.</dd>
+      </div>
+      <div>
+        <span class="n">05</span>
+        <dt>Sense and react</dt>
+        <dd>Sonar says something is there and how far; radar says
+            what it is. Students build reactive behaviour from readings with
+            the noise a real sensor has.</dd>
+      </div>
+    </dl>
+    <p class="after">
+      Student code drives the arena from Python over the network, with no
+      robotics stack to install. It is decision-making and planning with the
+      physical world left in: noise, delay, and a robot that takes time to
+      stop.
+    </p>
+  </div>
+</section>
+
+<section class="idx" id="military">
+  <div class="w">
+    <h2>Rehearse on a table.</h2>
+    <p class="sub">
+      The same arena runs a staff exercise, small enough for a desk and
+      connected to the tools already in use.
+    </p>
+
+    <dl class="rows">
+      <div>
+        <span class="n">01</span>
+        <dt>Mixed force</dt>
+        <dd>Blue and red, physical and virtual, on one arena, against
+            an opposing force that fights on its own.</dd>
+      </div>
+      <div>
+        <span class="n">02</span>
+        <dt>Rules of engagement</dt>
+        <dd>Weapons hold, tight or free, with civilian and
+            friendly checks on every round.</dd>
+      </div>
+      <div>
+        <span class="n">03</span>
+        <dt>CBRN</dt>
+        <dd>A gas release the pods' detectors read and ATAK draws; the umpire
+            can shift the wind under them.</dd>
+      </div>
+      <div>
+        <span class="n">04</span>
+        <dt>Fires</dt>
+        <dd>Strikes on one unit or an area, reduced by each unit's armour,
+            with casualties marked on ATAK.</dd>
+      </div>
+      <div>
+        <span class="n">05</span>
+        <dt>Exercises as configuration</dt>
+        <dd>Capture the flag, cordon and search, CBRN
+            reconnaissance patrol, defensive position: each is a file, not a
+            program.</dd>
+      </div>
+      <div>
+        <span class="n">06</span>
+        <dt>ATAK</dt>
+        <dd>The exercise appears where the rest of the picture already is,
+            registered onto real ground at the exercise's scale.</dd>
       </div>
     </dl>
   </div>
@@ -386,54 +494,6 @@
         <source src="img/sweep.mp4" type="video/mp4">
       </video>
     </figure>
-  </div>
-</section>
-
-<section class="blk" id="uses">
-  <div class="w">
-    <h2>Used two ways.</h2>
-    <p class="sub">
-      The same arena serves a staff exercise and a lecture course. The seam
-      between them is narrow on purpose: one is the scenario, the other is
-      the function that decides what a unit does inside it.
-    </p>
-    <div class="two">
-      <div>
-        <h3>Wargaming</h3>
-        <p>
-          Blue and red force, rules of engagement and an autonomous OPFOR
-          driven by a behaviour tree. Exercises are written as configuration
-          — capture the flag, cordon and search, CBRN reconnaissance patrol
-          — and virtual units spawn alongside the physical pods, so a few
-          robots stand in for a force larger than the desk. Positions and
-          engagement events bridge to ATAK, so the exercise appears where the
-          rest of the picture already does.
-        </p>
-        <p>
-          An umpire can release a gas plume, shift the wind or call a strike
-          mid-exercise. The pods' gas sensors read the new plume, the map in
-          ATAK redraws it, and a strike takes health off every unit it
-          catches, slowing each by how badly it was hit.
-        </p>
-      </div>
-      <div>
-        <h3>Teaching</h3>
-        <p>
-          Route following is a pure-pursuit controller with its integral and
-          derivative terms exposed, so a lecture on PID has something that
-          visibly oscillates when the gains are wrong. Pursuit and evasion,
-          planning through obstacles, and task allocation between cooperating
-          robots are each one or two pure functions with tests that run
-          without a robot — a student writes a strategy, not a stack, and
-          watches it lose to someone else's on the floor.
-        </p>
-        <p>
-          Student code drives the arena from Python over the network, with no
-          robotics stack to install. A graded search for a gas source ships
-          with reference solutions at three levels.
-        </p>
-      </div>
-    </div>
   </div>
 </section>
 
