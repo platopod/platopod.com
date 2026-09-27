@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plato Pod</title>
-<meta name="description" content="Physical robots and virtual force in one arena. Mixed-reality tactical simulation on a desk arena.">
+<title>Plato Pod — real robots, virtual force, one arena</title>
+<meta name="description" content="Small robots on a desk, with a battlefield built around them in software. Plato Pod teaches programming and decision-making, and lets officers rehearse on a table.">
 <meta property="og:title" content="Plato Pod">
-<meta property="og:description" content="Physical robots and virtual force in one arena.">
+<meta property="og:description" content="Real robots, virtual force, one arena.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://platopod.com/">
 <meta property="og:image" content="https://platopod.com/img/og.png">
@@ -14,787 +14,172 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-<style>
-  /* platopod.com
-     One idea: a white page in which the only dark thing is the arena. The
-     product's world is the single object; everything else is type and
-     hairlines. Read CLAUDE.md before adding a surface, a border or a card —
-     the restraint is the design, and a second box starts an arms race. */
-  :root {
-    --paper: #FFFFFF;
-    --ink:   #0B0B0C;
-    --ink-2: #56595F;
-    --ink-3: #9A9DA3;
-    --rule:  #E4E4E2;
-    --panel: #0B0E13;
-    --blue:  #1D4ED8;
-    --red:   #DC2626;
-    --measure: 34rem;
-
-    /* Three sizes. That is the whole scale, and it is a constraint worth
-       keeping: everything else is carried by weight, colour, tracking and
-       space. Nine sizes is what the first pass had, and it read as noise. */
-    --t1: clamp(38px, 6.6vw, 78px);   /* the opening line, once */
-    --t2: clamp(21px, 2.5vw, 27px);   /* section heads, the measured line */
-    --t3: 17px;                        /* everything else */
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    background: var(--paper); color: var(--ink);
-    font-family: Archivo, ui-sans-serif, system-ui, sans-serif;
-    font-size: var(--t3); line-height: 1.55;
-    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
-  }
-  .w { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
-  @media (max-width: 640px) { .w { padding: 0 20px; } }
-
-  a { color: inherit; text-decoration: none; }
-  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-
-  .lbl { color: var(--ink-3); }
-  .num { font-family: "IBM Plex Mono", ui-monospace, monospace;
-         color: var(--ink-3); }
-
-  /* masthead */
-  .mast { padding: 26px 0; }
-  .mast .w { display: flex; align-items: center; }
-  .mast b { font-weight: 600; letter-spacing: -.015em; }
-  .mast nav { margin-left: auto; display: flex; gap: 26px; }
-  .mast nav a { color: var(--ink-2); }
-  .mast nav a:hover { color: var(--ink); }
-  @media (max-width: 560px) { .mast nav { display: none; } }
-
-  /* opening statement */
-  .open { padding: 44px 0 60px; }
-  .open h1 {
-    font-weight: 500; font-size: var(--t1);
-    line-height: .97; letter-spacing: -.045em; max-width: 15ch;
-  }
-  .open h1 span { color: var(--ink-3); }
-  .open p {
-    margin-top: 30px; max-width: var(--measure); color: var(--ink-2);
-  }
-
-  /* the arena — the one dark object on the page */
-  .arena { background: var(--panel); }
-  .arena canvas { display: block; width: 100%; height: auto; }
-  .legend { display: flex; gap: 26px; flex-wrap: wrap; padding: 15px 0 24px; }
-  .legend span { color: #6E747E; }
-  .legend #sweep-read { margin-left: auto;
-                        font-family: "IBM Plex Mono", ui-monospace, monospace; }
-  .legend i {
-    width: 7px; height: 7px; border-radius: 50%;
-    display: inline-block; margin-right: 7px; vertical-align: 1px;
-  }
-
-  /* headings shared by the lower sections */
-  h2 {
-    font-weight: 500; font-size: var(--t2);
-    letter-spacing: -.028em; line-height: 1.12; max-width: 21ch;
-  }
-  p.sub { margin-top: 16px; max-width: var(--measure); color: var(--ink-2); }
-  .note { margin-top: 22px; color: var(--ink-3);
-          max-width: var(--measure); }
-
-  /* numbered index */
-  .idx { padding: 92px 0 0; }
-  dl.rows { margin-top: 46px; border-top: 1px solid var(--rule); }
-  dl.rows > div {
-    display: grid; grid-template-columns: 3rem 12.5rem 1fr; gap: 28px;
-    padding: 21px 0; border-bottom: 1px solid var(--rule); align-items: baseline;
-  }
-  dl.rows .n { color: var(--ink-3);
-               font-family: "IBM Plex Mono", ui-monospace, monospace; }
-  dl.rows dt { font-weight: 500; letter-spacing: -.012em; }
-  dl.rows dd { color: var(--ink-2); }
-  @media (max-width: 760px) {
-    dl.rows > div { grid-template-columns: 2.2rem 1fr; gap: 4px 16px; }
-    dl.rows dd { grid-column: 2; }
-  }
-
-  /* two-up */
-  .blk { padding: 92px 0 0; }
-  .two {
-    margin-top: 46px; display: grid; grid-template-columns: 1fr 1fr;
-    gap: 56px; border-top: 1px solid var(--rule); padding-top: 28px;
-  }
-  .two h3 { font-weight: 500; margin-bottom: 12px; }
-  .two p + p { margin-top: 16px; }
-  .two ul { list-style: none; }
-  .two li {
-    color: var(--ink-2); padding: 9px 0;
-    border-bottom: 1px solid var(--rule); display: flex; gap: 18px;
-  }
-  .two li b { font-weight: 400; color: var(--ink); min-width: 6.5rem; }
-  @media (max-width: 760px) { .two { grid-template-columns: 1fr; gap: 34px; } }
-
-  /* the run itself, recorded */
-  .measured { padding: 92px 0 0; }
-  /* Sits in the text column, not full bleed, so its edges line up with the
-     heading above it. */
-  .film { margin-top: 40px; background: var(--panel); }
-  .film video { display: block; width: 100%; height: auto; }
-
-  /* a closing paragraph under a list of rows: body text, so body contrast */
-  .after { margin-top: 28px; max-width: 42rem; color: var(--ink-2); }
-
-  /* the kit, rendered: on the page's white, with the arena the dark object */
-  .kit { padding: 92px 0 0; }
-  .render { margin-top: 40px; }
-  .render video { display: block; width: 100%; height: auto; }
-  figcaption { margin-top: 12px; color: var(--ink-2); font-size: 15px; max-width: 42rem; }
-
-  /* contact */
-  .contact { padding: 92px 0 100px; }
-  form { margin-top: 38px; max-width: 34rem; }
-  .f { margin-bottom: 26px; }
-  .f label { display: block; margin-bottom: 9px; }
-  .f input, .f textarea {
-    width: 100%; border: 0; border-bottom: 1px solid var(--rule);
-    background: transparent; color: var(--ink); font: inherit;
-    padding: 7px 0;
-  }
-  .f textarea { resize: vertical; min-height: 46px; line-height: 1.5; }
-  .f input:focus, .f textarea:focus { outline: none; border-color: var(--ink); }
-  button {
-    font: inherit; font-weight: 500; cursor: pointer;
-    background: var(--ink); color: var(--paper); border: 0;
-    padding: 13px 28px; border-radius: 2px; letter-spacing: -.01em;
-  }
-  button:hover:not([disabled]) { background: var(--blue); }
-  button[disabled] { background: var(--ink-3); cursor: default; }
-  #note { margin-top: 16px; color: var(--ink-2); min-height: 1px; }
-  #note.bad { color: var(--red); }
-
-  .foot { border-top: 1px solid var(--rule); padding: 22px 0 42px; margin-top: 8px; }
-  .foot .w { display: flex; gap: 22px; flex-wrap: wrap; }
-  .foot .r { margin-left: auto; }
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
 <header class="mast">
   <div class="w">
-    <b>Plato Pod</b>
+    <a class="brand" href="index.html">Plato<span>Pod</span></a>
     <nav>
-      <a href="#platform">Platform</a>
-      <a href="#how">How it works</a>
-      <a href="#teaching">Teaching</a>
-      <a href="#military">Military</a>
-      <a href="#kit">The kit</a>
-      <a href="#contact">Contact</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="military.html">Military</a>
+      <a href="technical.html">Technical</a>
+      <a href="about.html">About</a>
+      <a href="history.html">History</a>
     </nav>
+    <a class="btn solid" href="#contact">Get in touch</a>
   </div>
 </header>
 
-<section class="open">
+<main>
+
+<section class="hero">
   <div class="w">
-    <h1>Real robots. <span>Virtual force.</span> One arena.</h1>
-    <p>
-      A pod drives across a desk, fighting an adversary that is not there,
-      over terrain that is not there, under rules that are.
-    </p>
-  </div>
-</section>
-
-<div class="arena">
-  <div class="w">
-    <canvas id="sweep" aria-label="Two pods sweeping the arena for hidden hazards. Ground already covered fills in behind them; a hazard turns green when a detector passes over it."></canvas>
-    <div class="legend">
-      <span><i style="background:#1D4ED8"></i>Blue force</span>
-      <span><i style="background:#DC2626"></i>Red force</span>
-      <span><i style="background:#2EA36B"></i>Located</span>
-      <span id="sweep-read"></span>
-    </div></div>
-</div>
-
-<section class="idx" id="platform">
-  <div class="w">
-    <h2>The robots are the cheap part.</h2>
-    <p class="sub">
-      What makes an exercise worth running is everything the robots cannot
-      see. The platform supplies it once, for every unit on the floor.
-    </p>
-
-    <dl class="rows">
-      <div>
-        <span class="n">01</span>
-        <dt>Mixed forces</dt>
-        <dd>Physical pods and virtual units share one world, so a few
-            robots stand in for a larger force.</dd>
+    <div>
+      <h1>Real robots. <span class="accent">Virtual force.</span> One arena.</h1>
+      <p class="lede">
+        Plato Pod puts small robots on a desk and builds the battlefield around
+        them in software: sensors, an opposing force, gas, fire and rules of
+        engagement. Students learn to program and to plan with it. Officers
+        rehearse on it.
+      </p>
+      <div class="actions">
+        <a class="btn solid" href="#contact">Get in touch <span class="arrow">→</span></a>
+        <a class="btn" href="technical.html">How it works</a>
       </div>
-      <div>
-        <span class="n">02</span>
-        <dt>Sensors</dt>
-        <dd>Eleven simulated sensors, from gas with a real detector's lag
-            to sonar, radar and GNSS. Each pod's set, and each sensor's noise,
-            can be changed while an exercise runs.</dd>
-      </div>
-      <div>
-        <span class="n">03</span>
-        <dt>Engagement</dt>
-        <dd>Every shot is resolved against weapon, line of sight, cover
-            and the target's armour. Damage slows a unit and degrades its
-            fire, whatever is driving it.</dd>
-      </div>
-      <div>
-        <span class="n">04</span>
-        <dt>Rules and adversary</dt>
-        <dd>Rules of engagement are checked before a round
-            resolves. An autonomous opposing force patrols, observes, engages
-            and withdraws on its own.</dd>
-      </div>
-      <div>
-        <span class="n">05</span>
-        <dt>Umpire</dt>
-        <dd>Release a gas plume, shift the wind or call a strike
-            mid-exercise; sensors and maps see it at once.</dd>
-      </div>
-      <div>
-        <span class="n">06</span>
-        <dt>Any language</dt>
-        <dd>Everything travels over one WebSocket as JSON, so code in
-            any language can drive the arena, and a Python library ships for
-            students. Inside, the platform's parts exchange typed messages
-            that any ROS&nbsp;2 language can implement.</dd>
-      </div>
-      <div>
-        <span class="n">07</span>
-        <dt>ATAK</dt>
-        <dd>Positions, zones, sensor readings, engagements and casualties
-            appear on ATAK, on real ground.</dd>
-      </div>
-    </dl>
-  </div>
-</section>
-
-<section class="idx" id="how">
-  <div class="w">
-    <h2>From a marker to a map.</h2>
-    <p class="sub">
-      Every pod carries a printed marker. Everything else follows from where
-      one camera sees it.
-    </p>
-
-    <dl class="rows">
-      <div>
-        <span class="n">01</span>
-        <dt>Locate</dt>
-        <dd>An overhead camera reads the marker on each pod and turns it into a
-            position and heading in metres, many times a second.</dd>
-      </div>
-      <div>
-        <span class="n">02</span>
-        <dt>Frame</dt>
-        <dd>Four more markers mark the corners. The arena is fitted from their
-            geometry rather than from which marker is where, so they go down in
-            any order and the arena re-fits itself when one moves.</dd>
-      </div>
-      <div>
-        <span class="n">03</span>
-        <dt>One world</dt>
-        <dd>Pods and virtual units read the same world: cover, civilians,
-            hazards, jamming, weather and rules of engagement. Scenario logic
-            cannot tell a robot from a virtual unit, which is why a few pods
-            can stand in for a larger force.</dd>
-      </div>
-      <div>
-        <span class="n">04</span>
-        <dt>Command</dt>
-        <dd>A damaged unit slows and a destroyed one stops, however it is
-            driven. Commands from the console or from student code are also
-            checked for fuel and speed. Every pod also guards itself: it will
-            not leave the arena, cross a declared obstacle or drive into
-            another robot, and it stops if its radio link goes quiet.</dd>
-      </div>
-      <div>
-        <span class="n">05</span>
-        <dt>Picture</dt>
-        <dd>The exercise shows in a browser as camera, top-down view or map, and
-            on ATAK phones and tablets, placed on real ground at whatever scale
-            the exercise sets.</dd>
-      </div>
-    </dl>
-  </div>
-</section>
-
-<section class="idx" id="teaching">
-  <div class="w">
-    <h2>A strategy, not a stack.</h2>
-    <p class="sub">
-      Each exercise isolates one idea in a function a student can write, test
-      without a robot, then watch succeed or lose on the floor.
-    </p>
-
-    <dl class="rows">
-      <div>
-        <span class="n">01</span>
-        <dt>Follow a path</dt>
-        <dd>Feedback control. The route follower is pure pursuit with
-            its integral and derivative terms exposed, so a wrong gain
-            visibly oscillates.</dd>
-      </div>
-      <div>
-        <span class="n">02</span>
-        <dt>Tag</dt>
-        <dd>Pursuit and evasion. One pod flees, one chases, and both plan
-            round obstacles.</dd>
-      </div>
-      <div>
-        <span class="n">03</span>
-        <dt>Sweep</dt>
-        <dd>Coverage and task allocation. Two pods divide an arena between
-            them to find hidden hazards: the problem a robot vacuum cleaner
-            solves.</dd>
-      </div>
-      <div>
-        <span class="n">04</span>
-        <dt>Find the source</dt>
-        <dd>Sensor-driven search. A graded gas-source search ships
-            with reference solutions at three levels, from a random walk to a
-            search that respects rules of engagement.</dd>
-      </div>
-      <div>
-        <span class="n">05</span>
-        <dt>Sense and react</dt>
-        <dd>Sonar says something is there and how far; radar says
-            what it is. Students build reactive behaviour from readings with
-            the noise a real sensor has.</dd>
-      </div>
-    </dl>
-    <p class="after">
-      Student code drives the arena from Python over the network, with no
-      robotics stack to install. It is decision-making and planning with the
-      physical world left in: noise, delay, and a robot that takes time to
-      stop.
-    </p>
-  </div>
-</section>
-
-<section class="idx" id="military">
-  <div class="w">
-    <h2>Rehearse on a table.</h2>
-    <p class="sub">
-      The same arena runs a staff exercise, small enough for a desk and
-      connected to the tools already in use.
-    </p>
-
-    <dl class="rows">
-      <div>
-        <span class="n">01</span>
-        <dt>Mixed force</dt>
-        <dd>Blue and red, physical and virtual, on one arena, against
-            an opposing force that fights on its own.</dd>
-      </div>
-      <div>
-        <span class="n">02</span>
-        <dt>Rules of engagement</dt>
-        <dd>Weapons hold, tight or free, with civilian and
-            friendly checks on every round.</dd>
-      </div>
-      <div>
-        <span class="n">03</span>
-        <dt>CBRN</dt>
-        <dd>A gas release the pods' detectors read and ATAK draws; the umpire
-            can shift the wind under them.</dd>
-      </div>
-      <div>
-        <span class="n">04</span>
-        <dt>Fires</dt>
-        <dd>Strikes on one unit or an area, reduced by each unit's armour,
-            with casualties marked on ATAK.</dd>
-      </div>
-      <div>
-        <span class="n">05</span>
-        <dt>Exercises as configuration</dt>
-        <dd>Capture the flag, cordon and search, CBRN
-            reconnaissance patrol, defensive position: each is a file, not a
-            program.</dd>
-      </div>
-      <div>
-        <span class="n">06</span>
-        <dt>ATAK</dt>
-        <dd>The exercise appears where the rest of the picture already is,
-            registered onto real ground at the exercise's scale.</dd>
-      </div>
-    </dl>
-  </div>
-</section>
-
-<section class="kit" id="kit">
-  <div class="w">
-    <h2>One stand, a camera and a projector.</h2>
-    <p class="sub">
-      The desk kit being built: a light stand at the arena's edge carries the
-      camera and a small projector in one printed housing, and the projector
-      draws the exercise onto the arena around the pods. This is a render of
-      that design, not a recording; the projector is not fitted yet.
-    </p>
-    <figure class="render">
+    </div>
+    <figure>
+      <div class="frame">
       <video class="autoplay" playsinline muted loop preload="metadata"
              poster="img/kit-orbit-poster.jpg"
-             aria-label="Render of the desk kit, turning once around: the arena on the floor with two pods driving loops through a projected gas plume, and the light stand at its edge carrying the camera and projector housing.">
+             aria-label="Render of the Plato Pod desk kit, turning once around: an arena on the floor with two pods driving through a projected gas plume, and a light stand at its edge carrying the camera and projector.">
         <source src="img/kit-orbit.webm" type="video/webm">
         <source src="img/kit-orbit.mp4" type="video/mp4">
       </video>
-      <figcaption>
-        Once round the kit. Corner markers fix the arena; the projector lights
-        it from the stand, drawing a gas plume from the platform's own model
-        and a ring round each pod in its team's colour.
-      </figcaption>
+      </div>
+      <figcaption>Render of the desk kit being built.</figcaption>
     </figure>
   </div>
 </section>
 
-<section class="blk" id="scale">
+<section>
+  <div class="w centre">
+    <p class="kicker">What it is</p>
+    <h2 class="h2">Three things, working as one.</h2>
+  </div>
+  <div class="steps-wrap">
+  <ol class="steps">
+    <li>
+      <span class="dot">1</span>
+      <h3>Pods on the desk</h3>
+      <p>Small robots, 70 mm across, driven over Bluetooth and tracked by one
+         overhead camera that reads a printed marker on each.</p>
+    </li>
+    <li>
+      <span class="dot">2</span>
+      <h3>A world around them</h3>
+      <p>Virtual units, simulated sensors, hazards and an opposing force share
+         the arena with the pods, so a few robots stand in for a larger force.</p>
+    </li>
+    <li>
+      <span class="dot">3</span>
+      <h3>One picture</h3>
+      <p>The exercise shows in a browser, and on ATAK phones and tablets,
+         placed on real ground.</p>
+    </li>
+  </ol>
+  </div>
+</section>
+
+<section>
   <div class="w">
-    <h2>Built to leave the desk.</h2>
-    <p class="sub">
-      The tactical layer does not know how a robot is located. It reads poses
-      through one interface, and localisation is a provider behind it.
-    </p>
-    <div class="two">
-      <div>
-        <h3>Today</h3>
-        <ul>
-          <li><b>Platform</b> Differential-drive pods</li>
-          <li><b>Position</b> Overhead camera, fiducial markers</li>
-          <li><b>Frame</b> Fitted from the corner markers</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Next</h3>
-        <p>
-          A GNSS and inertial provider drops in where the camera one sits.
-          That provider is not written yet. The WGS84 georeferencing it would
-          feed is built and tested; the outdoor scale is a design the
-          architecture allows for, not a capability to be counted on today.
-        </p>
-      </div>
+    <div class="centre">
+      <p class="kicker">Where to next</p>
+      <h2 class="h2">Built for the classroom and the staff room.</h2>
     </div>
-    <p class="note">
-      Everything below was measured on the desk arena.
-    </p>
-  </div>
-</section>
-
-<section class="measured">
-  <div class="w">
-    <h2>Two pods, sweeping for what neither can see.</h2>
-    <p class="sub">
-      The desk arena, recorded. Hazards are hidden from the robots until a
-      detector passes over one.
-    </p>
-    <figure class="film">
-      <video id="film" playsinline muted loop preload="metadata"
-             poster="img/sweep-poster.jpg"
-             aria-label="Two pods sweeping a desk arena for hidden hazards, recorded at twice speed.">
-        <source src="img/sweep.webm" type="video/webm">
-        <source src="img/sweep.mp4" type="video/mp4">
-      </video>
-    </figure>
+    <div class="doors">
+      <a class="door" href="teaching.html">
+        <img src="img/sweep-poster.jpg" alt="The browser console during a run: the arena seen from above, two pods and the ground they have covered." loading="lazy">
+        <div>
+          <h3>Teaching</h3>
+          <p>Programming, control and decision-making, with robots that answer
+             back — and a track that needs no code at all.</p>
+          <p class="go">Explore teaching →</p>
+        </div>
+      </a>
+      <a class="door" href="military.html">
+        <img src="img/atak-view.jpg" alt="ATAK on a phone: the arena's corners and three units placed on a parade ground." loading="lazy">
+        <div>
+          <h3>Military</h3>
+          <p>Wargaming on a table, with an opposing force, rules of engagement,
+             and the picture on ATAK.</p>
+          <p class="go">Explore military use →</p>
+        </div>
+      </a>
+      <a class="door" href="technical.html">
+        <img src="img/pcb-top.jpg" alt="Render of the pod's circuit board." loading="lazy">
+        <div>
+          <h3>Technical</h3>
+          <p>How it is built: the pods, the camera, the server, and an interface
+             any language can drive.</p>
+          <p class="go">Read the technical story →</p>
+        </div>
+      </a>
+    </div>
   </div>
 </section>
 
 <section class="contact" id="contact">
   <div class="w">
-    <h2>Request a briefing.</h2>
-    <p class="sub">
-      Tell us what you are trying to rehearse and we will tell you whether the
-      platform does it yet.
-    </p>
-
+    <div>
+      <p class="kicker">Get in touch</p>
+      <h2 class="h2">Tell us what you want to teach or rehearse.</h2>
+      <p class="lede">We will tell you whether the platform does it yet, and
+        what it would take if it does not.</p>
+      <a class="email" data-user="a.lenskiy" data-domain="unsw.edu.au" data-show
+         href="#contact">a.lenskiy [at] unsw.edu.au</a>
+      <address>Office 302, Building 16<br>UNSW Canberra at ADFA</address>
+    </div>
     <form id="briefing" action="https://formspree.io/f/mvkgqbdb" method="POST">
-      <div class="f">
-        <label class="lbl" for="f-name">Name</label>
-        <input id="f-name" name="name" type="text" autocomplete="name" required>
-      </div>
-      <div class="f">
-        <label class="lbl" for="f-org">Organisation</label>
-        <input id="f-org" name="organisation" type="text" autocomplete="organization">
-      </div>
-      <div class="f">
-        <label class="lbl" for="f-email">Email</label>
-        <input id="f-email" name="email" type="email" autocomplete="email" required>
-      </div>
-      <div class="f">
-        <label class="lbl" for="f-msg">What are you trying to rehearse?</label>
-        <textarea id="f-msg" name="message" rows="3" required></textarea>
-      </div>
-      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
-             aria-hidden="true" style="position:absolute;left:-9999px">
-      <button type="submit">Send</button>
+      <div class="f"><label for="f-name">Name</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required></div>
+      <div class="f"><label for="f-org">Organisation</label>
+        <input id="f-org" name="organisation" type="text" autocomplete="organization"></div>
+      <div class="f"><label for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="f"><label for="f-msg">What would you like to do?</label>
+        <textarea id="f-msg" name="message" rows="4" required></textarea></div>
+      <button class="btn solid" type="submit">Send <span class="arrow">→</span></button>
       <p id="note" role="status"></p>
     </form>
   </div>
 </section>
 
+</main>
+
 <footer class="foot">
-  <div class="w mono">
-    <span>Plato Pod</span>
-    <span class="r">No analytics. Enquiries go to Formspree.</span>
+  <div class="w">
+    <div>
+      <b>Plato Pod</b>
+      Real robots, virtual force, one arena.<br>
+      Office 302, Building 16, UNSW Canberra at ADFA
+    </div>
+    <div>
+      <b>Pages</b>
+      <a href="teaching.html">Teaching</a>
+      <a href="military.html">Military</a>
+      <a href="technical.html">Technical</a>
+    </div>
+    <div>
+      <b>Us</b>
+      <a href="about.html">About</a>
+      <a href="history.html">History</a>
+      <a href="#contact">Contact</a>
+    </div>
   </div>
 </footer>
 
-<script>
-// Play the recorded run only while it is on screen, and only if the visitor
-// has not asked for less motion. A 6MB autoplaying video on a phone that has
-// scrolled past it is rude; a paused one with a poster frame is not.
-(function () {
-  var vs = [document.getElementById('film')]
-    .concat([].slice.call(document.querySelectorAll('video.autoplay')))
-    .filter(Boolean);
-  if (!vs.length) return;
-  var still = window.matchMedia &&
-              window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (still) { vs.forEach(function (v) { v.setAttribute('controls', ''); }); return; }
-  if (!('IntersectionObserver' in window)) {
-    vs.forEach(function (v) { v.play().catch(function () {}); });
-    return;
-  }
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (e) {
-      var v = e.target;
-      if (e.isIntersecting) { v.play().catch(function () { v.setAttribute('controls', ''); }); }
-      else { v.pause(); }
-    });
-  }, { threshold: 0.25 });
-  vs.forEach(function (v) { io.observe(v); });
-})();
-</script>
-
-<script>
-// The arena, sweeping itself.
-//
-// This is the platform's own cooperative search, cut down to what a hero
-// image needs: a grid of cells nobody has covered, two pods that each take
-// the nearest uncovered cell to themselves, and a rule keeping them apart so
-// they do not sweep the arena nose to tail at half the rate. That separation
-// rule is the whole of the cooperation in the real sweep_node too.
-//
-// Hazards are hidden until a detector passes within range, exactly as they
-// are on the arena: the animation cannot reveal what the pods have not
-// found, because it does not draw them until found.
-(function () {
-  var cv = document.getElementById('sweep');
-  if (!cv || !cv.getContext) return;
-  var ctx = cv.getContext('2d');
-  var read = document.getElementById('sweep-read');
-  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Tuned by running the loop headlessly across seeds, not by eye: at
-  // SPEED 1.35 / DETECT 34 a full sweep took 58 seconds, which is a minute
-  // of hero animation nobody watches. These finish in about 15 and located
-  // all six hazards on every seed tried.
-  var CELL = 26, DETECT = 56, SPEED = 3.0, SEPARATION = 190, DONE = 0.97;
-  var W = 0, H = 0, cols = 0, rows = 0, swept = null, pods = [], mines = [], t0 = 0, raf = 0;
-
-  function size() {
-    var w = cv.parentElement.clientWidth;
-    var h = Math.max(230, Math.min(360, Math.round(w * 0.34)));
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
-    cv.style.height = h + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    W = w; H = h;
-  }
-
-  function reset() {
-    cols = Math.ceil(W / CELL); rows = Math.ceil(H / CELL);
-    swept = new Uint8Array(cols * rows);
-    pods = [
-      { x: W * 0.10, y: H * 0.74, a: 0, col: '#1D4ED8', tgt: null },
-      { x: W * 0.90, y: H * 0.26, a: Math.PI, col: '#DC2626', tgt: null }
-    ];
-    mines = [];
-    for (var i = 0; i < 6; i++) {
-      mines.push({ x: 70 + Math.random() * (W - 140),
-                   y: 40 + Math.random() * (H - 80), found: false });
-    }
-    t0 = performance.now();
-  }
-
-  function covered() {
-    var n = 0;
-    for (var i = 0; i < swept.length; i++) if (swept[i]) n++;
-    return n / swept.length;
-  }
-
-  // Nearest uncovered cell to this pod, skipping anything the other pod has
-  // already claimed and anything too close to it.
-  function claim(pod, taken) {
-    var best = null, bestD = Infinity;
-    for (var r = 0; r < rows; r++) {
-      for (var c = 0; c < cols; c++) {
-        if (swept[r * cols + c]) continue;
-        var x = c * CELL + CELL / 2, y = r * CELL + CELL / 2;
-        var d = Math.hypot(x - pod.x, y - pod.y);
-        if (d >= bestD) continue;
-        if (taken && Math.hypot(x - taken.x, y - taken.y) < SEPARATION) continue;
-        bestD = d; best = { x: x, y: y };
-      }
-    }
-    return best;
-  }
-
-  function step() {
-    for (var i = 0; i < pods.length; i++) {
-      var p = pods[i], other = pods[1 - i];
-      if (!p.tgt || Math.hypot(p.tgt.x - p.x, p.tgt.y - p.y) < CELL * 0.7) {
-        p.tgt = claim(p, other.tgt) || claim(p, null);
-      }
-      if (!p.tgt) continue;
-      var want = Math.atan2(p.tgt.y - p.y, p.tgt.x - p.x);
-      var turn = Math.atan2(Math.sin(want - p.a), Math.cos(want - p.a));
-      p.a += Math.max(-0.14, Math.min(0.14, turn));      // a pod cannot pivot
-      p.x += Math.cos(p.a) * SPEED; p.y += Math.sin(p.a) * SPEED;
-
-      var cc = Math.floor(p.x / CELL), cr = Math.floor(p.y / CELL);
-      var reach = Math.ceil(DETECT / CELL);
-      for (var r = cr - reach; r <= cr + reach; r++) {
-        for (var c = cc - reach; c <= cc + reach; c++) {
-          if (r < 0 || c < 0 || r >= rows || c >= cols) continue;
-          var dx = c * CELL + CELL / 2 - p.x, dy = r * CELL + CELL / 2 - p.y;
-          if (dx * dx + dy * dy <= DETECT * DETECT) swept[r * cols + c] = 1;
-        }
-      }
-      for (var m = 0; m < mines.length; m++) {
-        if (!mines[m].found &&
-            Math.hypot(mines[m].x - p.x, mines[m].y - p.y) <= DETECT) {
-          mines[m].found = true;
-        }
-      }
-    }
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = '#0B0E13'; ctx.fillRect(0, 0, W, H);
-
-    ctx.strokeStyle = '#161B23'; ctx.lineWidth = 1;
-    ctx.beginPath();
-    for (var gx = CELL * 5; gx < W; gx += CELL * 5) { ctx.moveTo(gx + .5, 0); ctx.lineTo(gx + .5, H); }
-    for (var gy = CELL * 3; gy < H; gy += CELL * 3) { ctx.moveTo(0, gy + .5); ctx.lineTo(W, gy + .5); }
-    ctx.stroke();
-
-    ctx.fillStyle = 'rgba(29,78,216,0.17)';
-    for (var r = 0; r < rows; r++) {
-      for (var c = 0; c < cols; c++) {
-        if (swept[r * cols + c]) ctx.fillRect(c * CELL, r * CELL, CELL + 1, CELL + 1);
-      }
-    }
-
-    for (var m = 0; m < mines.length; m++) {
-      if (!mines[m].found) continue;
-      ctx.beginPath(); ctx.arc(mines[m].x, mines[m].y, 11, 0, 6.2832);
-      ctx.strokeStyle = '#2EA36B'; ctx.lineWidth = 2; ctx.stroke();
-      ctx.beginPath(); ctx.arc(mines[m].x, mines[m].y, 2.5, 0, 6.2832);
-      ctx.fillStyle = '#2EA36B'; ctx.fill();
-    }
-
-    for (var i = 0; i < pods.length; i++) {
-      var p = pods[i];
-      ctx.beginPath(); ctx.arc(p.x, p.y, 12, 0, 6.2832);
-      ctx.fillStyle = p.col; ctx.fill();
-      ctx.beginPath(); ctx.moveTo(p.x, p.y);
-      ctx.lineTo(p.x + Math.cos(p.a) * 26, p.y + Math.sin(p.a) * 26);
-      ctx.strokeStyle = p.col; ctx.lineWidth = 2.5; ctx.stroke();
-    }
-  }
-
-  function report(done) {
-    if (!read) return;
-    var found = mines.filter(function (m) { return m.found; }).length;
-    read.textContent = done
-      ? 'Swept in ' + ((performance.now() - t0) / 1000).toFixed(1) + 's'
-      : Math.round(covered() * 100) + '% swept, ' + found + ' of 6 found';
-  }
-
-  function frame() {
-    step(); draw();
-    var c = covered();
-    if (c >= DONE) {
-      report(true);
-      raf = 0;
-      setTimeout(function () { reset(); raf = requestAnimationFrame(frame); }, 2600);
-      return;
-    }
-    report(false);
-    raf = requestAnimationFrame(frame);
-  }
-
-  function start() {
-    if (raf) cancelAnimationFrame(raf);
-    size(); reset();
-    if (still) {
-      // Someone who has asked for less motion still gets the picture: run it
-      // to completion without animating, and leave the result on screen.
-      for (var i = 0; i < 6000 && covered() < DONE; i++) step();
-      draw(); report(true);
-      return;
-    }
-    raf = requestAnimationFrame(frame);
-  }
-
-  var resizeT;
-  window.addEventListener('resize', function () {
-    clearTimeout(resizeT); resizeT = setTimeout(start, 180);
-  });
-
-  // Do not burn a phone's battery animating something nobody is looking at.
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (e.isIntersecting) { if (!raf && !still) start(); }
-        else if (raf) { cancelAnimationFrame(raf); raf = 0; }
-      });
-    }, { threshold: 0.05 }).observe(cv);
-  }
-  start();
-})();
-</script>
-
-<script>
-// Progressive enhancement only. With JavaScript off the form is an ordinary
-// POST to Formspree and still works — nothing on this page lives in here.
-(function () {
-  var form = document.getElementById('briefing');
-  if (!form) return;
-  var note = document.getElementById('note');
-  var button = form.querySelector('button[type=submit]');
-
-  if (form.getAttribute('action').indexOf('REPLACE_ME') !== -1) {
-    // Refuse rather than post into the void: a form wired to a placeholder
-    // accepts enquiries and drops them, and the failure is invisible.
-    button.disabled = true;
-    note.className = 'bad';
-    note.textContent = 'This form is not connected yet.';
-    form.addEventListener('submit', function (e) { e.preventDefault(); });
-    return;
-  }
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    button.disabled = true;
-    note.className = '';
-    note.textContent = 'Sending…';
-    fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { Accept: 'application/json' }
-    }).then(function (r) {
-      if (!r.ok) throw new Error(r.status);
-      form.reset();
-      note.textContent = 'Thank you — we will be in touch.';
-    }).catch(function () {
-      note.className = 'bad';
-      note.textContent = 'That did not send. Please try again shortly.';
-      button.disabled = false;
-    });
-  });
-})();
-</script>
-
+<script src="assets/site.js"></script>
 </body>
 </html>
