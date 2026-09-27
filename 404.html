@@ -3,35 +3,73 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Not found — Plato Pod</title>
+<title>Page not found — Plato Pod</title>
+<meta name="description" content="Page not found.">
+<meta property="og:title" content="Page not found — Plato Pod">
+<meta property="og:description" content="Page not found.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://platopod.com/404.html">
+<meta property="og:image" content="https://platopod.com/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
-<style>
-  :root { --bg:#0B0E13; --ink:#E7ECF3; --ink-2:#93A0B2; --ink-3:#6B7686; --blue:#3D8BFD; }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background:var(--bg); color:var(--ink); min-height:100vh;
-    display:flex; align-items:center; justify-content:center; padding:24px;
-    font-family:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif; line-height:1.6;
-  }
-  .chrome {
-    font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.14em;
-    text-transform:uppercase; color:var(--ink-3);
-  }
-  h1 { font-size:30px; font-weight:600; letter-spacing:-.02em; margin:12px 0 10px; }
-  p { color:var(--ink-2); max-width:46ch; }
-  a { color:var(--blue); text-decoration:none; display:inline-block; margin-top:20px; }
-  a:hover { text-decoration:underline; }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-  <div>
-    <div class="chrome">Error 404</div>
-    <h1>Off the arena</h1>
-    <p>That page is not here. The boundary is fitted from the corner markers,
-       and this fell outside it.</p>
-    <a href="/">Back to platopod.com</a>
+
+<header class="mast">
+  <div class="w">
+    <a class="brand" href="/index.html">Plato<span>Pod</span></a>
+    <nav>
+      <a href="/teaching.html">Teaching</a>
+      <a href="/military.html">Military</a>
+      <a href="/technical.html">Technical</a>
+      <a href="/about.html">About</a>
+      <a href="/history.html">History</a>
+    </nav>
+    <a class="btn solid" href="/index.html#contact">Get in touch</a>
   </div>
+</header>
+
+<main>
+
+<section class="notfound">
+  <div class="w">
+    <p class="kicker">404</p>
+    <h1>This page has driven off the arena.</h1>
+    <p class="lede">The page you asked for is not here. It may have moved when the site
+      was reorganised.</p>
+    <a class="btn solid" href="/">Back to the home page <span class="arrow">→</span></a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="w">
+    <div>
+      <b>Plato Pod</b>
+      Real robots, virtual force, one arena.<br>
+      Office 302, Building 16, UNSW Canberra at ADFA<br>
+      <a data-user="a.lenskiy" data-domain="unsw.edu.au" data-show
+         href="/index.html#contact">a.lenskiy [at] unsw.edu.au</a>
+    </div>
+    <div>
+      <b>Pages</b>
+      <a href="/teaching.html">Teaching</a>
+      <a href="/military.html">Military</a>
+      <a href="/technical.html">Technical</a>
+    </div>
+    <div>
+      <b>Us</b>
+      <a href="/about.html">About</a>
+      <a href="/history.html">History</a>
+      <a href="/index.html#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/site.js"></script>
 </body>
 </html>
