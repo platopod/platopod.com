@@ -227,3 +227,5 @@ pre .c { color: #9FB3D9; }                      /* comments */
 .notfound h1 { font-size: clamp(42px, 5.6vw, 72px); letter-spacing: -.04em; }
 .notfound .lede { margin: 22px auto 34px; }
 @media (min-width: 1060px) { .people { margin-left: -150px; margin-right: -150px; } }
+.pair.even img, .pair.even video { aspect-ratio: 4 / 3; object-fit: cover; width: 100%;
+                                   height: auto; border-radius: 14px; }
