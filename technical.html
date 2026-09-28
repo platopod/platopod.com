@@ -50,18 +50,18 @@
     which serves a browser console and student code over a WebSocket, and ATAK devices over
     Cursor on Target.</desc>
   <style>
-    .bx { fill: #FAF6F1; stroke: #E7DFD4; stroke-width: 1.5; }
-    .sv { fill: #EEF2FA; stroke: #C9D5EE; stroke-width: 1.5; }
-    .ch { fill: #FFFFFF; stroke: #C9D5EE; }
-    .t  { font: 600 17px Archivo, sans-serif; fill: #17140F; }
-    .s  { font: 400 13.5px Archivo, sans-serif; fill: #57514A; }
-    .c  { font: 500 13px Archivo, sans-serif; fill: #1F4FB8; }
-    .h  { font: 400 12px "IBM Plex Mono", monospace; fill: #8A8279; letter-spacing: .06em; }
-    .ln { stroke: #1F4FB8; stroke-width: 1.8; fill: none; marker-end: url(#ar); }
-    .lb { font: 400 12.5px "IBM Plex Mono", monospace; fill: #1F4FB8; }
+    .bx { fill: var(--paper); stroke: var(--rule); stroke-width: 1.5; }
+    .sv { fill: var(--accent-mist); stroke: var(--accent-line); stroke-width: 1.5; }
+    .ch { fill: var(--card); stroke: var(--accent-line); }
+    .t  { font: 600 17px Archivo, sans-serif; fill: var(--ink); }
+    .s  { font: 400 13.5px Archivo, sans-serif; fill: var(--ink-2); }
+    .c  { font: 500 13px Archivo, sans-serif; fill: var(--accent); }
+    .h  { font: 400 12px "IBM Plex Mono", monospace; fill: var(--ink-3); letter-spacing: .06em; }
+    .ln { stroke: var(--accent); stroke-width: 1.8; fill: none; marker-end: url(#ar); }
+    .lb { font: 400 12.5px "IBM Plex Mono", monospace; fill: var(--accent); }
   </style>
   <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
-    orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F4FB8"/></marker></defs>
+    orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--accent)"/></marker></defs>
 
   <text class="h" x="20" y="24">ON THE DESK</text>
   <rect class="bx" x="20" y="44" width="210" height="104" rx="14"/>
@@ -131,16 +131,16 @@
 
   <figure class="wide">
     <div class="pair">
-      <img src="img/pod-open.jpg" alt="A pod with its lid off: the purple printed body, the green circuit board and a wheel." loading="lazy">
-      <img src="img/pod-side.jpg" alt="A pod from the side: a rubber wheel with a white three-spoke hub in the body's slot." loading="lazy">
+      <img src="img/pod-open.jpg" width="1400" height="1051" alt="A pod with its lid off: the purple printed body, the green circuit board and a wheel." loading="lazy">
+      <img src="img/pod-side.jpg" width="1400" height="968" alt="A pod from the side: a rubber wheel with a white three-spoke hub in the body's slot." loading="lazy">
     </div>
     <figcaption>A pod opened up, and from the side.</figcaption>
   </figure>
 
   <figure class="wide">
     <div class="pair">
-      <img src="img/pcb-top.jpg" alt="Render of the pod's circuit board, top side, with the ESP32-S3 module." loading="lazy">
-      <img src="img/pcb-bottom.jpg" alt="Render of the pod's circuit board, underside." loading="lazy">
+      <img src="img/pcb-top.jpg" width="1600" height="970" alt="Render of the pod's circuit board, top side, with the ESP32-S3 module." loading="lazy">
+      <img src="img/pcb-bottom.jpg" width="1400" height="849" alt="Render of the pod's circuit board, underside." loading="lazy">
     </div>
     <figcaption>The pod's circuit board, top and underside.</figcaption>
   </figure>
@@ -157,8 +157,8 @@
 
   <figure class="wide">
     <div class="pair">
-      <img src="img/console-overlay.jpg" alt="The camera's picture with the arena outline, a red pod, a blue pod and a dashed circle for a virtual unit drawn over it." loading="lazy">
-      <img src="img/console-topdown.jpg" alt="The same arena rectified to a top-down view." loading="lazy">
+      <img src="img/console-overlay.jpg" width="1400" height="805" alt="The camera's picture with the arena outline, a red pod, a blue pod and a dashed circle for a virtual unit drawn over it." loading="lazy">
+      <img src="img/console-topdown.jpg" width="1077" height="893" alt="The same arena rectified to a top-down view." loading="lazy">
     </div>
     <figcaption>The console: the camera's view with the arena drawn over it, and the same
       scene rectified to a top-down view. The dashed circle is a virtual unit.</figcaption>
