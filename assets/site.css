@@ -203,6 +203,39 @@ code { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .9em; }
 .diagram { background: var(--card); border-radius: var(--radius); padding: 24px;
            box-shadow: 0 1px 0 var(--rule); }
 .diagram svg { width: 100%; height: auto; display: block; }
+/* The architecture diagram: a wide drawing, and a stacked one for phones. Hardware
+   is ink, the server is cobalt; blue, red and green stay out (they belong to the arena). */
+.diagram .arch-tall { display: none; }
+@media (max-width: 760px) { .diagram .arch-wide { display: none; } .diagram .arch-tall { display: block; }
+  .diagram { padding: 12px; } }
+.arch text { font-family: "Archivo", sans-serif; }
+.arch .a-hw  { font-size: 16px; font-weight: 600; fill: var(--ink); }
+.arch .a-s   { font-size: var(--fs-small); fill: var(--ink-2); }
+.arch .a-h   { font: 400 12px "IBM Plex Mono", monospace; fill: var(--ink-3); letter-spacing: .06em; }
+.arch .a-lb  { font: 400 12.5px "IBM Plex Mono", monospace; fill: var(--accent); }
+.arch .a-lb-ink { fill: var(--ink-2); }
+.arch .a-nt  { font-size: 15px; font-weight: 500; fill: var(--accent); }
+.arch .a-et  { font-size: 15px; font-weight: 500; fill: #fff; }
+.arch .a-ht  { font-size: 15px; font-weight: 500; fill: var(--ink); }
+.arch .a-dev { fill: var(--ink-2); }
+.arch .a-scr { fill: var(--card); }
+.arch .a-fov { fill: var(--rule); opacity: .7; }
+.arch .a-arena { fill: var(--paper); stroke: var(--rule); stroke-width: 1.5; }
+.arch .a-tag { fill: var(--ink-3); }
+.arch .a-pod { fill: var(--ink); }
+.arch .a-lid { fill: var(--paper); }
+.arch .a-virt { fill: var(--card); stroke: var(--ink-3); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.arch .a-srv { fill: var(--accent-mist); stroke: var(--accent-line); stroke-width: 1.5; }
+.arch .a-node { fill: var(--card); stroke: var(--accent-line); stroke-width: 1.5; }
+.arch .a-edge { fill: var(--accent); }
+.arch .a-bus { stroke: var(--accent-line); stroke-width: 2; fill: none; }
+.arch .a-podp { fill: var(--paper); stroke: var(--rule); stroke-width: 1.5; }
+.arch .a-hwn { fill: var(--card); stroke: var(--rule); stroke-width: 1.5; }
+.arch .a-ln  { stroke: var(--accent); stroke-width: 1.8; fill: none; }
+.arch .a-ink { stroke: var(--ink-2); stroke-width: 1.5; fill: none; }
+.arch .a-loop { stroke: var(--ink-2); stroke-width: 1.8; fill: none; stroke-dasharray: 6 5; }
+.arch .a-head { fill: var(--accent); }
+.arch .a-head-ink { fill: var(--ink-2); }
 .facts { list-style: none; padding: 0 !important; margin: 26px 0 0; border-top: 1px solid var(--rule); }
 .facts li { display: grid; grid-template-columns: 11rem 1fr; gap: 18px; padding: 12px 0;
             border-bottom: 1px solid var(--rule); margin: 0 !important; }
