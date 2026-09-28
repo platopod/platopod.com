@@ -100,9 +100,6 @@ h3 { font-size: var(--fs-body); letter-spacing: -.01em; line-height: 1.35; }
 
 /* ---- sections -------------------------------------------------------- */
 section { padding: 110px 0 0; }
-.kicker { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--fs-small);
-          letter-spacing: .06em; text-transform: uppercase; color: var(--accent);
-          margin-bottom: 18px; }
 .h2 { font-size: var(--fs-head); }
 .lede { font-size: var(--fs-body); color: var(--ink-2); margin-top: 22px;
         max-width: 38rem; line-height: 1.55; }
@@ -135,6 +132,12 @@ section { padding: 110px 0 0; }
               font-weight: 600; }
 .steps h3 { padding-top: 10px; }
 .steps p { color: var(--ink-2); margin-top: 8px; }
+/* Unordered variant: the items are parts, not a sequence, so a small dot on
+   the spine instead of a number. */
+.steps.plain li { padding-left: 52px; }
+.steps.plain h3 { padding-top: 0; }
+.steps.plain .dot { width: 14px; height: 14px; left: 15px; top: 5px;
+                    box-shadow: 0 0 0 5px var(--paper); }
 
 /* ---- doorways (links to the other pages) ------------------------------ */
 .doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 56px; }
