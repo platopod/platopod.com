@@ -44,77 +44,141 @@
   </div>
 
   <figure class="wide">
-    <div class="diagram"><svg viewBox="0 0 960 430" role="img" aria-labelledby="dg-t dg-d">
-  <title id="dg-t">How the parts connect</title>
-  <desc id="dg-d">Pods and an overhead camera on the desk connect to a server running ROS 2,
-    which serves a browser console and student code over a WebSocket, and ATAK devices over
-    Cursor on Target.</desc>
-  <style>
-    .bx { fill: var(--paper); stroke: var(--rule); stroke-width: 1.5; }
-    .sv { fill: var(--accent-mist); stroke: var(--accent-line); stroke-width: 1.5; }
-    .ch { fill: var(--card); stroke: var(--accent-line); }
-    .t  { font: 600 17px Archivo, sans-serif; fill: var(--ink); }
-    .s  { font: 400 13.5px Archivo, sans-serif; fill: var(--ink-2); }
-    .c  { font: 500 13px Archivo, sans-serif; fill: var(--accent); }
-    .h  { font: 400 12px "IBM Plex Mono", monospace; fill: var(--ink-3); letter-spacing: .06em; }
-    .ln { stroke: var(--accent); stroke-width: 1.8; fill: none; marker-end: url(#ar); }
-    .lb { font: 400 12.5px "IBM Plex Mono", monospace; fill: var(--accent); }
-  </style>
-  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
-    orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--accent)"/></marker></defs>
+    <div class="diagram">
+<svg class="arch arch-wide" viewBox="0 0 960 520" role="img" aria-labelledby="aw-t aw-d">
+  <title id="aw-t">How the parts connect</title>
+  <desc id="aw-d">An overhead camera watches the arena, where a real pod and virtual units
+    share one frame, and sends video to the server. Inside the server, vision, world and
+    sensor processes exchange typed ROS 2 messages. Three processes face outward: the
+    gateway serves the console and student code over a WebSocket, the ATAK bridge sends
+    Cursor on Target to ATAK, and the pod bridge talks to each pod over Bluetooth LE. On
+    the pod, a receiver feeds the motors, which drive the wheels; the camera sees the
+    pod move, which closes the loop.</desc>
+  <defs><marker id="aw-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+    orient="auto-start-reverse"><path class="a-head" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="aw-l" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+    orient="auto"><path class="a-head-ink" d="M0,0 L10,5 L0,10 z"/></marker></defs>
 
-  <text class="h" x="20" y="24">ON THE DESK</text>
-  <rect class="bx" x="20" y="44" width="210" height="104" rx="14"/>
-  <rect class="bx" x="20" y="186" width="210" height="104" rx="14"/>
-  <text class="t" x="40" y="222">Pods</text>
-  <text class="s" x="40" y="246">ESP32-S3, two motors with</text>
-  <text class="s" x="40" y="266">encoders, a printed marker</text>
-  <text class="t" x="40" y="80">Overhead camera</text>
-  <text class="s" x="40" y="104">Reads every marker,</text>
-  <text class="s" x="40" y="124">many times a second</text>
+  <text class="a-hw" x="160" y="34" text-anchor="middle">Overhead camera</text>
+  <rect class="a-dev" x="120" y="48" width="80" height="36" rx="6"/>
+  <path class="a-dev" d="M145 84 L175 84 L182 100 L138 100 Z"/>
+  <path class="a-fov" d="M160 100 L48 150 L272 150 Z"/>
+  <rect class="a-arena" x="40" y="150" width="240" height="180" rx="6"/>
+  <rect class="a-tag" x="48" y="158" width="12" height="12"/><rect class="a-tag" x="260" y="158" width="12" height="12"/>
+  <rect class="a-tag" x="48" y="310" width="12" height="12"/><rect class="a-tag" x="260" y="310" width="12" height="12"/>
+  <circle class="a-pod" cx="110" cy="230" r="20"/><rect class="a-lid" x="102" y="222" width="16" height="16"/>
+  <circle class="a-virt" cx="210" cy="205" r="20"/><circle class="a-virt" cx="196" cy="285" r="20"/>
+  <text class="a-s" x="160" y="356" text-anchor="middle">A real pod (solid) and virtual</text>
+  <text class="a-s" x="160" y="374" text-anchor="middle">units (dashed) share one frame</text>
 
-  <text class="h" x="330" y="24">SERVER · ROS 2</text>
-  <rect class="sv" x="330" y="44" width="300" height="366" rx="16"/>
-  <g>
-    <rect class="ch" x="350" y="64"  width="126" height="40" rx="10"/><text class="c" x="364" y="89">Vision</text>
-    <rect class="ch" x="486" y="64"  width="126" height="40" rx="10"/><text class="c" x="500" y="89">Registry</text>
-    <rect class="ch" x="350" y="114" width="126" height="40" rx="10"/><text class="c" x="364" y="139">Arena model</text>
-    <rect class="ch" x="486" y="114" width="126" height="40" rx="10"/><text class="c" x="500" y="139">World state</text>
-    <rect class="ch" x="350" y="164" width="126" height="40" rx="10"/><text class="c" x="364" y="189">Sensors</text>
-    <rect class="ch" x="486" y="164" width="126" height="40" rx="10"/><text class="c" x="500" y="189">Engagement</text>
-    <rect class="ch" x="350" y="214" width="126" height="40" rx="10"/><text class="c" x="364" y="239">OPFOR</text>
-    <rect class="ch" x="486" y="214" width="126" height="40" rx="10"/><text class="c" x="500" y="239">Scenarios</text>
-    <rect class="ch" x="350" y="264" width="126" height="40" rx="10"/><text class="c" x="364" y="289">Pod bridges</text>
-    <rect class="ch" x="486" y="264" width="126" height="40" rx="10"/><text class="c" x="500" y="289">Simulator</text>
-    <rect class="ch" x="350" y="314" width="262" height="40" rx="10"/><text class="c" x="364" y="339">API gateway</text>
-    <rect class="ch" x="350" y="362" width="262" height="36" rx="10"/><text class="c" x="364" y="385">ATAK bridge</text>
-  </g>
 
-  <text class="h" x="740" y="24">PEOPLE</text>
-  <rect class="bx" x="740" y="44" width="200" height="90" rx="14"/>
-  <text class="t" x="760" y="80">Browser console</text>
-  <text class="s" x="760" y="104">Camera, top-down view, map</text>
-  <rect class="bx" x="740" y="154" width="200" height="90" rx="14"/>
-  <text class="t" x="760" y="190">Student code</text>
-  <text class="s" x="760" y="214">Python, or any language</text>
-  <rect class="bx" x="740" y="320" width="200" height="90" rx="14"/>
-  <text class="t" x="760" y="356">ATAK</text>
-  <text class="s" x="760" y="380">Phones and tablets</text>
+  <text class="a-h" x="360" y="32">SERVER · ROS 2</text>
+  <rect class="a-srv" x="360" y="44" width="580" height="188" rx="16"/>
+  <path class="a-bus" d="M464 114 V164 M650 114 V164 M836 114 V164 M464 139 H836"/>
+  <rect class="a-node" x="384" y="64" width="160" height="50" rx="10"/><text class="a-nt" x="464" y="94" text-anchor="middle">Vision</text>
+  <rect class="a-node" x="570" y="64" width="160" height="50" rx="10"/><text class="a-nt" x="650" y="94" text-anchor="middle">World</text>
+  <rect class="a-node" x="756" y="64" width="160" height="50" rx="10"/><text class="a-nt" x="836" y="94" text-anchor="middle">Sensors</text>
+  <rect class="a-edge" x="384" y="164" width="160" height="50" rx="10"/><text class="a-et" x="464" y="194" text-anchor="middle">Gateway</text>
+  <rect class="a-edge" x="570" y="164" width="160" height="50" rx="10"/><text class="a-et" x="650" y="194" text-anchor="middle">ATAK bridge</text>
+  <rect class="a-edge" x="756" y="164" width="160" height="50" rx="10"/><text class="a-et" x="836" y="194" text-anchor="middle">Pod bridge</text>
 
-  <path class="ln" d="M232 250 L346 284" marker-start="url(#ar)"/>
-  <text class="lb" x="238" y="294">Bluetooth LE</text>
-  <path class="ln" d="M232 90 L346 84"/>
-  <text class="lb" x="262" y="78">video</text>
-  <path class="ln" d="M614 330 L736 94" marker-start="url(#ar)"/>
-  <path class="ln" d="M614 336 L736 200" marker-start="url(#ar)"/>
-  <text class="lb" x="648" y="150">WebSocket</text>
-  <text class="lb" x="648" y="166">JSON</text>
-  <path class="ln" d="M614 380 L736 366"/>
-  <text class="lb" x="644" y="404">Cursor on Target</text>
-</svg></div>
-    <figcaption>The pods and camera on the desk, the server between them, and the people
-      who use it. Every box in the server is a separate process with a typed message
-      contract.</figcaption>
+  <text class="a-h" x="360" y="410">THE POD</text>
+  <rect class="a-podp" x="360" y="420" width="580" height="86" rx="16"/>
+  <rect class="a-hwn" x="384" y="438" width="160" height="50" rx="10"/><text class="a-ht" x="464" y="468" text-anchor="middle">Wheels</text>
+  <rect class="a-hwn" x="570" y="438" width="160" height="50" rx="10"/><text class="a-ht" x="650" y="468" text-anchor="middle">Motors</text>
+  <rect class="a-hwn" x="756" y="438" width="160" height="50" rx="10"/><text class="a-ht" x="836" y="468" text-anchor="middle">Receiver</text>
+  <path class="a-ink" d="M754 463 H734" marker-end="url(#aw-l)"/>
+  <path class="a-ink" d="M568 463 H548" marker-end="url(#aw-l)"/>
+  <path class="a-ln" d="M204 66 L378 94" marker-end="url(#aw-a)"/>
+  <text class="a-lb" x="262" y="66">video</text>
+
+  <path class="a-ln" d="M464 218 V290" marker-start="url(#aw-a)" marker-end="url(#aw-a)"/>
+  <text class="a-lb" x="474" y="258">WebSocket</text>
+  <path class="a-ln" d="M650 218 V288" marker-end="url(#aw-a)"/>
+  <text class="a-lb" x="660" y="258">Cursor on Target</text>
+  <path class="a-ln" d="M836 218 V434" marker-start="url(#aw-a)" marker-end="url(#aw-a)"/>
+  <text class="a-lb" x="846" y="300">Bluetooth LE</text>
+
+  <rect class="a-dev" x="434" y="296" width="60" height="38" rx="3"/><rect class="a-scr" x="439" y="301" width="50" height="28"/>
+  <path class="a-dev" d="M424 334 L504 334 L512 344 L416 344 Z"/>
+  <text class="a-hw" x="464" y="368" text-anchor="middle">Console and student code</text>
+  <rect class="a-dev" x="634" y="294" width="32" height="52" rx="5"/><rect class="a-scr" x="638" y="300" width="24" height="38"/>
+  <text class="a-hw" x="650" y="368" text-anchor="middle">ATAK</text>
+
+  <path class="a-loop" d="M384 463 H18 V240 H36" marker-end="url(#aw-l)"/>
+  <text class="a-lb a-lb-ink" x="40" y="454">the camera sees it move</text>
+</svg>
+<svg class="arch arch-tall" viewBox="0 0 400 850" role="img" aria-labelledby="at-t at-d">
+  <title id="at-t">How the parts connect</title>
+  <desc id="at-d">An overhead camera watches the arena, where a real pod and virtual units
+    share one frame, and sends video to the server. Inside the server, vision, world and
+    sensor processes exchange typed ROS 2 messages. Three processes face outward: the
+    gateway serves the console and student code over a WebSocket, the ATAK bridge sends
+    Cursor on Target to ATAK, and the pod bridge talks to each pod over Bluetooth LE. On
+    the pod, a receiver feeds the motors, which drive the wheels; the camera sees the
+    pod move, which closes the loop.</desc>
+  <defs><marker id="at-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+    orient="auto-start-reverse"><path class="a-head" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="at-l" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+    orient="auto"><path class="a-head-ink" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+
+  <text class="a-hw" x="200" y="28" text-anchor="middle">Overhead camera</text>
+  <rect class="a-dev" x="160" y="40" width="80" height="34" rx="6"/>
+  <path class="a-dev" d="M185 74 L215 74 L222 90 L178 90 Z"/>
+  <path class="a-fov" d="M200 90 L70 132 L330 132 Z"/>
+  <rect class="a-arena" x="60" y="132" width="280" height="160" rx="6"/>
+  <rect class="a-tag" x="68" y="140" width="12" height="12"/><rect class="a-tag" x="320" y="140" width="12" height="12"/>
+  <rect class="a-tag" x="68" y="272" width="12" height="12"/><rect class="a-tag" x="320" y="272" width="12" height="12"/>
+  <circle class="a-pod" cx="140" cy="205" r="18"/><rect class="a-lid" x="133" y="198" width="14" height="14"/>
+  <circle class="a-virt" cx="250" cy="185" r="18"/><circle class="a-virt" cx="236" cy="255" r="18"/>
+  <text class="a-s" x="200" y="316" text-anchor="middle">A real pod (solid) and virtual units</text>
+  <text class="a-s" x="200" y="334" text-anchor="middle">(dashed) share one frame</text>
+
+
+  <text class="a-h" x="16" y="368">SERVER · ROS 2</text>
+  <rect class="a-srv" x="16" y="378" width="368" height="172" rx="16"/>
+  <path class="a-bus" d="M84 442 V484 M200 442 V484 M316 442 V484 M84 463 H316"/>
+  <rect class="a-node" x="30" y="396" width="108" height="46" rx="10"/><text class="a-nt" x="84" y="424" text-anchor="middle">Sensors</text>
+  <rect class="a-node" x="146" y="396" width="108" height="46" rx="10"/><text class="a-nt" x="200" y="424" text-anchor="middle">World</text>
+  <rect class="a-node" x="262" y="396" width="108" height="46" rx="10"/><text class="a-nt" x="316" y="424" text-anchor="middle">Vision</text>
+  <rect class="a-edge" x="30" y="484" width="108" height="46" rx="10"/><text class="a-et" x="84" y="512" text-anchor="middle">Gateway</text>
+  <rect class="a-edge" x="146" y="484" width="108" height="46" rx="10"/><text class="a-et" x="200" y="512" text-anchor="middle">ATAK bridge</text>
+  <rect class="a-edge" x="262" y="484" width="108" height="46" rx="10"/><text class="a-et" x="316" y="512" text-anchor="middle">Pod bridge</text>
+
+  <text class="a-h" x="16" y="720">THE POD</text>
+  <rect class="a-podp" x="16" y="730" width="368" height="76" rx="16"/>
+  <rect class="a-hwn" x="30" y="744" width="96" height="48" rx="10"/><text class="a-ht" x="78" y="773" text-anchor="middle">Wheels</text>
+  <rect class="a-hwn" x="150" y="744" width="96" height="48" rx="10"/><text class="a-ht" x="198" y="773" text-anchor="middle">Motors</text>
+  <rect class="a-hwn" x="270" y="744" width="96" height="48" rx="10"/><text class="a-ht" x="318" y="773" text-anchor="middle">Receiver</text>
+  <path class="a-ink" d="M268 768 H250" marker-end="url(#at-l)"/>
+  <path class="a-ink" d="M148 768 H130" marker-end="url(#at-l)"/>
+  <path class="a-ln" d="M242 57 H392 V419 H374" marker-end="url(#at-a)"/>
+  <text class="a-lb" x="300" y="50">video</text>
+
+  <path class="a-ln" d="M84 534 V594" marker-start="url(#at-a)" marker-end="url(#at-a)"/>
+  <text class="a-lb" x="92" y="568">WebSocket</text>
+  <path class="a-ln" d="M200 534 V592" marker-end="url(#at-a)"/>
+  <text class="a-lb" x="208" y="560">Cursor on</text>
+  <text class="a-lb" x="208" y="576">Target</text>
+  <path class="a-ln" d="M316 534 V738" marker-start="url(#at-a)" marker-end="url(#at-a)"/>
+  <text class="a-lb" x="324" y="568">Bluetooth</text>
+
+  <rect class="a-dev" x="54" y="600" width="60" height="38" rx="3"/><rect class="a-scr" x="59" y="605" width="50" height="28"/>
+  <path class="a-dev" d="M44 638 L124 638 L132 648 L36 648 Z"/>
+  <text class="a-hw" x="84" y="672" text-anchor="middle">Console and</text>
+  <text class="a-hw" x="84" y="690" text-anchor="middle">student code</text>
+  <rect class="a-dev" x="184" y="598" width="32" height="52" rx="5"/><rect class="a-scr" x="188" y="604" width="24" height="38"/>
+  <text class="a-hw" x="200" y="672" text-anchor="middle">ATAK</text>
+
+  <path class="a-loop" d="M30 768 H6 V212 H56" marker-end="url(#at-l)"/>
+  <text class="a-lb a-lb-ink" x="16" y="834">Dashed: the camera sees it move</text>
+</svg>
+    </div>
+    <figcaption>The camera and arena, the server, and what connects to it. Every box in the
+      server is a separate process, and they speak typed ROS&nbsp;2 messages. The three
+      solid boxes are the server's only doors to the outside. Above the pod bridge, a real
+      pod and a virtual unit look the same, and the dashed line is how a pod's movement
+      comes back: through the camera.</figcaption>
   </figure>
 
   <div class="read">
