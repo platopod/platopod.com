@@ -1,16 +1,6 @@
 // platopod.com — shared behaviour. Progressive enhancement only: every page
 // reads and works with JavaScript off.
 
-// The email address, assembled here so the page source does not carry it
-// whole for harvesters. Without JavaScript the reader sees "name [at] domain".
-(function () {
-  document.querySelectorAll('a[data-user][data-domain]').forEach(function (a) {
-    var addr = a.getAttribute('data-user') + '@' + a.getAttribute('data-domain');
-    a.href = 'mailto:' + addr;
-    if (a.hasAttribute('data-show')) a.textContent = addr;
-  });
-})();
-
 // Play videos only while they are on screen, and only if the visitor has not
 // asked for less motion; otherwise show them paused with controls.
 (function () {
@@ -55,7 +45,7 @@
       button.disabled = false;
     }).catch(function () {
       note.className = 'bad';
-      note.textContent = 'That did not send. Please try again, or email us.';
+      note.textContent = 'That did not send. Please check your connection and try again.';
       button.disabled = false;
     });
   });

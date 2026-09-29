@@ -155,10 +155,6 @@ section { padding: 110px 0 0; }
 
 /* ---- contact --------------------------------------------------------- */
 .contact .w { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
-.contact .email { display: inline-block; margin-top: 26px; font-size: var(--fs-body);
-                  font-weight: 500; letter-spacing: -.02em; color: var(--accent);
-                  text-decoration: none; border-bottom: 2px solid var(--accent-soft); }
-.contact .email:hover { border-color: var(--accent); }
 .contact address { font-style: normal; color: var(--ink-2); margin-top: 22px; }
 form { background: var(--card); border-radius: var(--radius); padding: 30px;
        box-shadow: 0 1px 0 var(--rule); }
