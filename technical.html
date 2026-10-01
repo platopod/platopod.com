@@ -183,13 +183,13 @@
   <div class="read">
     <h2>The pods</h2>
     <p>Each pod is a round robot 70&nbsp;mm across: a 3D-printed body split by two wheel
-      slots, a custom circuit board with an ESP32-S3, two geared motors with wheel
-      encoders, and a small lithium battery charged over USB-C. A marker printed on the lid
+      slots, a custom circuit board with an ESP32-S3, two geared motors, and a small
+      lithium battery charged over USB-C. A marker printed on the lid
       is how the camera finds it.</p>
     <p>The pod does little thinking of its own, on purpose. It takes wheel commands over
-      Bluetooth, closes a speed loop on its encoders, and stops if no command arrives for
-      600&nbsp;ms. The intelligence lives on the server, where it can be read, changed and
-      tested.</p>
+      Bluetooth and stops if no command arrives for 600&nbsp;ms. Where it actually goes is
+      measured by the overhead camera, and the server steers on that. The intelligence
+      lives on the server, where it can be read, changed and tested.</p>
   </div>
 
   <figure class="wide">
