@@ -113,8 +113,9 @@
       <h2>A world around the robots</h2>
       <p class="where">UNSW Canberra, Australia</p>
       <p>At UNSW Canberra the platform became what it is today. The pods shrank to
-        85&nbsp;mm across, on ESP32 boards over Bluetooth. The arena no longer needs walls:
-        its boundary comes from markers on the corners, and the obstacles are virtual. And
+        85&nbsp;mm across, on ESP32 boards over Bluetooth. The arena no longer needs walls,
+        or markers of its own: a pod drives a short circle to show the camera where the
+        table is, the arena is drawn on the screen, and the obstacles are virtual. And
         around the robots grew a simulated world of sensors, hazards, virtual units and an
         opposing force on a server built on ROS&nbsp;2, shared with ATAK, for the classroom
         and for rehearsal alike.</p>
@@ -124,9 +125,10 @@
   </div>
 
   <figure class="wide">
-    <img src="img/console-overlay.jpg" width="1400" height="805" alt="The overhead camera's view of today's arena: a pale board with a marker puck on each corner, a red pod and a blue pod, the arena's outline drawn in green, and a dashed circle marking a virtual unit." loading="lazy">
-    <figcaption>Today's arena from the overhead camera: corner markers instead of walls, two
-      pods, and a virtual unit (the dashed circle) sharing the board with them.</figcaption>
+    <img src="img/arena-drawn.jpg" width="1630" height="890" alt="The console's camera view of a bare table in a lecture hall, with the arena drawn over it: a blue start strip on the left, a green objective strip on the right, three sensors shown as fading yellow rings, two black discs of cover, a blue pod and a red pod, and two dashed green circles where virtual pods wait." loading="lazy">
+    <figcaption>Today's arena, as the console shows it during a game in a lecture hall: drawn
+      on a bare table, with two pods and two virtual pods (the dashed circles) sharing
+      it.</figcaption>
   </figure>
 </article>
 

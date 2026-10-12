@@ -220,7 +220,6 @@ code { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: inherit
 .arch .a-scr { fill: var(--card); }
 .arch .a-fov { fill: var(--rule); opacity: .7; }
 .arch .a-arena { fill: var(--paper); stroke: var(--rule); stroke-width: 1.5; }
-.arch .a-tag { fill: var(--ink-3); }
 .arch .a-pod { fill: var(--ink); }
 .arch .a-lid { fill: var(--paper); }
 .arch .a-virt { fill: var(--card); stroke: var(--ink-3); stroke-width: 1.5; stroke-dasharray: 4 4; }
