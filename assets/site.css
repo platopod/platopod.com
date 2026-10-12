@@ -286,3 +286,22 @@ pre .c { color: var(--code-comment); }                      /* comments */
 @media (min-width: 1060px) { .people { margin-left: -150px; margin-right: -150px; } }
 .pair.even img, .pair.even video { aspect-ratio: 4 / 3; object-fit: cover; width: 100%;
                                    height: auto; border-radius: 14px; }
+
+/* A strip of photographs that scrolls sideways and snaps to each one. Works
+   with a trackpad, touch or the keyboard; site.js adds the two buttons. */
+.tape-wrap { position: relative; }
+.tape { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity;
+        padding-bottom: 12px; scrollbar-width: thin; scrollbar-color: var(--ink-3) transparent;
+        border-radius: 14px; }
+.tape:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+figure.wide .tape img { flex: none; height: 380px; width: auto; max-width: none;
+                        scroll-snap-align: start; }
+@media (max-width: 700px) { figure.wide .tape img { height: 230px; } }
+.tape-btn { position: absolute; top: calc(50% - 6px); transform: translateY(-50%); width: 44px;
+            height: 44px; border-radius: 50%; border: 1px solid var(--rule); cursor: pointer;
+            background: var(--card); color: var(--ink); font: inherit; font-size: var(--fs-body);
+            line-height: 1; display: grid; place-items: center; }
+.tape-btn:hover { background: var(--ink); color: var(--paper); }
+.tape-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tape-btn[disabled] { opacity: 0; pointer-events: none; }
+.tape-btn.prev { left: 12px; } .tape-btn.next { right: 12px; }

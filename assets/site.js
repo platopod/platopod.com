@@ -50,3 +50,38 @@
     });
   });
 })();
+
+// Photo strips. They scroll sideways by themselves; this adds a button at each
+// end that moves one photograph at a time.
+(function () {
+  [].slice.call(document.querySelectorAll('.tape')).forEach(function (tape) {
+    var wrap = document.createElement('div');
+    wrap.className = 'tape-wrap';
+    tape.parentNode.insertBefore(wrap, tape);
+    wrap.appendChild(tape);
+    function button(cls, label, text, dir) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'tape-btn ' + cls;
+      b.setAttribute('aria-label', label); b.textContent = text;
+      b.addEventListener('click', function () {
+        var imgs = [].slice.call(tape.querySelectorAll('img'));
+        var x = tape.scrollLeft, target = null;
+        if (dir > 0) { imgs.some(function (i) { if (i.offsetLeft - tape.offsetLeft > x + 4) { target = i; return true; } }); }
+        else { imgs.slice().reverse().some(function (i) { if (i.offsetLeft - tape.offsetLeft < x - 4) { target = i; return true; } }); }
+        if (target) tape.scrollTo({ left: target.offsetLeft - tape.offsetLeft, behavior: 'smooth' });
+      });
+      wrap.appendChild(b);
+      return b;
+    }
+    var prev = button('prev', 'Previous photograph', '\u2190', -1);
+    var next = button('next', 'Next photograph', '\u2192', 1);
+    function update() {
+      prev.disabled = tape.scrollLeft < 4;
+      next.disabled = tape.scrollLeft > tape.scrollWidth - tape.clientWidth - 4;
+    }
+    tape.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    window.addEventListener('load', update);
+    update();
+  });
+})();
