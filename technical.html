@@ -37,19 +37,20 @@
 <article class="article">
   <div class="read article-head">
     <h1>How Plato Pod is built.</h1>
-    <p class="lede">Small robots, one camera, and a server that builds a world around them.
-      Everything a student or an umpire touches goes through one interface, and any piece
-      can be replaced without the others noticing.</p>
+    <p class="lede">Small robots, one camera and a mini PC that builds a world around them.
+      There is little to set up and little to go wrong. Everything a student or an umpire
+      touches goes through one interface, and any piece can be replaced without the others
+      noticing.</p>
   </div>
 
   <figure class="wide">
     <div class="diagram">
 <svg class="arch arch-wide" viewBox="0 0 960 520" role="img" aria-labelledby="aw-t aw-d">
   <title id="aw-t">How the parts connect</title>
-  <desc id="aw-d">An overhead camera watches the arena, where a real pod and virtual units
-    share one frame, and sends video to the server. Inside the server, vision, world and
-    sensor processes exchange typed ROS 2 messages. Three processes face outward: the
-    gateway serves the console and student code over a WebSocket, the ATAK bridge sends
+  <desc id="aw-d">An overhead camera watches a bare table and sends video to a mini PC. The
+    arena's walls are drawn in software, and a real pod and virtual units share it. Inside
+    the mini PC, vision, world and sensor processes exchange typed ROS 2 messages. Three processes face outward: the
+    gateway serves the console and student code over a WebSocket on the mini PC's own Wi-Fi, the ATAK bridge sends
     Cursor on Target to ATAK, and the pod bridge talks to each pod over Bluetooth LE. On
     the pod, a receiver feeds the motors, which drive the wheels; the camera sees the
     pod move, which closes the loop.</desc>
@@ -63,13 +64,14 @@
   <path class="a-dev" d="M145 84 L175 84 L182 100 L138 100 Z"/>
   <path class="a-fov" d="M160 100 L48 150 L272 150 Z"/>
   <rect class="a-arena" x="40" y="150" width="240" height="180" rx="6"/>
+  <rect class="a-wall" x="58" y="166" width="204" height="148" rx="2"/>
   <circle class="a-pod" cx="110" cy="230" r="20"/><rect class="a-lid" x="102" y="222" width="16" height="16"/>
   <circle class="a-virt" cx="210" cy="205" r="20"/><circle class="a-virt" cx="196" cy="285" r="20"/>
-  <text class="a-s" x="160" y="356" text-anchor="middle">A real pod (solid) and virtual</text>
-  <text class="a-s" x="160" y="374" text-anchor="middle">units (dashed) share one frame</text>
+  <text class="a-s" x="160" y="356" text-anchor="middle">Dashed: the arena's walls and the</text>
+  <text class="a-s" x="160" y="374" text-anchor="middle">virtual units exist only in software</text>
 
 
-  <text class="a-h" x="360" y="32">SERVER · ROS 2</text>
+  <text class="a-h" x="360" y="32">MINI PC · ROS 2</text>
   <rect class="a-srv" x="360" y="44" width="580" height="188" rx="16"/>
   <path class="a-bus" d="M464 114 V164 M650 114 V164 M836 114 V164 M464 139 H836"/>
   <rect class="a-node" x="384" y="64" width="160" height="50" rx="10"/><text class="a-nt" x="464" y="94" text-anchor="middle">Vision</text>
@@ -90,7 +92,8 @@
   <text class="a-lb" x="262" y="66">video</text>
 
   <path class="a-ln" d="M464 218 V290" marker-start="url(#aw-a)" marker-end="url(#aw-a)"/>
-  <text class="a-lb" x="474" y="258">WebSocket</text>
+  <text class="a-lb" x="474" y="250">WebSocket,</text>
+  <text class="a-lb" x="474" y="266">over its own Wi-Fi</text>
   <path class="a-ln" d="M650 218 V288" marker-end="url(#aw-a)"/>
   <text class="a-lb" x="660" y="258">Cursor on Target</text>
   <path class="a-ln" d="M836 218 V434" marker-start="url(#aw-a)" marker-end="url(#aw-a)"/>
@@ -107,10 +110,10 @@
 </svg>
 <svg class="arch arch-tall" viewBox="0 0 400 850" role="img" aria-labelledby="at-t at-d">
   <title id="at-t">How the parts connect</title>
-  <desc id="at-d">An overhead camera watches the arena, where a real pod and virtual units
-    share one frame, and sends video to the server. Inside the server, vision, world and
-    sensor processes exchange typed ROS 2 messages. Three processes face outward: the
-    gateway serves the console and student code over a WebSocket, the ATAK bridge sends
+  <desc id="at-d">An overhead camera watches a bare table and sends video to a mini PC. The
+    arena's walls are drawn in software, and a real pod and virtual units share it. Inside
+    the mini PC, vision, world and sensor processes exchange typed ROS 2 messages. Three processes face outward: the
+    gateway serves the console and student code over a WebSocket on the mini PC's own Wi-Fi, the ATAK bridge sends
     Cursor on Target to ATAK, and the pod bridge talks to each pod over Bluetooth LE. On
     the pod, a receiver feeds the motors, which drive the wheels; the camera sees the
     pod move, which closes the loop.</desc>
@@ -124,13 +127,14 @@
   <path class="a-dev" d="M185 74 L215 74 L222 90 L178 90 Z"/>
   <path class="a-fov" d="M200 90 L70 132 L330 132 Z"/>
   <rect class="a-arena" x="60" y="132" width="280" height="160" rx="6"/>
+  <rect class="a-wall" x="78" y="146" width="244" height="132" rx="2"/>
   <circle class="a-pod" cx="140" cy="205" r="18"/><rect class="a-lid" x="133" y="198" width="14" height="14"/>
   <circle class="a-virt" cx="250" cy="185" r="18"/><circle class="a-virt" cx="236" cy="255" r="18"/>
-  <text class="a-s" x="200" y="316" text-anchor="middle">A real pod (solid) and virtual units</text>
-  <text class="a-s" x="200" y="334" text-anchor="middle">(dashed) share one frame</text>
+  <text class="a-s" x="200" y="316" text-anchor="middle">Dashed: the arena's walls and the virtual</text>
+  <text class="a-s" x="200" y="334" text-anchor="middle">units exist only in software</text>
 
 
-  <text class="a-h" x="16" y="368">SERVER · ROS 2</text>
+  <text class="a-h" x="16" y="368">MINI PC · ROS 2</text>
   <rect class="a-srv" x="16" y="378" width="368" height="172" rx="16"/>
   <path class="a-bus" d="M84 442 V484 M200 442 V484 M316 442 V484 M84 463 H316"/>
   <rect class="a-node" x="30" y="396" width="108" height="46" rx="10"/><text class="a-nt" x="84" y="424" text-anchor="middle">Sensors</text>
@@ -151,7 +155,8 @@
   <text class="a-lb" x="300" y="50">video</text>
 
   <path class="a-ln" d="M84 534 V594" marker-start="url(#at-a)" marker-end="url(#at-a)"/>
-  <text class="a-lb" x="92" y="568">WebSocket</text>
+  <text class="a-lb" x="92" y="560">WebSocket,</text>
+  <text class="a-lb" x="92" y="576">own Wi-Fi</text>
   <path class="a-ln" d="M200 534 V592" marker-end="url(#at-a)"/>
   <text class="a-lb" x="208" y="560">Cursor on</text>
   <text class="a-lb" x="208" y="576">Target</text>
@@ -169,14 +174,29 @@
   <text class="a-lb a-lb-ink" x="16" y="834">Dashed: the camera sees it move</text>
 </svg>
     </div>
-    <figcaption>The camera and arena, the server, and what connects to it. Every box in the
-      server is a separate process, and they speak typed ROS&nbsp;2 messages. The three
-      solid boxes are the server's only doors to the outside. Above the pod bridge, a real
-      pod and a virtual unit look the same, and the dashed line is how a pod's movement
-      comes back: through the camera.</figcaption>
+    <figcaption>The whole system: a camera over a bare table, a mini PC, and what connects
+      to it. Every box in the mini PC is a separate process, and they speak typed
+      ROS&nbsp;2 messages. The three solid boxes are its only doors to the outside. Above
+      the pod bridge, a real pod and a virtual unit look the same, and the dashed line is
+      how a pod's movement comes back: through the camera.</figcaption>
   </figure>
 
   <div class="read">
+    <h2>Little to set up</h2>
+    <p>The kit is three things: the pods, one camera on a stand, and a mini PC. There are
+      no markers to lay out, no walls to build, no tracking system to install and no cables
+      to the robots. Fewer parts means less to carry into a room, and less to go wrong in
+      front of a class.</p>
+    <ul class="facts">
+      <li><b>Switch on</b><span>The mini PC starts the platform by itself and opens its own
+        Wi-Fi network. The console is a web page on that network.</span></li>
+      <li><b>Calibrate</b><span>One pod drives a small circle, which takes about half a
+        minute. From its path the system works out how the camera sits over the
+        table.</span></li>
+      <li><b>Draw</b><span>The instructor clicks two corners of a rectangle on the screen,
+        or traces another shape, and that is the arena.</span></li>
+    </ul>
+
     <h2>The pods</h2>
     <p>Each pod is a round robot 85&nbsp;mm across: a 3D-printed body split by two wheel
       slots, a custom circuit board with an ESP32-S3, two geared motors, and a small
@@ -207,14 +227,15 @@
   <div class="read">
     <h2>Seeing the arena</h2>
     <p>One overhead camera reads the marker on every pod and turns it into a position and a
-      heading in metres, many times a second. Nothing else goes on the table: no corner
-      markers, no walls, no mat.</p>
-    <p>The arena calibrates itself from a pod's movement. A pod drives one small circle,
-      which takes about half a minute, and from its path the system works out where the
-      table's surface lies under the camera. The arena is then drawn on the screen, over
-      the camera's picture of the table, as a rectangle or any other shape. Its walls exist
-      only in software, and the pods stay inside them all the same. If the camera is moved,
-      the pods stop until the arena has been checked.</p>
+      heading, many times a second. Nothing else goes on the table: no corner markers, no
+      walls, no mat.</p>
+    <p>The camera's position over the table is calibrated from a pod's own movement. The
+      pod drives one small circle, and the system fits the table's surface to the path it
+      saw. The instructor then draws the arena over the camera's picture, by clicking two
+      corners of a rectangle; other shapes can be traced corner by corner. The pods stay
+      within the arena and never cross its boundaries, although those boundaries exist
+      only in software. If the camera is knocked or moved, the pods stop until the arena
+      has been checked.</p>
     <p>From the same picture the console draws a top-down view at a constant scale, so what
       the camera sees at an angle can be read like a map.</p>
   </div>
@@ -258,10 +279,10 @@
     <h2>How it is run</h2>
     <ul class="facts">
       <li><b>Server</b><span>A mini PC with no screen or keyboard of its own, running
-        ROS&nbsp;2 Jazzy and Python in Docker on an x86 processor. It starts the platform when
-        it is switched on. A GPU is used when present and never required.</span></li>
-      <li><b>Console</b><span>A web page: nothing to install. In a classroom the mini PC
-        runs its own Wi-Fi network, and laptops join it to reach the console.</span></li>
+        ROS&nbsp;2 Jazzy and Python in Docker on an x86 processor. A GPU is used when present
+        and never required.</span></li>
+      <li><b>Console</b><span>A web page, with nothing to install: one view for the
+        instructor, one for each team, and one for the room's big screen.</span></li>
       <li><b>Tests</b><span>Over two thousand unit tests, and a suite that launches the whole
         system and drives it the way clients do.</span></li>
     </ul>
