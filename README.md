@@ -15,6 +15,7 @@ operational detail.
 | `404.html` | Not-found page, served by GitHub Pages. |
 | `assets/site.css`, `assets/site.js` | The one stylesheet and the one script, shared by every page. |
 | `img/` | Photographs, renders and video. |
+| `favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, `img/og.png` | Site icon and the image shown when a link is shared. |
 | `CNAME` | Custom domain for GitHub Pages. |
 
 ## Working on it
