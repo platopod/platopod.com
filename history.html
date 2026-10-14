@@ -20,7 +20,7 @@
 
 <header class="mast">
   <div class="w">
-    <a class="brand" href="index.html">Plato<span>Pod</span></a>
+    <a class="brand" href="index.html" aria-label="Plato Pod">Plato<span>Pod</span></a>
     <nav>
       <a href="teaching.html">Teaching</a>
       <a href="military.html">Military</a>
@@ -46,7 +46,7 @@
     <div class="stage">
       <span class="dot">1</span>
       <h2>A camera that plays every sensor</h2>
-      <p class="where">KoreaTech, Korea</p>
+      <p class="where">KoreaTech, South Korea</p>
       <p>The first platform was built at the Korea University of Technology and Education
         to make programming classes less about memorising a language and more about making
         something move. Off-the-shelf robots ran in a table-top arena with real walls and
@@ -64,7 +64,7 @@
 
   <figure class="wide">
     <div class="pair even">
-      <video width="640" height="360" class="autoplay" playsinline muted loop preload="metadata" poster="img/gen1-exhibition-poster.jpg"
+      <video width="640" height="360" class="autoplay" controls playsinline muted loop preload="metadata" poster="img/gen1-exhibition-poster.jpg"
              aria-label="The first platform at an exhibition: robots moving through a maze of wooden blocks, the project poster, and a monitor showing the tracked robots.">
         <source src="img/gen1-exhibition.webm" type="video/webm">
         <source src="img/gen1-exhibition.mp4" type="video/mp4">
@@ -80,7 +80,7 @@
     <div class="stage">
       <span class="dot">2</span>
       <h2>Robots of our own</h2>
-      <p class="where">KoreaTech, Korea</p>
+      <p class="where">KoreaTech, South Korea</p>
       <p>The second platform replaced the off-the-shelf robots with a differential-drive
         robot designed in-house, 9&nbsp;cm in radius and 6&nbsp;cm high, driven over a
         Bluetooth link. A mini PC became the server, and the arena became something to
@@ -91,7 +91,7 @@
   </div>
 
   <figure class="wide">
-    <div class="tape" tabindex="0" role="group" aria-label="Photographs of the second platform. Scroll sideways to see all seven.">
+    <div class="tape" tabindex="0" role="group" aria-label="Pictures of the second platform. Scroll sideways to see all seven.">
       <img src="img/gen2-render.jpg" width="1400" height="990" alt="Render of the second platform: a rectangular arena framed by rails, with a camera on a post at one end." loading="lazy">
       <img src="img/gen2-lab.jpg" width="960" height="720" alt="The second platform in a teaching lab: the arena on a desk between computer workstations, with the camera on a tripod." loading="lazy">
       <img src="img/gen2-robot.jpg" width="960" height="720" alt="The second-generation robot opened up: a round yellow shell holding its circuit board, beside the arena's corner post." loading="lazy">
@@ -100,9 +100,9 @@
       <img src="img/gen2-exhibition-hall.jpg" width="1046" height="782" alt="The exhibition hall: display cubes in the foreground and a crowd facing a lit stage." loading="lazy">
       <img src="img/gen2-team.jpg" width="1104" height="790" alt="Five team members in front of an orange banner for a 2016 start-up teams event." loading="lazy">
     </div>
-    <figcaption>The second platform: the assemblable arena as designed and in the lab, the
+    <figcaption>The second platform: the arena as designed and in the lab, the
       in-house robot and its system board, and the kit and the team at a start-up
-      exhibition in Korea in 2016.</figcaption>
+      exhibition in South Korea in 2016.</figcaption>
   </figure>
 
   <div class="read">
@@ -112,21 +112,21 @@
       <h2>A world around the robots</h2>
       <p class="where">UNSW Canberra, Australia</p>
       <p>At UNSW Canberra the platform became what it is today. The pods shrank to
-        85&nbsp;mm across, on ESP32 boards over Bluetooth. The arena no longer needs walls,
-        or markers of its own: a pod drives a short circle to show the camera where the
-        table is, the arena is drawn on the screen, and the obstacles are virtual. And
-        around the robots grew a simulated world of sensors, hazards, virtual units and an
-        opposing force on a server built on ROS&nbsp;2, shared with ATAK, for the classroom
-        and for rehearsal alike.</p>
+        85&nbsp;mm across; each has an ESP32 board and is driven over Bluetooth. The arena
+        no longer needs walls or markers: a pod drives a small circle to show the camera
+        where the table is, the arena is drawn on the screen, and the obstacles are
+        virtual. A simulated world grew around the robots: sensors, hazards, virtual units
+        and an opposing force. It runs on a server built on ROS&nbsp;2, is shown on ATAK,
+        and is used for teaching and for rehearsal.</p>
       <p class="names">Team: Artem Lensky and Rhianne Chng. See <a href="about.html">About</a>.</p>
-      <p><a href="technical.html">How today’s platform is built →</a></p>
+      <p><a href="technical.html">How today's platform is built →</a></p>
     </div>
   </div>
 
   <figure class="wide">
-    <img src="img/arena-drawn.jpg" width="1630" height="890" alt="The console's camera view of a bare table in a lecture hall, with the arena drawn over it: a blue start strip on the left, a green objective strip on the right, three sensors shown as fading yellow rings, two black discs of cover, a blue pod and a red pod, and two dashed green circles where virtual pods wait." loading="lazy">
+    <img src="img/arena-drawn.jpg" width="1630" height="890" alt="The console's camera view of a bare table in a lecture hall, with the arena drawn over it: a blue start strip on the left, a green objective strip on the right, three sensors shown as fading yellow rings, two black discs of cover, a blue pod and a red pod, and two dashed green circles where virtual units wait." loading="lazy">
     <figcaption>Today's arena, as the console shows it during a game in a lecture hall: drawn
-      on a bare table, with two pods and two virtual pods (the dashed circles) sharing it.
+      on a bare table, with two pods and two virtual units (the dashed circles) sharing it.
       The black circles are obstacles that also serve as cover: a sensor cannot see through
       them, and the pods have to drive round them.</figcaption>
   </figure>

@@ -20,7 +20,7 @@
 
 <header class="mast">
   <div class="w">
-    <a class="brand" href="index.html">Plato<span>Pod</span></a>
+    <a class="brand" href="index.html" aria-label="Plato Pod">Plato<span>Pod</span></a>
     <nav>
       <a href="teaching.html" aria-current="page">Teaching</a>
       <a href="military.html">Military</a>
@@ -45,8 +45,8 @@
 
   <figure class="wide">
     <div class="frame">
-      <video width="1280" height="720" class="autoplay" playsinline muted loop preload="metadata" poster="img/sweep-poster.jpg"
-             aria-label="Recording of the browser console during a cooperative sweep: two pods cover the arena and the ground they have searched fills in.">
+      <video width="1280" height="720" class="autoplay" controls playsinline muted loop preload="metadata" poster="img/sweep-poster.jpg"
+             aria-label="A phone recording of the console during a cooperative sweep, with a look at the desk: two pods cover the arena and the ground they have searched fills in.">
         <source src="img/sweep.webm" type="video/webm">
         <source src="img/sweep.mp4" type="video/mp4">
       </video>
@@ -59,9 +59,9 @@
 
   <div class="read">
     <h2>Problems worth solving</h2>
-    <p>Each exercise is a problem with more than one good answer. The strategy behind it is a
-      single function with its own tests, so a student can replace it without touching
-      anything else.</p>
+    <p>Each exercise is a problem with more than one good answer. In several of them the
+      strategy is a small piece of code with its own tests, so a student can replace it
+      without touching anything else.</p>
   </div>
 
   <div class="read">
@@ -69,28 +69,28 @@
       <div><p class="tag">Pursuit</p><h3>Tag</h3>
         <p>One pod evades, one pursues, both planning a way round the obstacles.</p></div>
       <div><p class="tag">Control</p><h3>Follow a path</h3>
-        <p>Draw a route in the browser and a pod drives it. Steering well is harder than it
-          looks.</p></div>
+        <p>Draw a route in the browser and a pod drives it. The exercise is to make it
+          steer well.</p></div>
       <div><p class="tag">Cooperation</p><h3>Cover the ground</h3>
-        <p>The vacuum-cleaner problem: two pods divide the arena between them so no ground is
-          missed and none is swept twice.</p></div>
+        <p>The vacuum-cleaner problem: two pods share out the arena and sweep it between
+          them.</p></div>
       <div><p class="tag">Search</p><h3>Find the gas source</h3>
-        <p>Follow a simulated gas sensor to a leak. A graded exercise, with reference
-          solutions from a random walk up to a search that respects rules of
-          engagement.</p></div>
+        <p>Follow a simulated gas sensor to a leak. The exercise comes with reference
+          solutions at rising levels, from a random walk up to a search that respects
+          rules of engagement.</p></div>
       <div><p class="tag">Teams</p><h3>Capture the flag</h3>
         <p>Two teams, their zones and a flag laid out on the arena, for students to plan
           around.</p></div>
       <div><p class="tag">Sensing</p><h3>Make sense of sensors</h3>
         <p>Sonar, radar, lidar, gas and more, each with adjustable noise, so a student learns
           what a real sensor does and does not tell them.</p></div>
-      <div><p class="tag">Surveillance</p><h3>Get through unseen</h3>
+      <div class="full"><p class="tag">Surveillance</p><h3>Get through unseen</h3>
         <p>A game for teams. One side places sensors and commands a patrol; the other
-          writes orders to get its pods across the arena undetected, using cover. Real and
-          virtual pods play in the same round.</p></div>
+          writes orders to get its pods across the arena undetected, using cover. Pods and
+          virtual units play in the same game.</p></div>
       <div class="span2"><p class="tag">No code</p><h3>The plain-English track</h3>
         <p>Not every learner needs to program. On this track students describe a strategy in
-          plain English — how to sweep a room, how to take a flag — and the pods carry it
+          plain English (how to sweep a room, how to take a flag) and the pods carry it
           out. Getting it right means thinking logically and in the abstract, anticipating
           what could go wrong, and saying exactly what they mean. It suits students without
           an engineering background, and mid-career officers. Each plan is read back in
@@ -103,11 +103,11 @@
   <div class="read">
     <h2>What student code looks like</h2>
     <p>Students drive pods from Python with a small library, with no robotics software to
-      install. Here a pod reads its sonar and turns away from anything closer than
-      20&nbsp;cm:</p>
+      install. Here a pod reads its simulated sonar and turns away from anything closer
+      than 20&nbsp;cm:</p>
     <pre><code>from platopod import Arena
 
-arena = Arena("ws://arena.local:8080/api/control")
+arena = Arena("ws://ARENA-ADDRESS:8080/api/control")
 POD = 1
 
 arena.subscribe_sensors(POD, ["sonar"])
@@ -115,19 +115,24 @@ arena.subscribe_sensors(POD, ["sonar"])
 while True:
     sonar = arena.get_sensor(POD, "sonar")
     if sonar:
-        ahead = sonar["ranges"][0]              <span class="c"># beam 0 points straight ahead</span>
-        if ahead &lt; 0.20:                        <span class="c"># something within 20 cm</span>
-            arena.cmd_vel(POD, 0.0, 1.2)        <span class="c"># turn on the spot</span>
+        ahead = sonar["ranges"][0]         <span class="c"># beam 0 points ahead</span>
+        if ahead &lt; 0.20:                   <span class="c"># within 20 cm</span>
+            arena.cmd_vel(POD, 0.0, 1.2)   <span class="c"># turn on the spot</span>
         else:
-            arena.cmd_vel(POD, 0.10, 0.0)       <span class="c"># drive on at 10 cm/s</span>
+            arena.cmd_vel(POD, 0.10, 0.0)  <span class="c"># drive forward</span>
     arena.sleep(0.1)</code></pre>
     <p class="note-line">The same interface is plain JSON over a WebSocket, so any language
-      that can open one can drive the arena.</p>
+      that can open one can drive the arena. A real pod has a narrow range of speeds, so
+      the server fits each command to what that pod can do.</p>
 
     <h2>From first loop to planning</h2>
     <p>The same arena carries a class from a first loop that reads a sensor, through
       feedback control and path planning, to robots that cooperate and decide under
-      uncertainty. The robots do not change; the problems do.</p>
+      uncertainty.</p>
+
+    <h2>See it run</h2>
+    <p>We are happy to show the platform to anyone who wants to see it run.</p>
+    <p><a class="btn solid" href="index.html#contact">Get in touch <span class="arrow">→</span></a></p>
   </div>
 </article>
 

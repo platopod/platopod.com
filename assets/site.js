@@ -2,13 +2,14 @@
 // reads and works with JavaScript off.
 
 // Play videos only while they are on screen, and only if the visitor has not
-// asked for less motion; otherwise show them paused with controls.
+// asked for less motion. Every video keeps its controls, so it can be paused,
+// and one the visitor has paused stays paused.
 (function () {
   var vs = [].slice.call(document.querySelectorAll('video.autoplay'));
   if (!vs.length) return;
   var still = window.matchMedia &&
               window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (still) { vs.forEach(function (v) { v.setAttribute('controls', ''); }); return; }
+  if (still) return;
   if (!('IntersectionObserver' in window)) {
     vs.forEach(function (v) { v.play().catch(function () {}); });
     return;
@@ -16,11 +17,20 @@
   var io = new IntersectionObserver(function (es) {
     es.forEach(function (e) {
       var v = e.target;
-      if (e.isIntersecting) { v.play().catch(function () { v.setAttribute('controls', ''); }); }
-      else { v.pause(); }
+      if (e.isIntersecting) {
+        v._seen = true;
+        if (!v._held) v.play().catch(function () {});
+      } else {
+        v._seen = false;
+        v.pause();
+      }
     });
   }, { threshold: 0.25 });
-  vs.forEach(function (v) { io.observe(v); });
+  vs.forEach(function (v) {
+    v.addEventListener('pause', function () { if (v._seen) v._held = true; });
+    v.addEventListener('play', function () { v._held = false; });
+    io.observe(v);
+  });
 })();
 
 // The enquiry form. With JavaScript off it is an ordinary POST to Formspree.
@@ -39,13 +49,19 @@
       body: new FormData(form),
       headers: { Accept: 'application/json' }
     }).then(function (r) {
+      if (r.status === 422) {
+        note.className = 'bad';
+        note.textContent = 'That did not send. Please check the email address and try again.';
+        button.disabled = false;
+        return;
+      }
       if (!r.ok) throw new Error(r.status);
       form.reset();
-      note.textContent = 'Thank you — we will be in touch.';
+      note.textContent = 'Thank you. We will be in touch.';
       button.disabled = false;
     }).catch(function () {
       note.className = 'bad';
-      note.textContent = 'That did not send. Please check your connection and try again.';
+      note.textContent = 'That did not send. Please try again in a moment.';
       button.disabled = false;
     });
   });
@@ -73,8 +89,8 @@
       wrap.appendChild(b);
       return b;
     }
-    var prev = button('prev', 'Previous photograph', '\u2190', -1);
-    var next = button('next', 'Next photograph', '\u2192', 1);
+    var prev = button('prev', 'Previous picture', '\u2190', -1);
+    var next = button('next', 'Next picture', '\u2192', 1);
     function update() {
       prev.disabled = tape.scrollLeft < 4;
       next.disabled = tape.scrollLeft > tape.scrollWidth - tape.clientWidth - 4;

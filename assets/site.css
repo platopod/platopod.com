@@ -80,6 +80,7 @@ h3 { font-size: var(--fs-body); letter-spacing: -.01em; line-height: 1.35; }
               overflow-x: auto; scrollbar-width: none; }
   .mast nav a { white-space: nowrap; padding: 4px 0; }
 }
+@media (max-width: 400px) { .mast nav { gap: 13px; } }
 
 /* ---- buttons --------------------------------------------------------- */
 .btn {
@@ -248,6 +249,7 @@ code { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: inherit
 .cards .tag { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--fs-small);
               color: var(--accent); text-transform: uppercase; letter-spacing: .06em; }
 .cards p { color: var(--ink-2); margin-top: 6px; font-size: var(--fs-small); }
+.cards .full { grid-column: 1 / -1; }
 .cards .span2 { grid-column: 1 / -1; background: var(--accent-soft); box-shadow: none; }
 @media (max-width: 700px) { .cards { grid-template-columns: 1fr; } }
 pre .c { color: var(--code-comment); }                      /* comments */
@@ -286,6 +288,7 @@ pre .c { color: var(--code-comment); }                      /* comments */
 @media (min-width: 1060px) { .people { margin-left: -150px; margin-right: -150px; } }
 .pair.even img, .pair.even video { aspect-ratio: 4 / 3; object-fit: cover; width: 100%;
                                    height: auto; border-radius: 14px; }
+.pair.even.land img { aspect-ratio: 16 / 9; }
 
 /* A strip of photographs that scrolls sideways and snaps to each one. Works
    with a trackpad, touch or the keyboard; site.js adds the two buttons. */
