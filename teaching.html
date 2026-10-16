@@ -101,10 +101,10 @@
 
   <div class="read">
     <h2>Student code</h2>
-    <p>The arena is driven with JSON messages over a WebSocket, so any language with a
-      WebSocket client works. Python has a small library; the other examples speak the
-      protocol directly. Each one reads the pod's simulated sonar and turns away from
-      anything closer than 20&nbsp;cm.</p>
+    <p>Python, C, Java and JavaScript each have a small library with the same calls.
+      Underneath is JSON over a WebSocket, so any other language with a WebSocket client
+      can drive the arena too. Each example reads the pod's simulated sonar and turns away
+      from anything closer than 20&nbsp;cm.</p>
     <div class="codetabs">
       <div class="codepane" data-lang="Python">
         <p class="codelabel">Python</p>
@@ -127,94 +127,74 @@ arena.<span class="f">subscribe_sensors</span>(POD, [<span class="s">"sonar"</sp
       </div>
       <div class="codepane" data-lang="C">
         <p class="codelabel">C</p>
-        <pre><code><span class="k">#include</span> <span class="s">"mongoose.h"</span>   <span class="c">// Mongoose: a single-file WebSocket library</span>
+        <pre><code><span class="k">#include</span> <span class="s">"platopod.h"</span>
 
 <span class="k">#define</span> POD <span class="n">1</span>
 
-<span class="k">static</span> <span class="k">void</span> <span class="f">on_event</span>(<span class="k">struct</span> mg_connection *c, <span class="k">int</span> ev, <span class="k">void</span> *ev_data) {
-  <span class="k">if</span> (ev == MG_EV_WS_OPEN) {
-    <span class="f">mg_ws_printf</span>(c, WEBSOCKET_OP_TEXT,
-      <span class="s">"{\"type\":\"subscribe_sensors\",\"robot_id\":%d,"</span>
-      <span class="s">"\"sensors\":[\"sonar\"],\"rate_hz\":10}"</span>, POD);
-  } <span class="k">else</span> <span class="k">if</span> (ev == MG_EV_WS_MSG) {
-    <span class="k">struct</span> mg_ws_message *wm = (<span class="k">struct</span> mg_ws_message *) ev_data;
-    <span class="k">double</span> ahead;
-    <span class="k">if</span> (<span class="f">mg_json_get_num</span>(wm-&gt;data, <span class="s">"$.data.ranges[0]"</span>, &amp;ahead)) {  <span class="c">// beam 0 points ahead</span>
-      <span class="k">int</span> near = ahead &lt; <span class="n">0.20</span>;                                     <span class="c">// within 20 cm</span>
-      <span class="f">mg_ws_printf</span>(c, WEBSOCKET_OP_TEXT,
-        <span class="s">"{\"type\":\"cmd_vel\",\"robot_id\":%d,\"linear_x\":%g,\"angular_z\":%g}"</span>,
-        POD, near ? <span class="n">0.0</span> : <span class="n">0.10</span>, near ? <span class="n">1.2</span> : <span class="n">0.0</span>);                 <span class="c">// turn, or drive on</span>
-    }
-  }
-}
-
 <span class="k">int</span> <span class="f">main</span>(<span class="k">void</span>) {
-  <span class="k">struct</span> mg_mgr mgr;
-  <span class="f">mg_mgr_init</span>(&amp;mgr);
-  <span class="f">mg_ws_connect</span>(&amp;mgr, <span class="s">"ws://ARENA-ADDRESS:8080/api/control"</span>, on_event, NULL, NULL);
-  <span class="k">for</span> (;;) <span class="f">mg_mgr_poll</span>(&amp;mgr, <span class="n">100</span>);
+    <span class="t">pp_arena</span> *arena = <span class="f">pp_connect</span>(<span class="s">"ws://ARENA-ADDRESS:8080/api/control"</span>);
+    <span class="f">pp_subscribe_sensors</span>(arena, POD, <span class="s">"sonar"</span>);
+
+    <span class="k">while</span> (<span class="n">1</span>) {
+        <span class="k">double</span> ahead;
+        <span class="k">if</span> (<span class="f">pp_sensor_num</span>(arena, POD, <span class="s">"sonar"</span>, <span class="s">"ranges[0]"</span>, &amp;ahead)) {  <span class="c">// beam 0 points ahead</span>
+            <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>)                                             <span class="c">// within 20 cm</span>
+                <span class="f">pp_cmd_vel</span>(arena, POD, <span class="n">0.0</span>, <span class="n">1.2</span>);                         <span class="c">// turn on the spot</span>
+            <span class="k">else</span>
+                <span class="f">pp_cmd_vel</span>(arena, POD, <span class="n">0.10</span>, <span class="n">0.0</span>);                        <span class="c">// drive forward</span>
+        }
+        <span class="f">pp_sleep</span>(arena, <span class="n">0.1</span>);
+    }
 }</code></pre>
       </div>
       <div class="codepane" data-lang="Java">
         <p class="codelabel">Java</p>
-        <pre><code><span class="k">import</span> java.net.<span class="t">URI</span>;
-<span class="k">import</span> java.net.http.<span class="t">HttpClient</span>;
-<span class="k">import</span> java.net.http.<span class="t">WebSocket</span>;
-<span class="k">import</span> java.util.<span class="t">Locale</span>;
-<span class="k">import</span> java.util.concurrent.<span class="t">CompletionStage</span>;
-<span class="k">import</span> java.util.regex.<span class="t">Matcher</span>;
-<span class="k">import</span> java.util.regex.<span class="t">Pattern</span>;
+        <pre><code><span class="k">import</span> platopod.<span class="t">Arena</span>;
+<span class="k">import</span> platopod.<span class="t">Json</span>;
 
 <span class="k">public</span> <span class="k">class</span> Avoid {
-    <span class="k">static</span> <span class="k">final</span> <span class="k">int</span> POD = <span class="n">1</span>;
-    <span class="k">static</span> <span class="k">final</span> <span class="t">Pattern</span> AHEAD = <span class="t">Pattern</span>.<span class="f">compile</span>(<span class="s">"\"ranges\":\\s*\\[\\s*([-0-9.eE]+)"</span>);
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="f">main</span>(<span class="t">String</span>[] args) {
+        <span class="t">Arena</span> arena = <span class="k">new</span> <span class="t">Arena</span>(<span class="s">"ws://ARENA-ADDRESS:8080/api/control"</span>);
+        <span class="k">int</span> pod = <span class="n">1</span>;
 
-    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="f">main</span>(<span class="k">String</span>[] args) <span class="k">throws</span> <span class="t">Exception</span> {
-        <span class="t">WebSocket</span> ws = <span class="t">HttpClient</span>.<span class="f">newHttpClient</span>().<span class="f">newWebSocketBuilder</span>()
-            .<span class="f">buildAsync</span>(<span class="t">URI</span>.<span class="f">create</span>(<span class="s">"ws://ARENA-ADDRESS:8080/api/control"</span>),
-                <span class="k">new</span> <span class="t">WebSocket</span>.<span class="f">Listener</span>() {
-                    <span class="k">public</span> <span class="t">CompletionStage</span>&lt;?&gt; <span class="f">onText</span>(<span class="t">WebSocket</span> ws, <span class="t">CharSequence</span> msg,
-                                                     <span class="k">boolean</span> last) {
-                        <span class="t">Matcher</span> m = AHEAD.<span class="f">matcher</span>(msg);
-                        <span class="k">if</span> (m.<span class="f">find</span>()) {                          <span class="c">// beam 0 points ahead</span>
-                            <span class="k">double</span> ahead = <span class="t">Double</span>.<span class="f">parseDouble</span>(m.<span class="f">group</span>(<span class="n">1</span>));
-                            <span class="k">boolean</span> near = ahead &lt; <span class="n">0.20</span>;         <span class="c">// within 20 cm</span>
-                            ws.<span class="f">sendText</span>(<span class="f">cmd</span>(near ? <span class="n">0.0</span> : <span class="n">0.10</span>, near ? <span class="n">1.2</span> : <span class="n">0.0</span>), true);
-                        }
-                        ws.<span class="f">request</span>(<span class="n">1</span>);
-                        <span class="k">return</span> null;
-                    }
-                }).<span class="f">join</span>();
-        ws.<span class="f">sendText</span>(<span class="s">"{\"type\":\"subscribe_sensors\",\"robot_id\":"</span> + POD
-                + <span class="s">",\"sensors\":[\"sonar\"],\"rate_hz\":10}"</span>, true);
-        <span class="t">Thread</span>.<span class="f">sleep</span>(<span class="t">Long</span>.MAX_VALUE);
-    }
+        arena.<span class="f">subscribeSensors</span>(pod, <span class="s">"sonar"</span>);
 
-    <span class="k">static</span> <span class="k">String</span> <span class="f">cmd</span>(<span class="k">double</span> linear, <span class="k">double</span> angular) {
-        <span class="k">return</span> <span class="k">String</span>.<span class="f">format</span>(<span class="t">Locale</span>.ROOT,
-            <span class="s">"{\"type\":\"cmd_vel\",\"robot_id\":%d,\"linear_x\":%.2f,\"angular_z\":%.2f}"</span>,
-            POD, linear, angular);
+        <span class="k">while</span> (<span class="k">true</span>) {
+            <span class="t">Json</span> sonar = arena.<span class="f">getSensor</span>(pod, <span class="s">"sonar"</span>);
+            <span class="k">if</span> (sonar != <span class="k">null</span>) {
+                <span class="k">double</span> ahead = sonar.<span class="f">get</span>(<span class="s">"ranges"</span>).<span class="f">at</span>(<span class="n">0</span>).<span class="f">asDouble</span>();  <span class="c">// beam 0 points ahead</span>
+                <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>) {                                   <span class="c">// within 20 cm</span>
+                    arena.<span class="f">cmdVel</span>(pod, <span class="n">0.0</span>, <span class="n">1.2</span>);                      <span class="c">// turn on the spot</span>
+                } <span class="k">else</span> {
+                    arena.<span class="f">cmdVel</span>(pod, <span class="n">0.10</span>, <span class="n">0.0</span>);                     <span class="c">// drive forward</span>
+                }
+            }
+            arena.<span class="f">sleep</span>(<span class="n">0.1</span>);
+        }
     }
 }</code></pre>
       </div>
       <div class="codepane" data-lang="JavaScript">
         <p class="codelabel">JavaScript</p>
-        <pre><code><span class="c">// Node.js 22 or any browser: WebSocket is built in</span>
+        <pre><code><span class="k">import</span> { <span class="t">Arena</span> } <span class="k">from</span> <span class="s">"./platopod.mjs"</span>;
+
+<span class="k">const</span> arena = <span class="k">await</span> <span class="t">Arena</span>.<span class="f">connect</span>(<span class="s">"ws://ARENA-ADDRESS:8080/api/control"</span>);
 <span class="k">const</span> POD = <span class="n">1</span>;
-<span class="k">const</span> ws = <span class="k">new</span> <span class="t">WebSocket</span>(<span class="s">"ws://ARENA-ADDRESS:8080/api/control"</span>);
-<span class="k">const</span> send = (msg) =&gt; ws.<span class="f">send</span>(<span class="t">JSON</span>.<span class="f">stringify</span>(msg));
 
-ws.onopen = () =&gt;
-  <span class="f">send</span>({ type: <span class="s">"subscribe_sensors"</span>, robot_id: POD, sensors: [<span class="s">"sonar"</span>], rate_hz: <span class="n">10</span> });
+arena.<span class="f">subscribeSensors</span>(POD, [<span class="s">"sonar"</span>]);
 
-ws.onmessage = (event) =&gt; {
-  <span class="k">const</span> msg = <span class="t">JSON</span>.<span class="f">parse</span>(event.data);
-  <span class="k">if</span> (msg.type !== <span class="s">"sensor"</span> || msg.sensor !== <span class="s">"sonar"</span>) <span class="k">return</span>;
-  <span class="k">const</span> ahead = msg.data.ranges[<span class="n">0</span>];          <span class="c">// beam 0 points ahead</span>
-  <span class="k">const</span> near = ahead &lt; <span class="n">0.20</span>;                 <span class="c">// within 20 cm</span>
-  <span class="f">send</span>({ type: <span class="s">"cmd_vel"</span>, robot_id: POD,
-         linear_x: near ? <span class="n">0</span> : <span class="n">0.10</span>, angular_z: near ? <span class="n">1.2</span> : <span class="n">0</span> });
-};</code></pre>
+<span class="k">while</span> (<span class="k">true</span>) {
+  <span class="k">const</span> sonar = arena.<span class="f">getSensor</span>(POD, <span class="s">"sonar"</span>);
+  <span class="k">if</span> (sonar) {
+    <span class="k">const</span> ahead = sonar.ranges[<span class="n">0</span>];        <span class="c">// beam 0 points ahead</span>
+    <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>) {                   <span class="c">// within 20 cm</span>
+      arena.<span class="f">cmdVel</span>(POD, <span class="n">0.0</span>, <span class="n">1.2</span>);        <span class="c">// turn on the spot</span>
+    } <span class="k">else</span> {
+      arena.<span class="f">cmdVel</span>(POD, <span class="n">0.10</span>, <span class="n">0.0</span>);       <span class="c">// drive forward</span>
+    }
+  }
+  <span class="k">await</span> arena.<span class="f">sleep</span>(<span class="n">0.1</span>);
+}</code></pre>
       </div>
     </div>
     <p class="note-line">A real pod has a narrow range of speeds, so the server fits each
