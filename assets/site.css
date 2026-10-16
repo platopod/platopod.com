@@ -113,6 +113,14 @@ section { padding: 110px 0 0; }
            align-items: center; }
 .hero h1 { font-size: var(--fs-head); letter-spacing: -.04em; line-height: 1.04; }
 .hero .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
+.uses { display: grid; gap: 12px; margin-top: 26px; max-width: 38rem; }
+.uses a { display: block; background: var(--card); border-radius: 14px; padding: 16px 20px;
+          box-shadow: 0 1px 0 var(--rule); color: var(--ink-2); font-size: var(--fs-small);
+          line-height: 1.55; text-decoration: none; }
+.uses a:hover { box-shadow: 0 0 0 1px var(--accent-line); }
+.uses .tag { display: block; margin-bottom: 4px; font-family: "IBM Plex Mono", ui-monospace, monospace;
+             font-size: var(--fs-small); color: var(--accent); text-transform: uppercase;
+             letter-spacing: .06em; }
 .frame { background: var(--card); border-radius: var(--radius); overflow: hidden;
          box-shadow: 0 1px 0 var(--rule), 0 24px 60px -30px rgba(23, 20, 15, .25); }
 .frame video, .frame img { width: 100%; height: auto; }
