@@ -101,3 +101,40 @@
     update();
   });
 })();
+
+// Code tabs: one pane per language. With JavaScript off every pane shows
+// under its own label.
+(function () {
+  [].slice.call(document.querySelectorAll('.codetabs')).forEach(function (box, n) {
+    var panes = [].slice.call(box.querySelectorAll('.codepane'));
+    var bar = document.createElement('div');
+    bar.className = 'tabs';
+    bar.setAttribute('role', 'tablist');
+    var tabs = panes.map(function (pane, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.id = 'code-' + n + '-' + i;
+      b.setAttribute('role', 'tab');
+      b.textContent = pane.getAttribute('data-lang');
+      pane.setAttribute('role', 'tabpanel');
+      pane.setAttribute('aria-labelledby', b.id);
+      b.addEventListener('click', function () { show(i); });
+      b.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { var j = (i + d + panes.length) % panes.length; show(j); tabs[j].focus(); }
+      });
+      bar.appendChild(b);
+      return b;
+    });
+    function show(i) {
+      panes.forEach(function (p, j) { p.hidden = j !== i; });
+      tabs.forEach(function (t, j) {
+        t.setAttribute('aria-selected', j === i ? 'true' : 'false');
+        t.tabIndex = j === i ? 0 : -1;
+      });
+    }
+    box.insertBefore(bar, box.firstChild);
+    box.classList.add('on');
+    show(0);
+  });
+})();
