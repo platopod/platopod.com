@@ -42,25 +42,22 @@
 
 <article class="article">
   <div class="read article-head">
-    <h1>Three versions, <span class="accent">one idea.</span></h1>
-    <p class="lede">From the start, Plato Pod has been about one camera over a table of small
-      robots, with software filling in the rest of the world. What that world contains has
-      grown with each version.</p>
+    <h1>Three versions of <span class="accent">Plato Pod.</span></h1>
+    <p class="lede">All three versions track small robots with one overhead camera. With
+      each version, more of the arena moved into software.</p>
   </div>
 
   <div class="read">
     <div class="stage">
       <span class="dot">1</span>
-      <h2>A camera that plays every sensor</h2>
+      <h2>Off-the-shelf robots</h2>
       <p class="where">KoreaTech, South Korea</p>
-      <p>The first platform was built at the Korea University of Technology and Education
-        to make programming classes less about memorising a language and more about making
-        something move. Off-the-shelf robots ran in a table-top arena with real walls and
-        real obstacles. One overhead camera watched the whole table, and a computer-vision
-        algorithm turned what it saw into the robots' sensors, so a line follower, a maze, a
-        vacuum cleaner and a game of tag could all be set without extra hardware. The robots
-        ran on the Robot Operating System and were reached over the network, so students
-        could program them from anywhere.</p>
+      <p>Built at the Korea University of Technology and Education for teaching programming
+        with robots. Off-the-shelf robots ran in a table-top arena with physical walls and
+        obstacles. An overhead camera tracked them, and their sensor readings were computed
+        from the camera image, so one set-up served a line follower, a maze, a
+        vacuum-cleaner task and a game of tag. The robots ran the Robot Operating System and
+        were programmed over the network.</p>
       <p class="names">Team: Junho Heo, Dongyun Kim and Junsu Park, with Artem Lensky.
         Published as “Educational platform for learning programming via controlling mobile
         robots”, <a href="https://ieeexplore.ieee.org/abstract/document/7062695">IEEE
@@ -77,7 +74,7 @@
       </video>
       <img src="img/gen1-team.jpg" width="800" height="488" alt="Four team members standing beside a poster for the Mobile Robot Platform for Education, with the maze arena in front of them." loading="lazy">
     </div>
-    <figcaption>The first platform on show: off-the-shelf robots in a maze of real blocks
+    <figcaption>Version 1 at an exhibition: off-the-shelf robots in a maze of wooden blocks
       under one camera, and the team with their poster.</figcaption>
   </figure>
 
@@ -85,12 +82,12 @@
 
     <div class="stage">
       <span class="dot">2</span>
-      <h2>Robots of our own</h2>
+      <h2>An in-house robot</h2>
       <p class="where">KoreaTech, South Korea</p>
-      <p>The second platform replaced the off-the-shelf robots with a differential-drive
-        robot designed in-house, 9&nbsp;cm across and 6&nbsp;cm high, driven over a
-        Bluetooth link. A mini PC became the server, and the arena became something to
-        assemble, with the camera on its own post above it.</p>
+      <p>The off-the-shelf robots were replaced by a differential-drive robot designed
+        in-house, 9&nbsp;cm across and 6&nbsp;cm high, driven over Bluetooth. A mini PC ran
+        the server. The arena was a frame assembled on a desk, with the camera on a post
+        above it.</p>
       <p class="names">Team: Konho Park, Kyongjae Kim, Jongyoun Lim, Raminta
         Olbutaite and Artem Lensky.</p>
     </div>
@@ -106,36 +103,35 @@
       <img src="img/gen2-exhibition-hall.jpg" width="1046" height="782" alt="The exhibition hall: display cubes in the foreground and a crowd facing a lit stage." loading="lazy">
       <img src="img/gen2-team.jpg" width="1104" height="790" alt="Five team members in front of an orange banner for a 2016 start-up teams event." loading="lazy">
     </div>
-    <figcaption>The second platform: the arena as designed and in the lab, the
-      in-house robot and its system board, and the kit and the team at a start-up
-      exhibition in South Korea in 2016.</figcaption>
+    <figcaption>Version 2: the arena as designed and in the lab, the robot and its system
+      board, and the kit and the team at a start-up exhibition in South Korea in
+      2016.</figcaption>
   </figure>
 
   <div class="read">
 
     <div class="stage">
       <span class="dot">3</span>
-      <h2>A world around the robots</h2>
+      <h2>The current platform</h2>
       <p class="where">UNSW Canberra, Australia</p>
-      <p>At UNSW Canberra the platform became what it is today. The pods shrank to
-        85&nbsp;mm across; each has an ESP32 board and is driven over Bluetooth. The arena
-        no longer needs walls or markers: a pod drives a small circle to show the camera
-        where the table is, the arena is drawn on the screen, and the obstacles are
-        virtual. A simulated world grew around the robots: sensors, hazards, virtual units
-        and an opposing force. It runs on a server built on ROS&nbsp;2, is shown on ATAK,
-        and is used for teaching and for rehearsal.</p>
+      <p>The pods are 85&nbsp;mm across, each with an ESP32 board, driven over Bluetooth.
+        The arena needs no walls or markers: a pod drives a small circle so the camera can
+        locate the surface, the arena is drawn on screen, and obstacles are virtual. The
+        software adds simulated sensors, hazards, virtual units and an opposing force. The
+        server is built on ROS&nbsp;2, exercises can be followed on ATAK, and the platform
+        has been used in teaching at UNSW Canberra.</p>
       <p class="names">Built by Artem Lensky and Rhianne Chng. See <a href="about.html">About</a>
         for today's team.</p>
-      <p><a href="technical.html">How today's platform is built →</a></p>
+      <p><a href="technical.html">Technical details →</a></p>
     </div>
   </div>
 
   <figure class="wide">
     <img src="img/arena-drawn.jpg" width="1630" height="890" alt="The console's camera view of a bare table in a lecture hall, with the arena drawn over it: a blue start strip on the left, a green objective strip on the right, three sensors shown as fading yellow rings, two black discs of cover, a blue pod and a red pod, and two dashed green circles where virtual units wait." loading="lazy">
-    <figcaption>Today's arena, as the console shows it during a game in a lecture hall: drawn
-      on a bare table, with two pods and two virtual units (the dashed circles) sharing it.
-      The black circles are obstacles that also serve as cover: a sensor cannot see through
-      them, and the pods have to drive round them.</figcaption>
+    <figcaption>The console during a game in a lecture hall: the arena drawn on a bare
+      table, with two pods and two virtual units (dashed circles). The black circles are
+      virtual obstacles: sensors cannot see through them and pods drive around
+      them.</figcaption>
   </figure>
 </article>
 
