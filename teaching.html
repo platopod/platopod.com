@@ -103,45 +103,49 @@
     <h2>Student code</h2>
     <p>Python, C, Java and JavaScript each have a small library with the same calls.
       Underneath is JSON over a WebSocket, so any other language with a WebSocket client
-      can drive the arena too. Each example reads the pod's simulated sonar and turns away
-      from anything closer than 20&nbsp;cm.</p>
+      can drive the arena too. Each example takes the first pod no one else is driving, reads
+      its simulated sonar and turns away from anything closer than 20&nbsp;cm.</p>
     <div class="codetabs">
       <div class="codepane" data-lang="Python">
         <p class="codelabel">Python</p>
         <pre><code><span class="k">from</span> platopod <span class="k">import</span> <span class="t">Arena</span>
 
 arena = <span class="t">Arena</span>(<span class="s">"ws://ARENA-ADDRESS:8080/api/control"</span>)
-POD = <span class="n">1</span>
+pod = arena.<span class="f">take_pod</span>()                   <span class="c"># the first pod no one else is driving</span>
 
-arena.<span class="f">subscribe_sensors</span>(POD, [<span class="s">"sonar"</span>])
+arena.<span class="f">subscribe_sensors</span>(pod, [<span class="s">"sonar"</span>])
 
 <span class="k">while</span> <span class="k">True</span>:
-    sonar = arena.<span class="f">get_sensor</span>(POD, <span class="s">"sonar"</span>)
+    sonar = arena.<span class="f">get_sensor</span>(pod, <span class="s">"sonar"</span>)
     <span class="k">if</span> sonar:
         ahead = sonar[<span class="s">"ranges"</span>][<span class="n">0</span>]         <span class="c"># beam 0 points ahead</span>
         <span class="k">if</span> ahead &lt; <span class="n">0.20</span>:                   <span class="c"># within 20 cm</span>
-            arena.<span class="f">cmd_vel</span>(POD, <span class="n">0.0</span>, <span class="n">1.2</span>)   <span class="c"># turn on the spot</span>
+            arena.<span class="f">cmd_vel</span>(pod, <span class="n">0.0</span>, <span class="n">1.2</span>)   <span class="c"># turn on the spot</span>
         <span class="k">else</span>:
-            arena.<span class="f">cmd_vel</span>(POD, <span class="n">0.10</span>, <span class="n">0.0</span>)  <span class="c"># drive forward</span>
+            arena.<span class="f">cmd_vel</span>(pod, <span class="n">0.10</span>, <span class="n">0.0</span>)  <span class="c"># drive forward</span>
     arena.<span class="f">sleep</span>(<span class="n">0.1</span>)</code></pre>
       </div>
       <div class="codepane" data-lang="C">
         <p class="codelabel">C</p>
         <pre><code><span class="k">#include</span> <span class="s">"platopod.h"</span>
 
-<span class="k">#define</span> POD <span class="n">1</span>
-
 <span class="k">int</span> <span class="f">main</span>(<span class="k">void</span>) {
     <span class="t">pp_arena</span> *arena = <span class="f">pp_connect</span>(<span class="s">"ws://ARENA-ADDRESS:8080/api/control"</span>);
-    <span class="f">pp_subscribe_sensors</span>(arena, POD, <span class="s">"sonar"</span>);
+    <span class="k">int</span> pod = <span class="f">pp_take_pod</span>(arena);                    <span class="c">// the first pod no one else is driving</span>
+    <span class="k">if</span> (pod &lt; <span class="n">0</span>) {                                   <span class="c">// every pod is taken</span>
+        <span class="f">pp_close</span>(arena);
+        <span class="k">return</span> <span class="n">1</span>;
+    }
+
+    <span class="f">pp_subscribe_sensors</span>(arena, pod, <span class="s">"sonar"</span>);
 
     <span class="k">while</span> (<span class="n">1</span>) {
         <span class="k">double</span> ahead;
-        <span class="k">if</span> (<span class="f">pp_sensor_num</span>(arena, POD, <span class="s">"sonar"</span>, <span class="s">"ranges[0]"</span>, &amp;ahead)) {  <span class="c">// beam 0 points ahead</span>
+        <span class="k">if</span> (<span class="f">pp_sensor_num</span>(arena, pod, <span class="s">"sonar"</span>, <span class="s">"ranges[0]"</span>, &amp;ahead)) {  <span class="c">// beam 0 points ahead</span>
             <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>)                                             <span class="c">// within 20 cm</span>
-                <span class="f">pp_cmd_vel</span>(arena, POD, <span class="n">0.0</span>, <span class="n">1.2</span>);                         <span class="c">// turn on the spot</span>
+                <span class="f">pp_cmd_vel</span>(arena, pod, <span class="n">0.0</span>, <span class="n">1.2</span>);                         <span class="c">// turn on the spot</span>
             <span class="k">else</span>
-                <span class="f">pp_cmd_vel</span>(arena, POD, <span class="n">0.10</span>, <span class="n">0.0</span>);                        <span class="c">// drive forward</span>
+                <span class="f">pp_cmd_vel</span>(arena, pod, <span class="n">0.10</span>, <span class="n">0.0</span>);                        <span class="c">// drive forward</span>
         }
         <span class="f">pp_sleep</span>(arena, <span class="n">0.1</span>);
     }
@@ -155,7 +159,7 @@ arena.<span class="f">subscribe_sensors</span>(POD, [<span class="s">"sonar"</sp
 <span class="k">public</span> <span class="k">class</span> Avoid {
     <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="f">main</span>(<span class="t">String</span>[] args) {
         <span class="t">Arena</span> arena = <span class="k">new</span> <span class="t">Arena</span>(<span class="s">"ws://ARENA-ADDRESS:8080/api/control"</span>);
-        <span class="k">int</span> pod = <span class="n">1</span>;
+        <span class="k">int</span> pod = arena.<span class="f">takePod</span>();                     <span class="c">// the first pod no one else is driving</span>
 
         arena.<span class="f">subscribeSensors</span>(pod, <span class="s">"sonar"</span>);
 
@@ -179,18 +183,18 @@ arena.<span class="f">subscribe_sensors</span>(POD, [<span class="s">"sonar"</sp
         <pre><code><span class="k">import</span> { <span class="t">Arena</span> } <span class="k">from</span> <span class="s">"./platopod.mjs"</span>;
 
 <span class="k">const</span> arena = <span class="k">await</span> <span class="t">Arena</span>.<span class="f">connect</span>(<span class="s">"ws://ARENA-ADDRESS:8080/api/control"</span>);
-<span class="k">const</span> POD = <span class="n">1</span>;
+<span class="k">const</span> pod = <span class="k">await</span> arena.<span class="f">takePod</span>();          <span class="c">// the first pod no one else is driving</span>
 
-arena.<span class="f">subscribeSensors</span>(POD, [<span class="s">"sonar"</span>]);
+arena.<span class="f">subscribeSensors</span>(pod, [<span class="s">"sonar"</span>]);
 
 <span class="k">while</span> (<span class="k">true</span>) {
-  <span class="k">const</span> sonar = arena.<span class="f">getSensor</span>(POD, <span class="s">"sonar"</span>);
+  <span class="k">const</span> sonar = arena.<span class="f">getSensor</span>(pod, <span class="s">"sonar"</span>);
   <span class="k">if</span> (sonar) {
-    <span class="k">const</span> ahead = sonar.ranges[<span class="n">0</span>];        <span class="c">// beam 0 points ahead</span>
-    <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>) {                   <span class="c">// within 20 cm</span>
-      arena.<span class="f">cmdVel</span>(POD, <span class="n">0.0</span>, <span class="n">1.2</span>);        <span class="c">// turn on the spot</span>
+    <span class="k">const</span> ahead = sonar.ranges[<span class="n">0</span>];          <span class="c">// beam 0 points ahead</span>
+    <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>) {                     <span class="c">// within 20 cm</span>
+      arena.<span class="f">cmdVel</span>(pod, <span class="n">0.0</span>, <span class="n">1.2</span>);          <span class="c">// turn on the spot</span>
     } <span class="k">else</span> {
-      arena.<span class="f">cmdVel</span>(POD, <span class="n">0.10</span>, <span class="n">0.0</span>);       <span class="c">// drive forward</span>
+      arena.<span class="f">cmdVel</span>(pod, <span class="n">0.10</span>, <span class="n">0.0</span>);         <span class="c">// drive forward</span>
     }
   }
   <span class="k">await</span> arena.<span class="f">sleep</span>(<span class="n">0.1</span>);
