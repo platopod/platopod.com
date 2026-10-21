@@ -34,6 +34,7 @@
       <a href="about.html">About</a>
       <a href="history.html">History</a>
     </nav>
+    <a class="btn" href="https://arena.platopod.com/">Sign in</a>
     <a class="btn solid" href="index.html#contact">Get in touch</a>
   </div>
 </header>
@@ -206,6 +207,72 @@
         or traces another shape, and that is the arena.</span></li>
     </ul>
 
+    <h2>Or hosted, with no box at all</h2>
+    <p>The same software runs on a server: several arenas in one ROS&nbsp;2 graph, each a
+      namespace with its own gateway, and in front of them a small service with accounts
+      and rooms. A room holds an arena per group, and everything reaches it over TLS from
+      an ordinary browser.</p>
+  </div>
+
+  <figure class="wide">
+    <div class="diagram scroll">
+<svg class="arch" viewBox="0 0 960 330" role="img" aria-labelledby="ah-t ah-d">
+  <title id="ah-t">The hosted arrangement</title>
+  <desc id="ah-d">A server runs the front, with accounts and rooms, and several arenas, each
+    a full set of the processes. Browsers reach the console, the projector picture, the 3D
+    view and student code over a WebSocket through TLS. A teacher's laptop runs the agent,
+    which sends its webcam's view of the pods up to an arena and brings the pods' drive
+    commands down to them over Bluetooth; that part is being tested.</desc>
+  <defs><marker id="ah-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+    orient="auto-start-reverse"><path class="a-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+
+  <text class="a-h" x="300" y="32">SERVER · ROS 2</text>
+  <rect class="a-srv" x="300" y="44" width="360" height="250" rx="16"/>
+  <rect class="a-edge" x="324" y="64" width="312" height="50" rx="10"/><text class="a-et" x="480" y="94" text-anchor="middle">Front: accounts, rooms</text>
+  <path class="a-bus" d="M480 114 V140 M330 140 H630 M330 140 V164 M430 140 V164 M530 140 V164 M630 140 V164"/>
+  <rect class="a-node" x="324" y="164" width="68" height="50" rx="10"/><text class="a-nt" x="358" y="194" text-anchor="middle">a</text>
+  <rect class="a-node" x="404" y="164" width="68" height="50" rx="10"/><text class="a-nt" x="438" y="194" text-anchor="middle">b</text>
+  <rect class="a-node" x="484" y="164" width="68" height="50" rx="10"/><text class="a-nt" x="518" y="194" text-anchor="middle">c</text>
+  <rect class="a-node" x="564" y="164" width="72" height="50" rx="10"/><text class="a-nt" x="600" y="194" text-anchor="middle">d</text>
+  <text class="a-s" x="480" y="244" text-anchor="middle">Arenas: world, simulator, scenario host</text>
+  <text class="a-s" x="480" y="262" text-anchor="middle">and gateway, one set each</text>
+
+  <rect class="a-dev" x="760" y="120" width="60" height="38" rx="3"/><rect class="a-scr" x="765" y="125" width="50" height="28"/>
+  <path class="a-dev" d="M750 158 L830 158 L838 168 L742 168 Z"/>
+  <rect class="a-dev" x="850" y="112" width="32" height="52" rx="5"/><rect class="a-scr" x="854" y="118" width="24" height="38"/>
+  <text class="a-hw" x="812" y="196" text-anchor="middle">Browsers</text>
+  <text class="a-s" x="812" y="216" text-anchor="middle">console, projector, 3D,</text>
+  <text class="a-s" x="812" y="234" text-anchor="middle">a student's code</text>
+  <path class="a-ln" d="M662 150 H740" marker-start="url(#ah-a)" marker-end="url(#ah-a)"/>
+  <text class="a-lb" x="700" y="138" text-anchor="middle">WebSocket, TLS</text>
+
+  <text class="a-hw" x="130" y="34" text-anchor="middle">Webcam</text>
+  <rect class="a-dev" x="100" y="46" width="60" height="30" rx="6"/>
+  <path class="a-fov" d="M130 76 L60 118 L200 118 Z"/>
+  <rect class="a-dev" x="98" y="130" width="64" height="40" rx="3"/><rect class="a-scr" x="103" y="135" width="54" height="30"/>
+  <path class="a-dev" d="M88 170 L172 170 L180 180 L80 180 Z"/>
+  <text class="a-hw" x="130" y="206" text-anchor="middle">Teacher's laptop</text>
+  <text class="a-s" x="130" y="226" text-anchor="middle">the agent</text>
+  <circle class="a-pod" cx="100" cy="286" r="18"/><rect class="a-lid" x="93" y="279" width="14" height="14"/>
+  <circle class="a-pod" cx="160" cy="286" r="18"/><rect class="a-lid" x="153" y="279" width="14" height="14"/>
+  <path class="a-loop" d="M130 232 V262" marker-start="url(#ah-a)" marker-end="url(#ah-a)"/>
+  <text class="a-lb a-lb-ink" x="184" y="252">Bluetooth</text>
+  <path class="a-loop" d="M184 150 H298" marker-start="url(#ah-a)" marker-end="url(#ah-a)"/>
+  <text class="a-lb a-lb-ink" x="241" y="138" text-anchor="middle">tags up, drive down</text>
+  <text class="a-s" x="241" y="172" text-anchor="middle">being tested</text>
+</svg>
+    </div>
+    <figcaption>Hosted: the server runs the front and four arenas, each a full set of the
+      processes above in its own namespace. Browsers reach a room's arena over a WebSocket
+      through TLS. Dashed: a laptop in the room runs the agent, which sends its webcam's
+      view of the pods up and brings their drive commands down to them over Bluetooth. The
+      arena's floor is fitted from one pod's lap as that camera sees it, and the camera's
+      focal length from the pod's wheel encoders. This part has run against the hosted
+      server with a synthetic lap and is being tested with a real camera and pods.</figcaption>
+  </figure>
+
+  <div class="read">
+
     <h2>The pods</h2>
     <p>Each pod is a round robot 85&nbsp;mm across: a 3D-printed body split by two wheel
       slots, a custom circuit board with an ESP32-S3, two geared motors, and a small
@@ -282,18 +349,23 @@
     <h2>One interface, any language</h2>
     <p>Everything a client does (driving a pod, reading a sensor, receiving an engagement,
       injecting an umpire event) travels over one WebSocket as JSON, so code in any language can use
-      the arena. A small Python library wraps it for students. Inside the server, the parts
+      the arena. Small libraries in Python, C, Java and JavaScript wrap it for students.
+      Inside the server, the parts
       exchange typed ROS&nbsp;2 messages, so any of them can be rewritten in Python, C++,
       MATLAB, Rust or Java. The exercise also reaches ATAK over Cursor on Target.</p>
 
     <h2>How it is run</h2>
     <ul class="facts">
       <li><b>Server</b><span>A mini PC with no screen or keyboard, running
-        ROS&nbsp;2 Jazzy and Python in Docker on an x86 processor. A GPU is used when present
+        ROS&nbsp;2 Jazzy and Python in Docker on an x86 processor, or a hosted server
+        running several arenas, reached over TLS. A GPU is used when present
         and never required.</span></li>
       <li><b>Console</b><span>A web page, with nothing to install: one view for the
-        instructor, one for each team, and one for the room's big screen.</span></li>
-      <li><b>Tests</b><span>Over two thousand unit tests, and a suite that launches the whole
+        instructor, one for each team, a top-down picture for a projector and a 3D view for
+        the room's big screen, all from one feed.</span></li>
+      <li><b>Pods</b><span>Each pod reports its wheel encoders, and the server fuses them
+        with the camera's fixes, so a pod's position is carried between fixes.</span></li>
+      <li><b>Tests</b><span>Over three thousand unit tests, and a suite that launches the whole
         system and drives it the way clients do.</span></li>
     </ul>
 
@@ -318,6 +390,7 @@
       <a href="teaching.html">Teaching</a>
       <a href="military.html">Military</a>
       <a href="technical.html">Technical</a>
+      <a href="https://arena.platopod.com/">Online arena</a>
     </div>
     <div>
       <b>Us</b>
