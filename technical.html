@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Technical — Plato Pod</title>
-<meta name="description" content="How Plato Pod is built: the pods, the camera, the server, and one interface any language can use.">
-<meta property="og:title" content="Technical — Plato Pod">
-<meta property="og:description" content="How Plato Pod is built: the pods, the camera, the server, and one interface any language can use.">
+<title>How it works — Plato Pod</title>
+<meta name="description" content="How Plato Pod works: one camera, small robots and a computer that builds a world around them. Little to set up, and any language can drive it.">
+<meta property="og:title" content="How it works — Plato Pod">
+<meta property="og:description" content="How Plato Pod works: one camera, small robots and a computer that builds a world around them. Little to set up, and any language can drive it.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://platopod.com/technical.html">
 <meta property="og:image" content="https://platopod.com/img/og.png">
@@ -30,12 +30,12 @@
     <nav>
       <a href="teaching.html">Teaching</a>
       <a href="military.html">Military</a>
-      <a href="technical.html" aria-current="page">Technical</a>
+      <a href="technical.html" aria-current="page">How it works</a>
       <a href="about.html">About</a>
       <a href="history.html">History</a>
     </nav>
     <a class="btn" href="https://arena.platopod.com/">Sign in</a>
-    <a class="btn solid" href="index.html#contact">Get in touch</a>
+    <a class="btn solid" href="index.html#contact">Book a demo</a>
   </div>
 </header>
 
@@ -43,24 +43,22 @@
 
 <article class="article">
   <div class="read article-head">
-    <h1>How Plato Pod is built.</h1>
-    <p class="lede">Small robots, one camera and a mini PC that builds a world around them.
-      There is little to set up and little to go wrong. Everything a student or an instructor
-      touches goes through one interface, and any piece can be replaced without changing the
-      others.</p>
+    <h1>How it <span class="accent">works.</span></h1>
+    <p class="lede">One camera, small robots and a computer that builds a world around
+      them. There is little to set up and little to go wrong in front of a class, and
+      your own code can drive it in any language.</p>
   </div>
 
   <figure class="wide">
     <div class="diagram">
 <svg class="arch arch-wide" viewBox="0 0 960 520" role="img" aria-labelledby="aw-t aw-d">
   <title id="aw-t">How the parts connect</title>
-  <desc id="aw-d">An overhead camera watches a bare table and sends video to a mini PC. The
+  <desc id="aw-d">An overhead camera watches a bare table and sends video to the box. The
     arena's walls are drawn in software, and a real pod and virtual units share it. Inside
-    the mini PC, vision, world and sensor processes exchange typed ROS 2 messages. Three processes face outward: the
-    gateway serves the console and student code over a WebSocket on the mini PC's own Wi-Fi, the ATAK bridge sends
-    Cursor on Target to ATAK, and the pod bridge talks to each pod over Bluetooth LE. On
-    the pod, a receiver feeds the motors, which drive the wheels; the camera sees the
-    pod move, which closes the loop.</desc>
+    the box, vision, the world and the sensors are separate parts. Three face outward: the
+    console and student code over the box's own Wi-Fi, the link to ATAK, and the link to
+    each pod over Bluetooth. On the pod, a receiver feeds the motors, which drive the
+    wheels; the camera sees the pod move, which closes the loop.</desc>
   <defs><marker id="aw-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
     orient="auto-start-reverse"><path class="a-head" d="M0,0 L10,5 L0,10 z"/></marker>
     <marker id="aw-l" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
@@ -78,15 +76,15 @@
   <text class="a-s" x="160" y="374" text-anchor="middle">virtual units exist only in software</text>
 
 
-  <text class="a-h" x="360" y="32">MINI PC · ROS 2</text>
+  <text class="a-h" x="360" y="32">THE BOX</text>
   <rect class="a-srv" x="360" y="44" width="580" height="188" rx="16"/>
   <path class="a-bus" d="M464 114 V164 M650 114 V164 M836 114 V164 M464 139 H836"/>
   <rect class="a-node" x="384" y="64" width="160" height="50" rx="10"/><text class="a-nt" x="464" y="94" text-anchor="middle">Vision</text>
   <rect class="a-node" x="570" y="64" width="160" height="50" rx="10"/><text class="a-nt" x="650" y="94" text-anchor="middle">World</text>
   <rect class="a-node" x="756" y="64" width="160" height="50" rx="10"/><text class="a-nt" x="836" y="94" text-anchor="middle">Sensors</text>
-  <rect class="a-edge" x="384" y="164" width="160" height="50" rx="10"/><text class="a-et" x="464" y="194" text-anchor="middle">Gateway</text>
-  <rect class="a-edge" x="570" y="164" width="160" height="50" rx="10"/><text class="a-et" x="650" y="194" text-anchor="middle">ATAK bridge</text>
-  <rect class="a-edge" x="756" y="164" width="160" height="50" rx="10"/><text class="a-et" x="836" y="194" text-anchor="middle">Pod bridge</text>
+  <rect class="a-edge" x="384" y="164" width="160" height="50" rx="10"/><text class="a-et" x="464" y="194" text-anchor="middle">Console</text>
+  <rect class="a-edge" x="570" y="164" width="160" height="50" rx="10"/><text class="a-et" x="650" y="194" text-anchor="middle">ATAK link</text>
+  <rect class="a-edge" x="756" y="164" width="160" height="50" rx="10"/><text class="a-et" x="836" y="194" text-anchor="middle">Pod link</text>
 
   <text class="a-h" x="360" y="410">THE POD</text>
   <rect class="a-podp" x="360" y="420" width="580" height="86" rx="16"/>
@@ -99,12 +97,12 @@
   <text class="a-lb" x="262" y="66">video</text>
 
   <path class="a-ln" d="M464 218 V290" marker-start="url(#aw-a)" marker-end="url(#aw-a)"/>
-  <text class="a-lb" x="474" y="250">WebSocket,</text>
-  <text class="a-lb" x="474" y="266">over its own Wi-Fi</text>
+  <text class="a-lb" x="474" y="250">over the box's</text>
+  <text class="a-lb" x="474" y="266">own Wi-Fi</text>
   <path class="a-ln" d="M650 218 V288" marker-end="url(#aw-a)"/>
-  <text class="a-lb" x="660" y="258">Cursor on Target</text>
+  <text class="a-lb" x="660" y="258">to ATAK</text>
   <path class="a-ln" d="M836 218 V434" marker-start="url(#aw-a)" marker-end="url(#aw-a)"/>
-  <text class="a-lb" x="846" y="300">Bluetooth LE</text>
+  <text class="a-lb" x="846" y="300">Bluetooth</text>
 
   <rect class="a-dev" x="434" y="296" width="60" height="38" rx="3"/><rect class="a-scr" x="439" y="301" width="50" height="28"/>
   <path class="a-dev" d="M424 334 L504 334 L512 344 L416 344 Z"/>
@@ -117,13 +115,12 @@
 </svg>
 <svg class="arch arch-tall" viewBox="0 0 400 850" role="img" aria-labelledby="at-t at-d">
   <title id="at-t">How the parts connect</title>
-  <desc id="at-d">An overhead camera watches a bare table and sends video to a mini PC. The
+  <desc id="at-d">An overhead camera watches a bare table and sends video to the box. The
     arena's walls are drawn in software, and a real pod and virtual units share it. Inside
-    the mini PC, vision, world and sensor processes exchange typed ROS 2 messages. Three processes face outward: the
-    gateway serves the console and student code over a WebSocket on the mini PC's own Wi-Fi, the ATAK bridge sends
-    Cursor on Target to ATAK, and the pod bridge talks to each pod over Bluetooth LE. On
-    the pod, a receiver feeds the motors, which drive the wheels; the camera sees the
-    pod move, which closes the loop.</desc>
+    the box, vision, the world and the sensors are separate parts. Three face outward: the
+    console and student code over the box's own Wi-Fi, the link to ATAK, and the link to
+    each pod over Bluetooth. On the pod, a receiver feeds the motors, which drive the
+    wheels; the camera sees the pod move, which closes the loop.</desc>
   <defs><marker id="at-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
     orient="auto-start-reverse"><path class="a-head" d="M0,0 L10,5 L0,10 z"/></marker>
     <marker id="at-l" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
@@ -141,15 +138,15 @@
   <text class="a-s" x="200" y="334" text-anchor="middle">units exist only in software</text>
 
 
-  <text class="a-h" x="16" y="368">MINI PC · ROS 2</text>
+  <text class="a-h" x="16" y="368">THE BOX</text>
   <rect class="a-srv" x="16" y="378" width="368" height="172" rx="16"/>
   <path class="a-bus" d="M84 442 V484 M200 442 V484 M316 442 V484 M84 463 H316"/>
   <rect class="a-node" x="30" y="396" width="108" height="46" rx="10"/><text class="a-nt" x="84" y="424" text-anchor="middle">Sensors</text>
   <rect class="a-node" x="146" y="396" width="108" height="46" rx="10"/><text class="a-nt" x="200" y="424" text-anchor="middle">World</text>
   <rect class="a-node" x="262" y="396" width="108" height="46" rx="10"/><text class="a-nt" x="316" y="424" text-anchor="middle">Vision</text>
-  <rect class="a-edge" x="30" y="484" width="108" height="46" rx="10"/><text class="a-et" x="84" y="512" text-anchor="middle">Gateway</text>
-  <rect class="a-edge" x="146" y="484" width="108" height="46" rx="10"/><text class="a-et" x="200" y="512" text-anchor="middle">ATAK bridge</text>
-  <rect class="a-edge" x="262" y="484" width="108" height="46" rx="10"/><text class="a-et" x="316" y="512" text-anchor="middle">Pod bridge</text>
+  <rect class="a-edge" x="30" y="484" width="108" height="46" rx="10"/><text class="a-et" x="84" y="512" text-anchor="middle">Console</text>
+  <rect class="a-edge" x="146" y="484" width="108" height="46" rx="10"/><text class="a-et" x="200" y="512" text-anchor="middle">ATAK link</text>
+  <rect class="a-edge" x="262" y="484" width="108" height="46" rx="10"/><text class="a-et" x="316" y="512" text-anchor="middle">Pod link</text>
 
   <text class="a-h" x="16" y="720">THE POD</text>
   <rect class="a-podp" x="16" y="730" width="368" height="76" rx="16"/>
@@ -162,14 +159,12 @@
   <text class="a-lb" x="300" y="50">video</text>
 
   <path class="a-ln" d="M84 534 V594" marker-start="url(#at-a)" marker-end="url(#at-a)"/>
-  <text class="a-lb" x="92" y="560">WebSocket,</text>
+  <text class="a-lb" x="92" y="560">the box's</text>
   <text class="a-lb" x="92" y="576">own Wi-Fi</text>
   <path class="a-ln" d="M200 534 V592" marker-end="url(#at-a)"/>
-  <text class="a-lb" x="208" y="560">Cursor on</text>
-  <text class="a-lb" x="208" y="576">Target</text>
+  <text class="a-lb" x="208" y="560">to ATAK</text>
   <path class="a-ln" d="M316 534 V738" marker-start="url(#at-a)" marker-end="url(#at-a)"/>
   <text class="a-lb" x="324" y="560">Bluetooth</text>
-  <text class="a-lb" x="324" y="576">LE</text>
 
   <rect class="a-dev" x="54" y="600" width="60" height="38" rx="3"/><rect class="a-scr" x="59" y="605" width="50" height="28"/>
   <path class="a-dev" d="M44 638 L124 638 L132 648 L36 648 Z"/>
@@ -182,106 +177,34 @@
   <text class="a-lb a-lb-ink" x="16" y="834">Dashed: the camera sees it move</text>
 </svg>
     </div>
-    <figcaption>The whole system: a camera over a bare table, a mini PC, and what connects
-      to it. Every box in the mini PC is a separate process, and they speak typed
-      ROS&nbsp;2 messages. The three solid boxes are its only doors to the outside. To
-      every process except the pod bridge, a real pod and a virtual unit look the same.
+    <figcaption>The whole system: a camera over a bare table, the box, and what connects
+      to it. The three solid boxes are its only doors to the outside. To everything but
+      the pod link, a real pod and a virtual unit look the same.
       The line from the pod back to the table shows how a pod's movement returns to the
       system, which is by the camera seeing it.</figcaption>
   </figure>
 
   <div class="read">
-    <h2>Little to set up</h2>
-    <p>The kit is the pods, a camera and a projector on one tripod, and a
-      mini PC. There are
+    <h2>The kit</h2>
+    <p>The pods, a camera and a projector on one tripod, and a small computer. There are
       no markers to lay out, no walls to build, no tracking system to install and no cables
-      to the robots. Fewer parts means less to carry into a room, and less to go wrong in
-      front of a class.</p>
+      to the robots.</p>
     <ul class="facts">
-      <li><b>Switch on</b><span>The mini PC starts the platform by itself and opens its own
-        Wi-Fi network. The console is a web page on that network.</span></li>
-      <li><b>Calibrate</b><span>One pod drives a small circle, which takes about half a
-        minute. From its path the system works out how the camera sits over the
-        table.</span></li>
-      <li><b>Draw</b><span>The instructor clicks two corners of a rectangle on the screen,
-        or traces another shape, and that is the arena.</span></li>
+      <li><b>Switch on</b><span>The box starts by itself and opens its own Wi-Fi. The
+        console is a web page on that network.</span></li>
+      <li><b>Calibrate</b><span>One pod drives a small circle, about half a minute. From
+        its path the system works out how the camera sits over the table.</span></li>
+      <li><b>Draw</b><span>Click two corners of a rectangle on the screen, or trace another
+        shape, and that is the arena. The pods never cross its edge, although it exists
+        only in software. If the camera is knocked, the pods stop until the arena has been
+        checked.</span></li>
     </ul>
 
-    <h2>Or hosted, with no box at all</h2>
-    <p>The same software runs on a server: several arenas in one ROS&nbsp;2 graph, each a
-      namespace with its own gateway, and in front of them a small service with accounts
-      and rooms. A room holds an arena per group, and everything reaches it over TLS from
-      an ordinary browser.</p>
-  </div>
-
-  <figure class="wide">
-    <div class="diagram scroll">
-<svg class="arch" viewBox="0 0 960 330" role="img" aria-labelledby="ah-t ah-d">
-  <title id="ah-t">The hosted arrangement</title>
-  <desc id="ah-d">A server runs the front, with accounts and rooms, and several arenas, each
-    a full set of the processes. Browsers reach the console, the projector picture, the 3D
-    view and student code over a WebSocket through TLS. A teacher's laptop runs the agent,
-    which sends its webcam's view of the pods up to an arena and brings the pods' drive
-    commands down to them over Bluetooth; that part is being tested.</desc>
-  <defs><marker id="ah-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
-    orient="auto-start-reverse"><path class="a-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
-
-  <text class="a-h" x="300" y="32">SERVER · ROS 2</text>
-  <rect class="a-srv" x="300" y="44" width="360" height="250" rx="16"/>
-  <rect class="a-edge" x="324" y="64" width="312" height="50" rx="10"/><text class="a-et" x="480" y="94" text-anchor="middle">Front: accounts, rooms</text>
-  <path class="a-bus" d="M480 114 V140 M330 140 H630 M330 140 V164 M430 140 V164 M530 140 V164 M630 140 V164"/>
-  <rect class="a-node" x="324" y="164" width="68" height="50" rx="10"/><text class="a-nt" x="358" y="194" text-anchor="middle">a</text>
-  <rect class="a-node" x="404" y="164" width="68" height="50" rx="10"/><text class="a-nt" x="438" y="194" text-anchor="middle">b</text>
-  <rect class="a-node" x="484" y="164" width="68" height="50" rx="10"/><text class="a-nt" x="518" y="194" text-anchor="middle">c</text>
-  <rect class="a-node" x="564" y="164" width="72" height="50" rx="10"/><text class="a-nt" x="600" y="194" text-anchor="middle">d</text>
-  <text class="a-s" x="480" y="244" text-anchor="middle">Arenas: world, simulator, scenario host</text>
-  <text class="a-s" x="480" y="262" text-anchor="middle">and gateway, one set each</text>
-
-  <rect class="a-dev" x="760" y="120" width="60" height="38" rx="3"/><rect class="a-scr" x="765" y="125" width="50" height="28"/>
-  <path class="a-dev" d="M750 158 L830 158 L838 168 L742 168 Z"/>
-  <rect class="a-dev" x="850" y="112" width="32" height="52" rx="5"/><rect class="a-scr" x="854" y="118" width="24" height="38"/>
-  <text class="a-hw" x="812" y="196" text-anchor="middle">Browsers</text>
-  <text class="a-s" x="812" y="216" text-anchor="middle">console, projector, 3D,</text>
-  <text class="a-s" x="812" y="234" text-anchor="middle">a student's code</text>
-  <path class="a-ln" d="M662 150 H740" marker-start="url(#ah-a)" marker-end="url(#ah-a)"/>
-  <text class="a-lb" x="700" y="138" text-anchor="middle">WebSocket, TLS</text>
-
-  <text class="a-hw" x="130" y="34" text-anchor="middle">Webcam</text>
-  <rect class="a-dev" x="100" y="46" width="60" height="30" rx="6"/>
-  <path class="a-fov" d="M130 76 L60 118 L200 118 Z"/>
-  <rect class="a-dev" x="98" y="130" width="64" height="40" rx="3"/><rect class="a-scr" x="103" y="135" width="54" height="30"/>
-  <path class="a-dev" d="M88 170 L172 170 L180 180 L80 180 Z"/>
-  <text class="a-hw" x="130" y="206" text-anchor="middle">Teacher's laptop</text>
-  <text class="a-s" x="130" y="226" text-anchor="middle">the agent</text>
-  <circle class="a-pod" cx="100" cy="286" r="18"/><rect class="a-lid" x="93" y="279" width="14" height="14"/>
-  <circle class="a-pod" cx="160" cy="286" r="18"/><rect class="a-lid" x="153" y="279" width="14" height="14"/>
-  <path class="a-loop" d="M130 232 V262" marker-start="url(#ah-a)" marker-end="url(#ah-a)"/>
-  <text class="a-lb a-lb-ink" x="184" y="252">Bluetooth</text>
-  <path class="a-loop" d="M184 150 H298" marker-start="url(#ah-a)" marker-end="url(#ah-a)"/>
-  <text class="a-lb a-lb-ink" x="241" y="138" text-anchor="middle">tags up, drive down</text>
-  <text class="a-s" x="241" y="172" text-anchor="middle">being tested</text>
-</svg>
-    </div>
-    <figcaption>Hosted: the server runs the front and four arenas, each a full set of the
-      processes above in its own namespace. Browsers reach a room's arena over a WebSocket
-      through TLS. Dashed: a laptop in the room runs the agent, which sends its webcam's
-      view of the pods up and brings their drive commands down to them over Bluetooth. The
-      arena's floor is fitted from one pod's lap as that camera sees it, and the camera's
-      focal length from the pod's wheel encoders. This part has run against the hosted
-      server with a synthetic lap and is being tested with a real camera and pods.</figcaption>
-  </figure>
-
-  <div class="read">
-
     <h2>The pods</h2>
-    <p>Each pod is a round robot 85&nbsp;mm across: a 3D-printed body split by two wheel
-      slots, a custom circuit board with an ESP32-S3, two geared motors, and a small
-      lithium battery charged over USB-C. A marker printed on the lid
-      is how the camera finds it.</p>
-    <p>The pod is kept simple by design. It takes wheel commands over Bluetooth and stops
-      if no command arrives for 600&nbsp;ms. The overhead camera measures where it goes,
-      and the server steers it from that. The control logic is on the server, where it can
-      be read, changed and tested.</p>
+    <p>Each pod is a round robot 85&nbsp;mm across, with two wheels, a small rechargeable
+      battery and a marker on its lid that the camera reads. It is kept simple by design:
+      it takes wheel commands over Bluetooth and stops if they stop arriving. The
+      intelligence is on the server, where it can be read, changed and tested.</p>
   </div>
 
   <figure class="wide">
@@ -303,18 +226,10 @@
 
   <div class="read">
     <h2>Seeing the arena</h2>
-    <p>One overhead camera reads the marker on every pod and turns it into a position and a
-      heading, many times a second. Nothing else goes on the table: no corner markers, no
-      walls, no mat.</p>
-    <p>The camera's position over the table is calibrated from a pod's own movement. The
-      pod drives one small circle, and the system fits the table's surface to the path it
-      saw. The instructor then draws the arena over the camera's picture, by clicking two
-      corners of a rectangle; other shapes can be traced corner by corner. The pods stay
-      within the arena and never cross its boundaries, although those boundaries exist
-      only in software. If the camera is knocked or moved, the pods stop until the arena
-      has been checked.</p>
-    <p>From the same picture the console draws a top-down view at a constant scale, so what
-      the camera sees at an angle can be read like a map.</p>
+    <p>One overhead camera reads the marker on every pod and turns it into a position and
+      a heading, many times a second. Nothing else goes on the table. From the same picture
+      the console draws a top-down map at a constant scale, a picture for the projector
+      and a 3D view for the big screen.</p>
   </div>
 
   <figure class="wide">
@@ -327,52 +242,134 @@
 
   <div class="read">
     <h2>A world around the pods</h2>
-    <p>Physical pods and virtual units read the same world, and exercise logic cannot tell
-      them apart. The server simulates what the robots carry and what surrounds them.</p>
+    <p>Real pods and virtual units share one world, and an exercise cannot tell them
+      apart. The server simulates what the robots carry and what surrounds them.</p>
     <ul class="facts">
-      <li><b>Sensors</b><span>Eleven, simulated: gas with a real detector's lag, GNSS in metres
-        or latitude and longitude, sonar, radar, lidar, thermal, rangefinder, IED detector,
-        direction finding, UAV camera and friend-or-foe. Each pod's set, and each sensor's
-        noise, can be changed while an exercise runs.</span></li>
-      <li><b>Engagement</b><span>Every shot is resolved against the weapon, line of sight, cover,
-        visibility and the target's armour. Damage slows a unit and degrades its fire, however it is
-        driven.</span></li>
-      <li><b>Rules and opposing force</b><span>The weapons control status (hold, tight or free) and the
-        rules of engagement are checked before each shot is resolved. The opposing force needs no operator: it patrols, observes, engages and
-        withdraws.</span></li>
+      <li><b>Sensors</b><span>Eleven, simulated: gas with a real detector's lag, GNSS, sonar,
+        radar, lidar, thermal, rangefinder, IED detector, direction finding, UAV camera and
+        friend-or-foe. Each pod's set, and each sensor's noise, can be changed while an
+        exercise runs.</span></li>
+      <li><b>Engagement</b><span>Every shot is resolved against the weapon, line of sight,
+        cover, visibility and the target's armour. Damage slows a unit and degrades its
+        fire.</span></li>
+      <li><b>Rules and opposing force</b><span>Weapons control and the rules of engagement
+        are checked before each shot. The opposing force needs no operator.</span></li>
       <li><b>Umpire</b><span>Gas releases, wind shifts and strikes are injected mid-exercise
         and show on sensors and maps straight away.</span></li>
       <li><b>Safety</b><span>Whatever drives it, a pod will not leave the arena, cross a
         declared obstacle or drive into another robot.</span></li>
     </ul>
 
-    <h2>One interface, any language</h2>
-    <p>Everything a client does (driving a pod, reading a sensor, receiving an engagement,
-      injecting an umpire event) travels over one WebSocket as JSON, so code in any language can use
-      the arena. Small libraries in Python, C, Java and JavaScript wrap it for students.
-      Inside the server, the parts
-      exchange typed ROS&nbsp;2 messages, so any of them can be rewritten in Python, C++,
-      MATLAB, Rust or Java. The exercise also reaches ATAK over Cursor on Target.</p>
+    <h2>Your own code, any language</h2>
+    <p>Everything a program does, from driving a pod to reading a sensor, travels over one
+      web connection as plain messages, so any language can drive the arena. Small
+      libraries for Python, C, Java and JavaScript make it a few lines. Each example takes
+      a free pod, reads its sonar and turns away from anything closer than 20&nbsp;cm.</p>
+    <div class="codetabs">
+      <div class="codepane" data-lang="Python">
+        <p class="codelabel">Python</p>
+        <pre><code><span class="k">from</span> platopod <span class="k">import</span> <span class="t">Arena</span>
 
-    <h2>How it is run</h2>
-    <ul class="facts">
-      <li><b>Server</b><span>A mini PC with no screen or keyboard, running
-        ROS&nbsp;2 Jazzy and Python in Docker on an x86 processor, or a hosted server
-        running several arenas, reached over TLS. A GPU is used when present
-        and never required.</span></li>
-      <li><b>Console</b><span>A web page, with nothing to install: one view for the
-        instructor, one for each team, a top-down picture for a projector and a 3D view for
-        the room's big screen, all from one feed.</span></li>
-      <li><b>Pods</b><span>Each pod reports its wheel encoders, and the server fuses them
-        with the camera's fixes, so a pod's position is carried between fixes.</span></li>
-      <li><b>Tests</b><span>Over three thousand unit tests, and a suite that launches the whole
-        system and drives it the way clients do.</span></li>
-    </ul>
+arena = <span class="t">Arena</span>(<span class="s">"wss://a.arena.platopod.com/api/control"</span>)
+pod = arena.<span class="f">take_pod</span>()                   <span class="c"># waits for a pod no one else is driving</span>
+
+arena.<span class="f">subscribe_sensors</span>(pod, [<span class="s">"sonar"</span>])
+
+<span class="k">while</span> <span class="k">True</span>:
+    sonar = arena.<span class="f">get_sensor</span>(pod, <span class="s">"sonar"</span>)
+    <span class="k">if</span> sonar:
+        ahead = sonar[<span class="s">"ranges"</span>][<span class="n">0</span>]         <span class="c"># beam 0 points ahead</span>
+        <span class="k">if</span> ahead &lt; <span class="n">0.20</span>:                   <span class="c"># within 20 cm</span>
+            arena.<span class="f">cmd_vel</span>(pod, <span class="n">0.0</span>, <span class="n">1.2</span>)   <span class="c"># turn on the spot</span>
+        <span class="k">else</span>:
+            arena.<span class="f">cmd_vel</span>(pod, <span class="n">0.10</span>, <span class="n">0.0</span>)  <span class="c"># drive forward</span>
+    arena.<span class="f">sleep</span>(<span class="n">0.1</span>)</code></pre>
+      </div>
+      <div class="codepane" data-lang="C">
+        <p class="codelabel">C</p>
+        <pre><code><span class="k">#include</span> <span class="s">"platopod.h"</span>
+
+<span class="k">int</span> <span class="f">main</span>(<span class="k">void</span>) {
+    <span class="t">pp_arena</span> *arena = <span class="f">pp_connect</span>(<span class="s">"wss://a.arena.platopod.com/api/control"</span>);
+    <span class="k">int</span> pod = <span class="f">pp_take_pod</span>(arena);                    <span class="c">// waits for a pod no one else is driving</span>
+
+    <span class="f">pp_subscribe_sensors</span>(arena, pod, <span class="s">"sonar"</span>);
+
+    <span class="k">while</span> (<span class="n">1</span>) {
+        <span class="k">double</span> ahead;
+        <span class="k">if</span> (<span class="f">pp_sensor_num</span>(arena, pod, <span class="s">"sonar"</span>, <span class="s">"ranges[0]"</span>, &amp;ahead)) {  <span class="c">// beam 0 points ahead</span>
+            <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>)                                             <span class="c">// within 20 cm</span>
+                <span class="f">pp_cmd_vel</span>(arena, pod, <span class="n">0.0</span>, <span class="n">1.2</span>);                         <span class="c">// turn on the spot</span>
+            <span class="k">else</span>
+                <span class="f">pp_cmd_vel</span>(arena, pod, <span class="n">0.10</span>, <span class="n">0.0</span>);                        <span class="c">// drive forward</span>
+        }
+        <span class="f">pp_sleep</span>(arena, <span class="n">0.1</span>);
+    }
+}</code></pre>
+      </div>
+      <div class="codepane" data-lang="Java">
+        <p class="codelabel">Java</p>
+        <pre><code><span class="k">import</span> platopod.<span class="t">Arena</span>;
+<span class="k">import</span> platopod.<span class="t">Json</span>;
+
+<span class="k">public</span> <span class="k">class</span> Avoid {
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="f">main</span>(<span class="t">String</span>[] args) {
+        <span class="t">Arena</span> arena = <span class="k">new</span> <span class="t">Arena</span>(<span class="s">"wss://a.arena.platopod.com/api/control"</span>);
+        <span class="k">int</span> pod = arena.<span class="f">takePod</span>();                     <span class="c">// waits for a pod no one else is driving</span>
+
+        arena.<span class="f">subscribeSensors</span>(pod, <span class="s">"sonar"</span>);
+
+        <span class="k">while</span> (<span class="k">true</span>) {
+            <span class="t">Json</span> sonar = arena.<span class="f">getSensor</span>(pod, <span class="s">"sonar"</span>);
+            <span class="k">if</span> (sonar != <span class="k">null</span>) {
+                <span class="k">double</span> ahead = sonar.<span class="f">get</span>(<span class="s">"ranges"</span>).<span class="f">at</span>(<span class="n">0</span>).<span class="f">asDouble</span>();  <span class="c">// beam 0 points ahead</span>
+                <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>) {                                   <span class="c">// within 20 cm</span>
+                    arena.<span class="f">cmdVel</span>(pod, <span class="n">0.0</span>, <span class="n">1.2</span>);                      <span class="c">// turn on the spot</span>
+                } <span class="k">else</span> {
+                    arena.<span class="f">cmdVel</span>(pod, <span class="n">0.10</span>, <span class="n">0.0</span>);                     <span class="c">// drive forward</span>
+                }
+            }
+            arena.<span class="f">sleep</span>(<span class="n">0.1</span>);
+        }
+    }
+}</code></pre>
+      </div>
+      <div class="codepane" data-lang="JavaScript">
+        <p class="codelabel">JavaScript</p>
+        <pre><code><span class="k">import</span> { <span class="t">Arena</span> } <span class="k">from</span> <span class="s">"./platopod.mjs"</span>;
+
+<span class="k">const</span> arena = <span class="k">await</span> <span class="t">Arena</span>.<span class="f">connect</span>(<span class="s">"wss://a.arena.platopod.com/api/control"</span>);
+<span class="k">const</span> pod = <span class="k">await</span> arena.<span class="f">takePod</span>();          <span class="c">// waits for a pod no one else is driving</span>
+
+arena.<span class="f">subscribeSensors</span>(pod, [<span class="s">"sonar"</span>]);
+
+<span class="k">while</span> (<span class="k">true</span>) {
+  <span class="k">const</span> sonar = arena.<span class="f">getSensor</span>(pod, <span class="s">"sonar"</span>);
+  <span class="k">if</span> (sonar) {
+    <span class="k">const</span> ahead = sonar.ranges[<span class="n">0</span>];          <span class="c">// beam 0 points ahead</span>
+    <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>) {                     <span class="c">// within 20 cm</span>
+      arena.<span class="f">cmdVel</span>(pod, <span class="n">0.0</span>, <span class="n">1.2</span>);          <span class="c">// turn on the spot</span>
+    } <span class="k">else</span> {
+      arena.<span class="f">cmdVel</span>(pod, <span class="n">0.10</span>, <span class="n">0.0</span>);         <span class="c">// drive forward</span>
+    }
+  }
+  <span class="k">await</span> arena.<span class="f">sleep</span>(<span class="n">0.1</span>);
+}</code></pre>
+      </div>
+    </div>
+    <p class="note-line">A real pod has a narrow range of speeds, so the server fits each
+      command to what that pod can do.</p>
+
+    <h2>In your room or hosted</h2>
+    <p>The same software runs on a box in your room, on its own Wi-Fi, or on our server,
+      several arenas at once, reached from any browser. A laptop in the room can carry a
+      webcam's view of real pods up to the hosted arena; that part is being tested. The
+      exercise also reaches ATAK, laid over a real map.</p>
+    <p>Built on ROS&nbsp;2, with over three thousand automated tests. Engineering details
+      are available on request.</p>
 
     <h2>See it run</h2>
-    <p>Plato Pod has been used in teaching at UNSW Canberra and is available for
-      demonstrations and pilots. Get in touch to discuss a kit.</p>
-    <p><a class="btn solid" href="index.html#contact">Get in touch <span class="arrow">→</span></a></p>
+    <p><a class="btn solid" href="index.html#contact">Book a demonstration <span class="arrow">→</span></a></p>
   </div>
 </article>
 
@@ -389,7 +386,7 @@
       <b>Pages</b>
       <a href="teaching.html">Teaching</a>
       <a href="military.html">Military</a>
-      <a href="technical.html">Technical</a>
+      <a href="technical.html">How it works</a>
       <a href="https://arena.platopod.com/">Online arena</a>
     </div>
     <div>

@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teaching — Plato Pod</title>
-<meta name="description" content="Teaching with Plato Pod: a room by code and a pod per student, refereed exercises from a drawn path to the mine sweep, student code in any language, and a plain-English track.">
+<meta name="description" content="Teaching with Plato Pod: students write code or plain-English orders and watch a real robot carry them out. Lessons from a school class to final-year control and planning.">
 <meta property="og:title" content="Teaching — Plato Pod">
-<meta property="og:description" content="Teaching with Plato Pod: a room by code and a pod per student, refereed exercises from a drawn path to the mine sweep, student code in any language, and a plain-English track.">
+<meta property="og:description" content="Teaching with Plato Pod: students write code or plain-English orders and watch a real robot carry them out. Lessons from a school class to final-year control and planning.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://platopod.com/teaching.html">
 <meta property="og:image" content="https://platopod.com/img/og.png">
@@ -30,12 +30,12 @@
     <nav>
       <a href="teaching.html" aria-current="page">Teaching</a>
       <a href="military.html">Military</a>
-      <a href="technical.html">Technical</a>
+      <a href="technical.html">How it works</a>
       <a href="about.html">About</a>
       <a href="history.html">History</a>
     </nav>
     <a class="btn" href="https://arena.platopod.com/">Sign in</a>
-    <a class="btn solid" href="index.html#contact">Get in touch</a>
+    <a class="btn solid" href="index.html#contact">Book a demo</a>
   </div>
 </header>
 
@@ -44,10 +44,9 @@
 <article class="article">
   <div class="read article-head">
     <h1>Teaching with <span class="accent">real robots.</span></h1>
-    <p class="lede">Students program pods in a simulated world of sensors, obstacles,
-      hazards and other robots: the real pods in the room, or virtual ones on the hosted
-      arena from any browser. The exercises run from a first drawn path to feedback
-      control, in any language with a WebSocket client, or in plain English with no code.</p>
+    <p class="lede">Your students write a plan and watch a real robot carry it out. The same
+      arena serves a school class with no code, a first programming course, and final-year
+      work on control and planning.</p>
   </div>
 
   <figure class="wide">
@@ -58,35 +57,40 @@
         <source src="img/sweep.mp4" type="video/mp4">
       </video>
     </div>
-    <figcaption>A recorded run of the cooperative sweep: two pods share out a desk-sized
-      arena and find all six hidden mines in a little over a minute. That was a fast run;
-      a few minutes is usual. It was recorded with the corner markers the arena used to
-      need.</figcaption>
+    <figcaption>Two pods share out a desk-sized arena and find all six hidden mines in a
+      little over a minute. That was a fast run; a few minutes is usual. Recorded with the
+      corner markers the arena used to need.</figcaption>
   </figure>
 
   <div class="read">
-    <h2>How a class runs</h2>
-    <p>Hosted, a class needs nothing installed. The same room serves a workshop or a
-      rehearsal.</p>
+    <h2>A lesson at three levels</h2>
     <ul class="facts">
-      <li><b>A room</b><span>The teacher signs in and makes a room. It gets a six-letter code
-        and an arena for each group, and the teacher's page links each group's console,
-        projector picture and 3D view.</span></li>
-      <li><b>A pod each</b><span>A student opens the join page, types the code and their name,
-        picks a colour if they want one and a group with a free place, and gets a pod of
-        their own. The same name gets the same pod back from a notebook.</span></li>
-      <li><b>A referee</b><span>Every exercise carries a brief (the task in words), a debrief
-        (the result, a headline and marks) and rules: who plays, how a student's command may
-        reach a pod while the run is on, and how long. The server ends a run whose time is up
-        and refuses what the rules do not allow.</span></li>
-      <li><b>Difficulty</b><span>The rules are the knobs. The same exercise is driven with the
-        keys, with a route drawn on the map, with orders in plain English, or with a
+      <li><b>School</b><span>Students write orders in plain English, such as how to sweep a
+        room or take a flag. The orders are read back before anything moves, so the class
+        sees what the machine understood. No code.</span></li>
+      <li><b>First course</b><span>Ten lines of Python drive a pod: read its sonar, turn
+        away from the wall, try again. Any language works.</span></li>
+      <li><b>Advanced</b><span>Tune a controller and watch a real robot settle. Plan routes
+        round obstacles. Make two pods share a job. Play a team game against sensors and
+        cover.</span></li>
+    </ul>
+
+    <h2>How a class runs</h2>
+    <ul class="facts">
+      <li><b>A room</b><span>You make a room and get a six-letter code, with an arena for
+        each group. Your page links each group's console, projector picture and 3D
+        view.</span></li>
+      <li><b>A pod each</b><span>A student types the code and their name and gets a pod of
+        their own, with its colour. The same name gets the same pod back.</span></li>
+      <li><b>A referee</b><span>Every exercise tells the students the task, enforces its
+        rules, ends on time and marks the result. The same exercise gets harder by
+        changing the rules: the keys, a drawn route, orders in plain English, a
         program.</span></li>
     </ul>
     <p class="try"><a class="btn solid" href="https://arena.platopod.com/">Teachers: make a room <span class="arrow">→</span></a>
       <a class="btn" href="https://arena.platopod.com/join.html">Students: join with a code</a></p>
-    <p class="note-line">Free while we pilot it. A teacher's account is by invitation: ask
-      through the form and we will send the code.</p>
+    <p class="note-line">On our hosted arena, from any browser, with nothing installed. A
+      teacher's account is by invitation. Pricing on request.</p>
   </div>
 
   <div class="read">
@@ -96,49 +100,44 @@
   <div class="read">
     <div class="cards">
       <div><p class="tag">1 · Control</p><h3>Draw a path</h3>
-        <p>Draw a route in the browser and a pod drives it. The controller is pure pursuit
-          with PID on heading, its gains exposed, so students tune each term and see the
-          result on a real robot.</p></div>
+        <p>Draw a route on the screen and a pod drives it. Students tune the controller and
+          watch a real robot overshoot, settle and track the line.</p></div>
       <div><p class="tag">2 · Pursuit</p><h3>Pursuit</h3>
-        <p>One pod evades and one pursues, each planning a path round the obstacles.</p></div>
+        <p>One pod chases and one evades, each planning a path round the obstacles.
+          Students write the strategy for either side.</p></div>
       <div><p class="tag">3 · Class</p><h3>Class pursuit</h3>
-        <p>Every pair at once, or one side against the other, the students driving and the
-          scenario the referee: who caught whom, and the marks.</p></div>
+        <p>Every pair at once, or one side against the other, the whole class driving and
+          the referee keeping score.</p></div>
       <div><p class="tag">4 · Coverage</p><h3>Route clearance</h3>
-        <p>The vacuum-cleaner problem: cover the arena and find mines hidden in it. Start
-          with a random walk, then a zig-zag, then two pods sharing out the ground. The
-          strategy is one function with its own tests.</p></div>
+        <p>Find the mines hidden in the arena: a random walk first, then a pattern, then two
+          pods sharing the ground. Students watch coverage and time improve with each
+          strategy.</p></div>
       <div><p class="tag">5 · Patrol</p><h3>Patrol</h3>
         <p>A lap round the arena on time, reporting what changed since the last one.</p></div>
       <div><p class="tag">6 · Teams</p><h3>Get through unseen</h3>
-        <p>One side places sensors and commands a patrol; the other gets its pods across
-          the arena undetected, using cover. Real pods and virtual units play in the same
-          game.</p></div>
+        <p>One side places sensors and commands a patrol; the other slips its pods across
+          using cover. Real pods and virtual units in one game.</p></div>
       <div><p class="tag">7 · Search</p><h3>Find the gas source</h3>
-        <p>Follow a simulated gas sensor to a hidden leak. Reference solutions at three
-          levels: random walk, gradient ascent, and a search that respects rules of
-          engagement.</p></div>
+        <p>Follow a simulated gas sensor to a hidden leak, from a random walk to climbing
+          the gradient.</p></div>
       <div><p class="tag">8 · Sensing</p><h3>Capture the flag</h3>
-        <p>Two teams, their zones and a flag, laid out among obstacles. Each pod is given a
-          set of simulated sensors, chosen from sonar, lidar, radar and others with
-          adjustable noise, so a team plans around what its sensors can and cannot see.</p></div>
+        <p>Two teams, their zones and a flag among obstacles. Each pod has its own set of
+          simulated sensors, with their noise, so a team plans around what it can and
+          cannot see.</p></div>
       <div class="span2"><p class="tag">No code</p><h3>The plain-English track</h3>
-        <p>Students write a strategy in plain English, such as how to sweep a room or take a
-          flag. It is translated into a fixed set of orders (go to, patrol, sweep, follow,
-          keep away, wait, stop) and read back before anything moves, so a team sees what
-          the machine understood. Used in October 2026 in a postgraduate surveillance
-          course at UNSW Canberra.</p></div>
+        <p>Students write a strategy in plain English. It is turned into a fixed set of
+          orders (go to, patrol, sweep, follow, keep away, wait, stop) and read back before
+          anything moves, so a team sees what the machine understood. Used in October 2026
+          in a postgraduate surveillance course at UNSW Canberra.</p></div>
     </div>
   </div>
 
   <div class="read">
-    <h2>Student code</h2>
-    <p>Python, C, Java and JavaScript each have a small library with the same calls.
-      Underneath is JSON over a WebSocket, so any other language with a WebSocket client
-      can drive the arena too. The address is the one the room gives you when you join.
-      Each example takes a pod no one else is driving, waiting if
-      they are all in use, reads its simulated sonar and turns away from anything closer
-      than 20&nbsp;cm.</p>
+    <h2>Your students' code</h2>
+    <p>This takes a free pod, reads its sonar and turns away from anything closer than
+      20&nbsp;cm. The same calls exist in C, Java and JavaScript, and any language that
+      can open a web connection can drive the arena: see <a href="technical.html">how it
+      works</a>.</p>
     <div class="codetabs">
       <div class="codepane" data-lang="Python">
         <p class="codelabel">Python</p>
@@ -159,97 +158,11 @@ arena.<span class="f">subscribe_sensors</span>(pod, [<span class="s">"sonar"</sp
             arena.<span class="f">cmd_vel</span>(pod, <span class="n">0.10</span>, <span class="n">0.0</span>)  <span class="c"># drive forward</span>
     arena.<span class="f">sleep</span>(<span class="n">0.1</span>)</code></pre>
       </div>
-      <div class="codepane" data-lang="C">
-        <p class="codelabel">C</p>
-        <pre><code><span class="k">#include</span> <span class="s">"platopod.h"</span>
-
-<span class="k">int</span> <span class="f">main</span>(<span class="k">void</span>) {
-    <span class="t">pp_arena</span> *arena = <span class="f">pp_connect</span>(<span class="s">"wss://a.arena.platopod.com/api/control"</span>);
-    <span class="k">int</span> pod = <span class="f">pp_take_pod</span>(arena);                    <span class="c">// waits for a pod no one else is driving</span>
-
-    <span class="f">pp_subscribe_sensors</span>(arena, pod, <span class="s">"sonar"</span>);
-
-    <span class="k">while</span> (<span class="n">1</span>) {
-        <span class="k">double</span> ahead;
-        <span class="k">if</span> (<span class="f">pp_sensor_num</span>(arena, pod, <span class="s">"sonar"</span>, <span class="s">"ranges[0]"</span>, &amp;ahead)) {  <span class="c">// beam 0 points ahead</span>
-            <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>)                                             <span class="c">// within 20 cm</span>
-                <span class="f">pp_cmd_vel</span>(arena, pod, <span class="n">0.0</span>, <span class="n">1.2</span>);                         <span class="c">// turn on the spot</span>
-            <span class="k">else</span>
-                <span class="f">pp_cmd_vel</span>(arena, pod, <span class="n">0.10</span>, <span class="n">0.0</span>);                        <span class="c">// drive forward</span>
-        }
-        <span class="f">pp_sleep</span>(arena, <span class="n">0.1</span>);
-    }
-}</code></pre>
-      </div>
-      <div class="codepane" data-lang="Java">
-        <p class="codelabel">Java</p>
-        <pre><code><span class="k">import</span> platopod.<span class="t">Arena</span>;
-<span class="k">import</span> platopod.<span class="t">Json</span>;
-
-<span class="k">public</span> <span class="k">class</span> Avoid {
-    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="f">main</span>(<span class="t">String</span>[] args) {
-        <span class="t">Arena</span> arena = <span class="k">new</span> <span class="t">Arena</span>(<span class="s">"wss://a.arena.platopod.com/api/control"</span>);
-        <span class="k">int</span> pod = arena.<span class="f">takePod</span>();                     <span class="c">// waits for a pod no one else is driving</span>
-
-        arena.<span class="f">subscribeSensors</span>(pod, <span class="s">"sonar"</span>);
-
-        <span class="k">while</span> (<span class="k">true</span>) {
-            <span class="t">Json</span> sonar = arena.<span class="f">getSensor</span>(pod, <span class="s">"sonar"</span>);
-            <span class="k">if</span> (sonar != <span class="k">null</span>) {
-                <span class="k">double</span> ahead = sonar.<span class="f">get</span>(<span class="s">"ranges"</span>).<span class="f">at</span>(<span class="n">0</span>).<span class="f">asDouble</span>();  <span class="c">// beam 0 points ahead</span>
-                <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>) {                                   <span class="c">// within 20 cm</span>
-                    arena.<span class="f">cmdVel</span>(pod, <span class="n">0.0</span>, <span class="n">1.2</span>);                      <span class="c">// turn on the spot</span>
-                } <span class="k">else</span> {
-                    arena.<span class="f">cmdVel</span>(pod, <span class="n">0.10</span>, <span class="n">0.0</span>);                     <span class="c">// drive forward</span>
-                }
-            }
-            arena.<span class="f">sleep</span>(<span class="n">0.1</span>);
-        }
-    }
-}</code></pre>
-      </div>
-      <div class="codepane" data-lang="JavaScript">
-        <p class="codelabel">JavaScript</p>
-        <pre><code><span class="k">import</span> { <span class="t">Arena</span> } <span class="k">from</span> <span class="s">"./platopod.mjs"</span>;
-
-<span class="k">const</span> arena = <span class="k">await</span> <span class="t">Arena</span>.<span class="f">connect</span>(<span class="s">"wss://a.arena.platopod.com/api/control"</span>);
-<span class="k">const</span> pod = <span class="k">await</span> arena.<span class="f">takePod</span>();          <span class="c">// waits for a pod no one else is driving</span>
-
-arena.<span class="f">subscribeSensors</span>(pod, [<span class="s">"sonar"</span>]);
-
-<span class="k">while</span> (<span class="k">true</span>) {
-  <span class="k">const</span> sonar = arena.<span class="f">getSensor</span>(pod, <span class="s">"sonar"</span>);
-  <span class="k">if</span> (sonar) {
-    <span class="k">const</span> ahead = sonar.ranges[<span class="n">0</span>];          <span class="c">// beam 0 points ahead</span>
-    <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>) {                     <span class="c">// within 20 cm</span>
-      arena.<span class="f">cmdVel</span>(pod, <span class="n">0.0</span>, <span class="n">1.2</span>);          <span class="c">// turn on the spot</span>
-    } <span class="k">else</span> {
-      arena.<span class="f">cmdVel</span>(pod, <span class="n">0.10</span>, <span class="n">0.0</span>);         <span class="c">// drive forward</span>
-    }
-  }
-  <span class="k">await</span> arena.<span class="f">sleep</span>(<span class="n">0.1</span>);
-}</code></pre>
-      </div>
     </div>
-    <p class="note-line">A real pod has a narrow range of speeds, so the server fits each
-      command to what that pod can do.</p>
 
-    <h2>From no code to ROS&nbsp;2</h2>
-    <p>The same arena serves a first lesson and a research project; what changes is how
-      much of the machine a student sees.</p>
-    <ul class="facts">
-      <li><b>No code</b><span>Orders in plain English, read back before anything moves.</span></li>
-      <li><b>One interface</b><span>JSON over a WebSocket, from any language, with the four
-        libraries above for the common ones.</span></li>
-      <li><b>A notebook</b><span>A Jupyter notebook that connects with the name a student
-        joined with and works through an exercise cell by cell.</span></li>
-      <li><b>ROS&nbsp;2</b><span>Inside the server every part is a ROS&nbsp;2 node exchanging
-        typed messages, so a student can replace one in Python, C++ or another language.</span></li>
-    </ul>
-
-    <h2>See it run</h2>
-    <p><a class="btn solid" href="https://arena.platopod.com/">Open the arena <span class="arrow">→</span></a>
-      <a class="btn" href="index.html#contact">Get in touch</a></p>
+    <h2>See it with your class</h2>
+    <p><a class="btn solid" href="index.html#contact">Book a demonstration <span class="arrow">→</span></a>
+      <a class="btn" href="https://arena.platopod.com/">Open the arena</a></p>
   </div>
 </article>
 
@@ -266,7 +179,7 @@ arena.<span class="f">subscribeSensors</span>(pod, [<span class="s">"sonar"</spa
       <b>Pages</b>
       <a href="teaching.html">Teaching</a>
       <a href="military.html">Military</a>
-      <a href="technical.html">Technical</a>
+      <a href="technical.html">How it works</a>
       <a href="https://arena.platopod.com/">Online arena</a>
     </div>
     <div>
