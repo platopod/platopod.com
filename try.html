@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Try Plato Pod</title>
+<meta name="description" content="Four demo rooms open to anyone: Python first programs, PID line following, a swarm that searches, and Infiltration in plain English. No account, no install.">
+<meta property="og:title" content="Try Plato Pod">
+<meta property="og:description" content="Four demo rooms open to anyone: Python first programs, PID line following, a swarm that searches, and Infiltration in plain English.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://platopod.com/try.html">
+<meta property="og:image" content="https://platopod.com/img/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .guide .read > ol, .guide .read > ul { padding-left: 1.4em; }
+  .guide .read p, .guide .read li { font-size: var(--fs-body); }
+  .guide .read > p { margin-top: 18px; }
+  .guide .read > h2 { font-size: clamp(26px, 3vw, 34px); margin-top: 64px; }
+  .guide .read > p:has(> b:only-child) { margin-top: 32px; }
+  .scroll { overflow-x: auto; margin-top: 22px; }
+  .guide table { border-collapse: collapse; font-size: var(--fs-small); background: var(--card);
+                 border: 1px solid var(--rule); border-radius: 12px; }
+  .guide th, .guide td { padding: 10px 14px; text-align: left; vertical-align: top;
+                         border-bottom: 1px solid var(--rule); }
+  .guide th { font-weight: 600; color: var(--ink); }
+  .guide tr:last-child td { border-bottom: none; }
+  .guide figure { margin: 28px 0 0; }
+  .guide figure img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--rule); }
+  .guide code { background: var(--accent-mist); padding: 1px 6px; border-radius: 6px; }
+  .guide .pdf { margin-top: 18px; font-size: var(--fs-small); color: var(--ink-2); }
+  @media print {
+    .mast, .foot, .guide .pdf { display: none; }
+    .article-head { padding-top: 0; }
+    .guide figure, .guide table { break-inside: avoid; }
+    .guide .read > h2 { margin-top: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="w">
+    <a class="brand" href="index.html" aria-label="Plato Pod">Plato<span>Pod</span></a>
+    <nav>
+      <a href="teaching.html">Teaching</a>
+      <a href="military.html">Military</a>
+      <a href="technical.html">How it works</a>
+      <a href="about.html">About</a>
+      <a href="history.html">History</a>
+    </nav>
+    <a class="btn" href="https://arena.platopod.com/">Sign in</a>
+    <a class="btn solid" href="index.html#contact">Book a demo</a>
+  </div>
+</header>
+
+<main>
+<article class="article guide">
+  <div class="read article-head">
+<h1>Try Plato Pod</h1>
+<p>Updated 20 November 2026 · Artem Lensky, UNSW Canberra</p>
+<p class="pdf">Also as a <a href="try.pdf">PDF</a> to print or keep.</p>
+<p>Plato Pod puts small robots on a shared arena that students drive from a browser, in plain English, or from their own Python code. Four demo rooms are open to anyone with the codes below: no account, no install. A teacher who wants rooms of their own asks for an invite.</p>
+<h2>The four demo rooms</h2>
+<p>Each room is open all the time and keeps its own setup. Join with its code at <a href="https://arena.platopod.com/join.html">arena.platopod.com/join</a>, or follow its link.</p>
+<div class="scroll"><table><thead><tr><th>Room</th><th>Course it was built for</th><th>Code</th><th>What you do</th><th>Teacher needed?</th></tr></thead><tbody><tr><td><a href="https://arena.platopod.com/join?c=TLQGNR">Problem solving: first programs in Python</a></td><td>ZEIT1307 Computational Problem Solving</td><td>TLQGNR</td><td>Drive a pod in a square, find out why it misses, fix it with feedback</td><td>No</td></tr><tr><td><a href="https://arena.platopod.com/join?c=GFYFYJ">Control engineering: PID line following</a></td><td>ZEIT3222 Control Engineering</td><td>GFYFYJ</td><td>Follow tape with a line sensor; tune P, I and D against a real delay</td><td>No</td></tr><tr><td><a href="https://arena.platopod.com/join?c=UUDPYD">Artificial intelligence: a swarm that searches</a></td><td>ZEIT4150 Fundamentals of Artificial Intelligence</td><td>UUDPYD</td><td>Five pods search for hidden targets: no plan against a plan</td><td>No</td></tr><tr><td><a href="https://arena.platopod.com/join?c=UBACYD">Surveillance: outwit the sensors in plain English</a></td><td>ZEIT8205 Fundamentals of Surveillance Technologies</td><td>UBACYD</td><td>Two teams: one hides sensors, the other writes orders to get past them</td><td>Yes, to start each round</td></tr></tbody></table></div>
+<p>The first three run from a Python notebook, at home or in class. The fourth is played live: a teacher at the console starts the rounds (see the Infiltration walkthrough below).</p>
+<h2>Try it in five minutes</h2>
+<p>All you need is a laptop with a browser and Python 3.10 or later, or a Google account for Colab.</p>
+<ol><li>Download the room's notebook (links below) and open it in Jupyter, VS Code, or <a href="https://colab.research.google.com">Google Colab</a> (File, Upload notebook).</li><li>Put your name in the second code cell (<code>MY_NAME</code>). The room's code is already there.</li><li>Run the cells from the top. The first fetches the Plato Pod client from the server; the second joins the room, gives you a pod, and prints a link to watch it in 3D.</li><li>Open that link beside the notebook and watch your pod do what your code says.</li></ol>
+<div class="scroll"><table><thead><tr><th>Notebook</th><th>Room</th></tr></thead><tbody><tr><td><a href="https://arena.platopod.com/sdk/notebooks/first-programs.ipynb">first-programs.ipynb</a></td><td>Problem solving: first programs in Python</td></tr><tr><td><a href="https://arena.platopod.com/sdk/notebooks/pid-line-following.ipynb">pid-line-following.ipynb</a></td><td>Control engineering: PID line following</td></tr><tr><td><a href="https://arena.platopod.com/sdk/notebooks/swarm-search.ipynb">swarm-search.ipynb</a></td><td>Artificial intelligence: a swarm that searches</td></tr></tbody></table></div>
+<p>Your name keeps your pod: run the notebook again tomorrow with the same name and you get the same pod back. A pod nobody has used for 20 minutes leaves the room, so the room never fills up. A room takes 12 people at once (the swarm room 6, as each brings five pods).</p>
+<p>Without a notebook, you can still look in: join from <a href="https://arena.platopod.com/join.html">arena.platopod.com/join</a> with the code and a name, and the page links to your pod on the table and in 3D.</p>
+<h2>Problem solving: first programs in Python (TLQGNR)</h2>
+<p>A first program that moves something real, then the first lesson in why programs that control things need feedback.</p>
+<ol><li>Drive straight for 3 s at 0.1 m/s and measure how far the pod went.</li><li>Turn a quarter turn by time: 0.8 rad/s for (π/2)/0.8 s.</li><li>A square by time: four sides, four turns. It does not close.</li><li>The same square by feedback: turn until the heading is right, drive until the distance is right.</li><li>Your turn: any polygon, a spiral, a star, and back to where you started.</li></ol>
+<div class="scroll"><table><thead><tr><th>Square</th><th>Missed its start by (measured on the server)</th></tr></thead><tbody><tr><td>By time</td><td>6.6 cm, heading off by 14°</td></tr><tr><td>By feedback on the pose</td><td>1.6 cm</td></tr></tbody></table></div>
+<p>The point for students: commands arrive late and unevenly and the pod speeds up and slows down, so a program that trusts the clock drifts, and one that looks at where the pod is does not.</p>
+<h2>Control engineering: PID line following (GFYFYJ)</h2>
+<p>Tape is drawn on the floor: an oval and a course with square corners and sharp bends. Each pod carries a line sensor, five reflectance cells under its nose that read 0 to 1 with noise, and reports where the line is across the pod (<code>offset_m</code>, positive to the left). Students write the controller.</p>
+<ol><li>The pod drives itself onto the oval by feedback on its pose, at a place of its own so several students share the course.</li><li>P only at 5 cm/s, then the same at 8 cm/s.</li><li>D, smoothed: the textbook cure for snaking, and why it does not cure it here.</li><li>I, capped against windup: the steady error on the curves.</li><li>Your turn: the fastest lap, predicting through the delay, the course with sharp bends, the five raw cells.</li></ol>
+<div class="scroll"><table><thead><tr><th>Controller (measured on the server)</th><th>Mean error</th><th>Line lost</th></tr></thead><tbody><tr><td>P, kp = 40, 5 cm/s</td><td>2.5 mm</td><td>never</td></tr><tr><td>P, kp = 40, 8 cm/s</td><td>7.3 mm</td><td>never</td></tr><tr><td>PD, kp = 40, kd = 0.5</td><td>2.5 mm</td><td>never</td></tr><tr><td>PI, kp = 40, ki = 10</td><td>2.8 mm</td><td>never</td></tr></tbody></table></div>
+<p>The lesson is a real one: a reading is a tenth of a second old when it arrives and commands cross the internet, so the delay, not the gains, limits the speed, and D and I need a better signal than this one to help. A teacher can draw new courses on the console's Mission sheet (below).</p>
+<figure><img src="img/try/r02-line-3d.png" alt="The line-following room in 3D: the oval and the course with bends as tape on the floor, a pod named Line demo on the oval" loading="lazy"><figcaption>The room in 3D while a notebook's pod follows the oval: the link the notebook prints.</figcaption></figure>
+<h2>Artificial intelligence: a swarm that searches (UUDPYD)</h2>
+<p>Ten targets are hidden on a 3 m by 2 m floor; nobody, not even the console, shows where. One program commands five pods, each with a detector that reports a target within 15 cm. The swarm keeps one shared map of what it has found.</p>
+<ol><li>Join, and add four more pods to your swarm (<code>arena.spawn()</code>). They leave the room when your notebook closes.</li><li>No plan: each pod drives to random points for 90 s.</li><li>A plan: the floor split into one strip per pod, each swept in lanes 25 cm apart.</li><li>Your turn: compare the two, share out a strip when a pod fails, allocate strips by auction, and use what has been found to choose where to look next.</li></ol>
+<div class="scroll"><table><thead><tr><th>Search (measured on the server)</th><th>Targets found</th><th>Time</th></tr></thead><tbody><tr><td>Random walk</td><td>4 of 10</td><td>90 s</td></tr><tr><td>Planned sweep</td><td>9 of 10</td><td>61 s</td></tr></tbody></table></div>
+<p>The sweep missed one target that sits where two pods' strips meet: a good first question for students.</p>
+<figure><img src="img/try/r03-swarm-3d.png" alt="The swarm room in 3D during a sweep: five pods of one swarm spread across the floor, each in its own strip" loading="lazy"><figcaption>One notebook's swarm of five early in its sweep, each pod starting its own strip. The targets are not shown anywhere.</figcaption></figure>
+<h2>Run it in your own classroom</h2>
+<p>While the service is new, rooms of your own are by invitation: write to a.lenskiyunsw.edu.au for an invite code. A room is yours alone, holds one arena per group of up to five students, and closes after 7 days nobody uses it.</p>
+<ol><li>Sign up at <a href="https://arena.platopod.com">arena.platopod.com</a> with the invite code. <b>My rooms</b> opens.</li><li>Type a name, choose how many arenas (one per group), and click <b>Make a room</b>.</li><li>On the room card, note the six-letter <b>room code</b>. Students type it on the join page, or in a notebook.</li><li>On the big-screen laptop, click <b>console</b> on the card. It opens signed in as the teacher; never share this link. Its <b>Join</b> button puts the code, the join address and a QR code on the screen.</li><li>Optional: <b>projector</b> gives a clean full-screen view for a second screen; <b>3D</b> the arena in three dimensions.</li></ol>
+<p>To set up the activities of the demo rooms in your own room:</p>
+<ul><li><b>Lines for the line sensor:</b> open the console's <b>Mission</b> sheet, choose <b>Line</b>, then press and drag on the map. The line's card sets the tape's width. <b>Save</b> keeps it; the ready-made <b>Line following</b> mission has the oval and the bends.</li><li><b>A swarm:</b> in the <b>Arena</b> sheet, set how many pods a student's program may drive (up to 8). The ready-made <b>Swarm search</b> mission hides the ten targets.</li><li><b>ATAK, for military classes:</b> an arena linked to a TAK server shows <b>Show this arena on ATAK</b> in the Arena sheet. Ask for it with your invite.</li></ul>
+<figure><img src="img/try/r01-mission-lines.png" alt="The console&#x27;s Mission sheet in the line-following room: the Line button, the Oval and Bends lines listed, and the two courses drawn as tape on the map" loading="lazy"><figcaption>The Mission sheet with the line-following room's two courses. Choose <b>Line</b> and drag on the map to draw another.</figcaption></figure>
+<figure><img src="img/try/g01-room-card.png" alt="The room card on My rooms: the room name, the room code, the join address arena.platopod.com/join?c=..., and the console, projector and 3D links" loading="lazy"><figcaption>The room card: the code players type, and the <b>console</b> link for the big screen.</figcaption></figure>
+<figure><img src="img/try/g02-join-card.png" alt="The join card on the console: a QR code, the address arena.platopod.com/join and the room code in large letters" loading="lazy"><figcaption>The console's <b>Join</b> card, for the projector while players join. Phones can scan the QR code.</figcaption></figure>
+<h2>Surveillance: Infiltration in plain English (UBACYD)</h2>
+<p>One team hides sensors and patrols; the other tries to get its pods to the objective unseen. Two rounds of up to 120 s, roles swapped; about 15 minutes in all. Orders are typed in plain English and turned into a plan.</p>
+<p>It is played live, with a teacher at the console: the activity is already chosen in the surveillance demo room, where the presenter runs the console. In your own room, steps 1 and 2 choose it. The steps and pictures below are a two-team match from start to report.</p>
+<p><b>Teacher (big screen)</b></p>
+<ol><li>Click <b>Activity</b> on the left rail, choose <b>Infiltration</b>. A box asks how many teams: choose <b>2</b> teams.</li><li>Click <b>Run</b>, then <b>Put pods out</b> if the pods are not out yet (on an arena already drawn, choosing the teams puts them out). The amber button is always the next step. Four pods: A-patrol for the watchers, B1 to B3 for the infiltrators (in round 2, B-patrol and A1 to A3).</li></ol>
+<figure><img src="img/try/g03-activity.png" alt="The Activity sheet: under Write orders in plain English, Plain English and Infiltration; under Programming, Pursuit, Route clearance and Patrol, each with how long it takes" loading="lazy"><figcaption>Step 1: the Activity sheet. Infiltration is under Write orders in plain English.</figcaption></figure>
+<figure><img src="img/try/g04-teams.png" alt="The How many teams? box with 2, 3, 4 and 5 teams" loading="lazy"><figcaption>Step 1: choose 2 teams.</figcaption></figure>
+<figure><img src="img/try/g05-run.png" alt="The Run sheet with the pods out: Start Infiltration is the one amber button; B1 to B3 on the left, A-patrol near the objective" loading="lazy"><figcaption>Step 2: the Run sheet with the pods out. The amber button is the next step, here <b>Start Infiltration</b>; after a round it moves to <b>Next round</b>. Infiltrators start in the blue strip on the left; the objective is the green strip on the right.</figcaption><figcaption><i>Each team (own laptop)</i></figcaption></figure>
+<ol start="3"><li>Open <a href="https://arena.platopod.com/join.html">arena.platopod.com/join</a> (or scan the QR code on the big screen), type the room code, click <b>Find it</b>, then <b>Team A</b> or <b>Team B</b>. The team's console opens.</li><li>The watching team clicks <b>Place sensors</b>, clicks up to three spots on the ground, then <b>Place sensors</b> again to finish. The other team cannot see them.</li><li>Both teams type their orders and click <b>Read my orders</b>. Check the read-back says what was meant. Example orders:<ul><li>Watchers: "A-patrol patrols between sensor 1 and sensor 3 until stopped. If a pod is spotted, intercept it."</li><li>Infiltrators: "B1 goes along the bottom edge to the objective. B2 goes to the objective. B3 goes along the top edge to the objective."</li></ul></li></ol>
+<figure><img src="img/try/g06-join.png" alt="The join page for a team game: the room code found, no name or colour asked, and the Team A and Team B buttons" loading="lazy"><figcaption>Step 3: the join page for a team game. No name is needed; each team clicks its own button.</figcaption></figure>
+<figure><img src="img/try/g07-orders.png" alt="Team A&#x27;s console: three sensor circles placed on the arena, the orders typed, Read my orders and the read-back below" loading="lazy"><figcaption>Steps 4 and 5, the watching team: three sensors placed (the yellow circles), orders typed and read back. The pod names and places the orders may use are listed under the box.</figcaption><figcaption><i>Teacher</i></figcaption></figure>
+<ol start="6"><li>Click <b>Start</b> Infiltration once both teams' orders show in the middle panel. If a team has sent none, the console asks before it starts. The round ends by itself at 120 s, or sooner once every pod is through or caught; the clock then stops on the time that was left.</li><li>Click <b>Next round</b>: roles swap and the pods go back out. Repeat steps 4 to 6.</li><li>After round 2 every screen shows the result. <b>Report</b> opens the match write-up (orders, rounds, scores) to print or save.</li><li><b>New match</b> to play again, or <b>Reset all</b> to clear.</li></ol>
+<figure><img src="img/try/g08-running.png" alt="The teacher&#x27;s console during round 1: the clock counting down, pods leaving tracks, both teams&#x27; orders and the event log" loading="lazy"><figcaption>Step 6: a round running on the big screen. The clock is top centre; the event log on the right says what each pod and sensor did.</figcaption></figure>
+<figure><img src="img/try/g09-result.png" alt="The end-of-match box: the result, the score, each round&#x27;s result and comments on the orders" loading="lazy"><figcaption>Step 8: what each team sees after round 2: the result, each round's score, and comments on their orders.</figcaption></figure>
+<figure><img src="img/try/g10-report.png" alt="The report page headed Infiltration demo and the room code: the result, the score table, and for each round each team&#x27;s orders as read back and what happened" loading="lazy"><figcaption>Step 8: the report, with <b>Print or save as PDF</b> and <b>Download the scores (CSV)</b> at the top.</figcaption></figure>
+<h2>What to know</h2>
+<ul><li><b>Devices:</b> any laptop or tablet with a browser; phones work but are cramped. Notebooks need Python 3.10 or later, or Colab.</li><li><b>Virtual pods:</b> the hosted rooms are all virtual. The same code drives real pods on a classroom box with a camera.</li><li><b>What students give:</b> a name, nothing else; a nickname is fine. Students have no accounts. In the demo rooms a name and its pod are cleared after 20 minutes unused.</li><li><b>The language model:</b> orders written in plain English are sent to Claude, Anthropic's model, to be turned into a plan, which is read back before anything moves. Keep personal details out of orders.</li><li><b>What is kept:</b> a closed room's match reports (orders and results) are kept 90 days for its teacher.</li><li><b>Busy times:</b> a demo room takes 12 people at once (the swarm room 6). If it is full, try again a little later.</li></ul>
+<h2>If something goes wrong</h2>
+<div class="scroll"><table><thead><tr><th>Problem</th><th>Fix</th></tr></thead><tbody><tr><td>Join page says the room isn't found</td><td>Check the code on the room card; the room may have closed after 7 idle days. Make a new room.</td></tr><tr><td>A sensor click didn't land</td><td>Click the spot again. On a raised wall a sensor sits on the wall's top.</td></tr><tr><td><b>Start</b> asks: a team has no orders yet</td><td>Click Cancel and have that team click <b>Read my orders</b>, then Start again.</td></tr><tr><td>The read-back is not what was meant</td><td>Rewrite the orders more plainly, naming the pod and the place, and send again.</td></tr><tr><td>A screen looks stuck</td><td>Reload the page; it reconnects and keeps the team.</td></tr><tr><td>Everything is wrong</td><td><b>Reset all</b>, then start again from Activity.</td></tr><tr><td>A notebook cannot reach the server, or cannot install websockets</td><td>A school network may block it: run the notebook in Google Colab instead.</td></tr><tr><td>A notebook says the room is full</td><td>Try again in a few minutes: names nobody uses leave after 20 minutes.</td></tr></tbody></table></div>
+<p>If none of this helps, write to a.lenskiyunsw.edu.au.</p>
+  </div>
+</article>
+</main>
+
+<footer class="foot">
+  <div class="w">
+    <div>
+      <b>Plato Pod</b>
+      Real robots, virtual force, one arena.<br>
+      Office 302, Building 16, UNSW Canberra at ADFA
+    </div>
+    <div>
+      <b>Pages</b>
+      <a href="teaching.html">Teaching</a>
+      <a href="military.html">Military</a>
+      <a href="technical.html">How it works</a>
+      <a href="https://arena.platopod.com/">Online arena</a>
+    </div>
+    <div>
+      <b>Us</b>
+      <a href="about.html">About</a>
+      <a href="history.html">History</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
