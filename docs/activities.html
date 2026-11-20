@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Set up activities · Plato Pod documentation</title>
+<meta name="description" content="Plato Pod documentation: demo rooms open to anyone, notebooks, running your own room, ATAK, privacy.">
+<meta property="og:title" content="Set up activities · Plato Pod documentation">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://platopod.com/img/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .docs { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 56px; padding-top: 56px; }
+  .docnav { position: sticky; top: 96px; align-self: start; display: flex; flex-direction: column;
+            gap: 2px; font-size: var(--fs-small); }
+  .docnav b { font-weight: 600; margin: 14px 0 4px; color: var(--ink-3); }
+  .docnav b:first-child { margin-top: 0; }
+  .docnav a { color: var(--ink-2); text-decoration: none; padding: 5px 10px; border-radius: 8px; }
+  .docnav a:hover { background: var(--accent-mist); }
+  .docnav a[aria-current="page"] { color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+  .docs .read { margin: 0; padding: 0; }
+  .guide .read > h1 { margin-bottom: 8px; }
+  .guide .read > ol, .guide .read > ul { padding-left: 1.4em; }
+  .guide .read p, .guide .read li { font-size: var(--fs-body); }
+  .guide .read > p { margin-top: 18px; }
+  .guide .read > h2 { font-size: clamp(24px, 2.6vw, 30px); margin-top: 56px; }
+  .guide .read > p:has(> b:only-child) { margin-top: 32px; }
+  .scroll { overflow-x: auto; margin-top: 22px; }
+  .guide table { border-collapse: collapse; font-size: var(--fs-small); background: var(--card);
+                 border: 1px solid var(--rule); border-radius: 12px; }
+  .guide th, .guide td { padding: 10px 14px; text-align: left; vertical-align: top;
+                         border-bottom: 1px solid var(--rule); }
+  .guide th { font-weight: 600; color: var(--ink); }
+  .guide tr:last-child td { border-bottom: none; }
+  .guide figure { margin: 28px 0 0; }
+  .guide figure img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--rule); }
+  .guide code { background: var(--accent-mist); padding: 1px 6px; border-radius: 6px; }
+  .pager { display: flex; justify-content: space-between; gap: 16px; margin-top: 64px;
+           padding-top: 20px; border-top: 1px solid var(--rule); font-size: var(--fs-small); }
+  .pager a { text-decoration: none; }
+  @media (max-width: 860px) {
+    .docs { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 28px; }
+    .docnav { position: static; flex-direction: row; flex-wrap: wrap; gap: 4px; }
+    .docnav b { width: 100%; margin: 6px 0 0; }
+  }
+  @media print {
+    .mast, .foot, .docnav, .pager { display: none; }
+    .docs { display: block; padding-top: 0; }
+    .guide figure, .guide table { break-inside: avoid; }
+    .guide section + section { break-before: page; }
+  }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="w">
+    <a class="brand" href="../index.html" aria-label="Plato Pod">Plato<span>Pod</span></a>
+    <nav>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../military.html">Military</a>
+      <a href="../technical.html">How it works</a>
+      <a href="../about.html">About</a>
+      <a href="../history.html">History</a>
+    </nav>
+    <a class="btn" href="https://arena.platopod.com/">Sign in</a>
+    <a class="btn solid" href="../index.html#contact">Book a demo</a>
+  </div>
+</header>
+<main><div class="w docs">
+<nav class="docnav" aria-label="Documentation">
+<b>Get started</b>
+<a href="index.html">Start here</a>
+<b>Demo rooms</b>
+<a href="python.html">First programs in Python</a>
+<a href="pid.html">PID line following</a>
+<a href="swarm.html">A swarm that searches</a>
+<a href="infiltration.html">Infiltration in plain English</a>
+<b>Teachers</b>
+<a href="own-room.html">Run your own room</a>
+<a href="activities.html" aria-current="page">Set up activities</a>
+<a href="atak.html">ATAK</a>
+<b>Reference</b>
+<a href="privacy.html">Students and privacy</a>
+<a href="troubleshooting.html">Troubleshooting</a>
+<b>Keep</b>
+<a href="plato-pod-guide.pdf">The whole guide as a PDF</a>
+</nav>
+<article class="article guide"><div class="read">
+<h1>Set up activities</h1>
+<p>Everything the demo rooms do can be set up in your own room from the console.</p>
+<ul><li><b>An activity:</b> the <b>Activity</b> sheet lists them, each with how long it takes: Plain English and Infiltration (orders in plain English), and Pursuit, Route clearance and Patrol (programming). Choose one, then <b>Run</b>.</li><li><b>A mission:</b> the <b>Mission</b> sheet places zones to hold or take, cover, where each unit starts, gas, and lines on the floor. <b>Open</b> loads a ready-made one; <b>Save</b> keeps yours as a mission of your own.</li><li><b>Lines for the line sensor:</b> in the Mission sheet choose <b>Line</b>, then press and drag on the map. The line's card sets the tape's width. The ready-made <b>Line following</b> mission has the oval and the bends of the PID room.</li><li><b>Hidden targets:</b> the ready-made <b>Swarm search</b> mission hides the ten targets of the swarm room.</li><li><b>A swarm:</b> in the <b>Arena</b> sheet, set how many pods a student's program may drive (up to 8). Back to one when the room closes.</li><li><b>ATAK:</b> see <a href="atak.html">ATAK</a>.</li></ul>
+<figure><img src="../img/try/r01-mission-lines.png" alt="The console&#x27;s Mission sheet in the line-following room: the Line button, the Oval and Bends lines listed, and the two courses drawn as tape on the map" loading="lazy"><figcaption>The Mission sheet with the line-following room's two courses. Choose <b>Line</b> and drag on the map to draw another.</figcaption></figure>
+<div class="pager">
+<a href="own-room.html">← Run your own room</a>
+<a href="atak.html">ATAK →</a>
+</div>
+</div></article>
+</div></main>
+
+<footer class="foot">
+  <div class="w">
+    <div>
+      <b>Plato Pod</b>
+      Real robots, virtual force, one arena.<br>
+      Office 302, Building 16, UNSW Canberra at ADFA
+    </div>
+    <div>
+      <b>Pages</b>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../military.html">Military</a>
+      <a href="../technical.html">How it works</a>
+      <a href="index.html">Documentation</a>
+      <a href="https://arena.platopod.com/">Online arena</a>
+    </div>
+    <div>
+      <b>Us</b>
+      <a href="../about.html">About</a>
+      <a href="../history.html">History</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>

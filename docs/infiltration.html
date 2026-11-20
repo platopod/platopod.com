@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infiltration in plain English · Plato Pod documentation</title>
+<meta name="description" content="Plato Pod documentation: demo rooms open to anyone, notebooks, running your own room, ATAK, privacy.">
+<meta property="og:title" content="Infiltration in plain English · Plato Pod documentation">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://platopod.com/img/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .docs { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 56px; padding-top: 56px; }
+  .docnav { position: sticky; top: 96px; align-self: start; display: flex; flex-direction: column;
+            gap: 2px; font-size: var(--fs-small); }
+  .docnav b { font-weight: 600; margin: 14px 0 4px; color: var(--ink-3); }
+  .docnav b:first-child { margin-top: 0; }
+  .docnav a { color: var(--ink-2); text-decoration: none; padding: 5px 10px; border-radius: 8px; }
+  .docnav a:hover { background: var(--accent-mist); }
+  .docnav a[aria-current="page"] { color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+  .docs .read { margin: 0; padding: 0; }
+  .guide .read > h1 { margin-bottom: 8px; }
+  .guide .read > ol, .guide .read > ul { padding-left: 1.4em; }
+  .guide .read p, .guide .read li { font-size: var(--fs-body); }
+  .guide .read > p { margin-top: 18px; }
+  .guide .read > h2 { font-size: clamp(24px, 2.6vw, 30px); margin-top: 56px; }
+  .guide .read > p:has(> b:only-child) { margin-top: 32px; }
+  .scroll { overflow-x: auto; margin-top: 22px; }
+  .guide table { border-collapse: collapse; font-size: var(--fs-small); background: var(--card);
+                 border: 1px solid var(--rule); border-radius: 12px; }
+  .guide th, .guide td { padding: 10px 14px; text-align: left; vertical-align: top;
+                         border-bottom: 1px solid var(--rule); }
+  .guide th { font-weight: 600; color: var(--ink); }
+  .guide tr:last-child td { border-bottom: none; }
+  .guide figure { margin: 28px 0 0; }
+  .guide figure img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--rule); }
+  .guide code { background: var(--accent-mist); padding: 1px 6px; border-radius: 6px; }
+  .pager { display: flex; justify-content: space-between; gap: 16px; margin-top: 64px;
+           padding-top: 20px; border-top: 1px solid var(--rule); font-size: var(--fs-small); }
+  .pager a { text-decoration: none; }
+  @media (max-width: 860px) {
+    .docs { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 28px; }
+    .docnav { position: static; flex-direction: row; flex-wrap: wrap; gap: 4px; }
+    .docnav b { width: 100%; margin: 6px 0 0; }
+  }
+  @media print {
+    .mast, .foot, .docnav, .pager { display: none; }
+    .docs { display: block; padding-top: 0; }
+    .guide figure, .guide table { break-inside: avoid; }
+    .guide section + section { break-before: page; }
+  }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="w">
+    <a class="brand" href="../index.html" aria-label="Plato Pod">Plato<span>Pod</span></a>
+    <nav>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../military.html">Military</a>
+      <a href="../technical.html">How it works</a>
+      <a href="../about.html">About</a>
+      <a href="../history.html">History</a>
+    </nav>
+    <a class="btn" href="https://arena.platopod.com/">Sign in</a>
+    <a class="btn solid" href="../index.html#contact">Book a demo</a>
+  </div>
+</header>
+<main><div class="w docs">
+<nav class="docnav" aria-label="Documentation">
+<b>Get started</b>
+<a href="index.html">Start here</a>
+<b>Demo rooms</b>
+<a href="python.html">First programs in Python</a>
+<a href="pid.html">PID line following</a>
+<a href="swarm.html">A swarm that searches</a>
+<a href="infiltration.html" aria-current="page">Infiltration in plain English</a>
+<b>Teachers</b>
+<a href="own-room.html">Run your own room</a>
+<a href="activities.html">Set up activities</a>
+<a href="atak.html">ATAK</a>
+<b>Reference</b>
+<a href="privacy.html">Students and privacy</a>
+<a href="troubleshooting.html">Troubleshooting</a>
+<b>Keep</b>
+<a href="plato-pod-guide.pdf">The whole guide as a PDF</a>
+</nav>
+<article class="article guide"><div class="read">
+<h1>Infiltration in plain English</h1>
+<p>Room <b>UBACYD</b>, built for ZEIT8205 Fundamentals of Surveillance Technologies.</p>
+<p>One team hides sensors and patrols; the other tries to get its pods to the objective unseen. Two rounds of up to 120 s, roles swapped; about 15 minutes in all. Orders are typed in plain English and turned into a plan.</p>
+<p>It is played live, with a teacher at the console: the activity is already chosen in the surveillance demo room, where the presenter runs the console. In <a href="own-room.html">your own room</a>, steps 1 and 2 choose it. The steps and pictures below are a two-team match from start to report. For a class that uses ATAK, the same match shows on ATAK devices: see <a href="atak.html">ATAK</a>.</p>
+<p><b>Teacher (big screen)</b></p>
+<ol><li>Click <b>Activity</b> on the left rail, choose <b>Infiltration</b>. A box asks how many teams: choose <b>2</b> teams.</li><li>Click <b>Run</b>, then <b>Put pods out</b> if the pods are not out yet (on an arena already drawn, choosing the teams puts them out). The amber button is always the next step. Four pods: A-patrol for the watchers, B1 to B3 for the infiltrators (in round 2, B-patrol and A1 to A3).</li></ol>
+<figure><img src="../img/try/g03-activity.png" alt="The Activity sheet: under Write orders in plain English, Plain English and Infiltration; under Programming, Pursuit, Route clearance and Patrol, each with how long it takes" loading="lazy"><figcaption>Step 1: the Activity sheet. Infiltration is under Write orders in plain English.</figcaption></figure>
+<figure><img src="../img/try/g04-teams.png" alt="The How many teams? box with 2, 3, 4 and 5 teams" loading="lazy"><figcaption>Step 1: choose 2 teams.</figcaption></figure>
+<figure><img src="../img/try/g05-run.png" alt="The Run sheet with the pods out: Start Infiltration is the one amber button; B1 to B3 on the left, A-patrol near the objective" loading="lazy"><figcaption>Step 2: the Run sheet with the pods out. The amber button is the next step, here <b>Start Infiltration</b>; after a round it moves to <b>Next round</b>. Infiltrators start in the blue strip on the left; the objective is the green strip on the right.</figcaption><figcaption><i>Each team (own laptop)</i></figcaption></figure>
+<ol start="3"><li>Open <a href="https://arena.platopod.com/join.html">arena.platopod.com/join</a> (or scan the QR code on the big screen), type the room code, click <b>Find it</b>, then <b>Team A</b> or <b>Team B</b>. The team's console opens.</li><li>The watching team clicks <b>Place sensors</b>, clicks up to three spots on the ground, then <b>Place sensors</b> again to finish. The other team cannot see them.</li><li>Both teams type their orders and click <b>Read my orders</b>. Check the read-back says what was meant. Example orders:<ul><li>Watchers: "A-patrol patrols between sensor 1 and sensor 3 until stopped. If a pod is spotted, intercept it."</li><li>Infiltrators: "B1 goes along the bottom edge to the objective. B2 goes to the objective. B3 goes along the top edge to the objective."</li></ul></li></ol>
+<figure><img src="../img/try/g06-join.png" alt="The join page for a team game: the room code found, no name or colour asked, and the Team A and Team B buttons" loading="lazy"><figcaption>Step 3: the join page for a team game. No name is needed; each team clicks its own button.</figcaption></figure>
+<figure><img src="../img/try/g07-orders.png" alt="Team A&#x27;s console: three sensor circles placed on the arena, the orders typed, Read my orders and the read-back below" loading="lazy"><figcaption>Steps 4 and 5, the watching team: three sensors placed (the yellow circles), orders typed and read back. The pod names and places the orders may use are listed under the box.</figcaption><figcaption><i>Teacher</i></figcaption></figure>
+<ol start="6"><li>Click <b>Start</b> Infiltration once both teams' orders show in the middle panel. If a team has sent none, the console asks before it starts. The round ends by itself at 120 s, or sooner once every pod is through or caught; the clock then stops on the time that was left.</li><li>Click <b>Next round</b>: roles swap and the pods go back out. Repeat steps 4 to 6.</li><li>After round 2 every screen shows the result. <b>Report</b> opens the match write-up (orders, rounds, scores) to print or save.</li><li><b>New match</b> to play again, or <b>Reset all</b> to clear.</li></ol>
+<figure><img src="../img/try/g08-running.png" alt="The teacher&#x27;s console during round 1: the clock counting down, pods leaving tracks, both teams&#x27; orders and the event log" loading="lazy"><figcaption>Step 6: a round running on the big screen. The clock is top centre; the event log on the right says what each pod and sensor did.</figcaption></figure>
+<figure><img src="../img/try/g09-result.png" alt="The end-of-match box: the result, the score, each round&#x27;s result and comments on the orders" loading="lazy"><figcaption>Step 8: what each team sees after round 2: the result, each round's score, and comments on their orders.</figcaption></figure>
+<figure><img src="../img/try/g10-report.png" alt="The report page headed Infiltration demo and the room code: the result, the score table, and for each round each team&#x27;s orders as read back and what happened" loading="lazy"><figcaption>Step 8: the report, with <b>Print or save as PDF</b> and <b>Download the scores (CSV)</b> at the top.</figcaption></figure>
+<div class="pager">
+<a href="swarm.html">← A swarm that searches</a>
+<a href="own-room.html">Run your own room →</a>
+</div>
+</div></article>
+</div></main>
+
+<footer class="foot">
+  <div class="w">
+    <div>
+      <b>Plato Pod</b>
+      Real robots, virtual force, one arena.<br>
+      Office 302, Building 16, UNSW Canberra at ADFA
+    </div>
+    <div>
+      <b>Pages</b>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../military.html">Military</a>
+      <a href="../technical.html">How it works</a>
+      <a href="index.html">Documentation</a>
+      <a href="https://arena.platopod.com/">Online arena</a>
+    </div>
+    <div>
+      <b>Us</b>
+      <a href="../about.html">About</a>
+      <a href="../history.html">History</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>

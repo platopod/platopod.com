@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A swarm that searches · Plato Pod documentation</title>
+<meta name="description" content="Plato Pod documentation: demo rooms open to anyone, notebooks, running your own room, ATAK, privacy.">
+<meta property="og:title" content="A swarm that searches · Plato Pod documentation">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://platopod.com/img/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .docs { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 56px; padding-top: 56px; }
+  .docnav { position: sticky; top: 96px; align-self: start; display: flex; flex-direction: column;
+            gap: 2px; font-size: var(--fs-small); }
+  .docnav b { font-weight: 600; margin: 14px 0 4px; color: var(--ink-3); }
+  .docnav b:first-child { margin-top: 0; }
+  .docnav a { color: var(--ink-2); text-decoration: none; padding: 5px 10px; border-radius: 8px; }
+  .docnav a:hover { background: var(--accent-mist); }
+  .docnav a[aria-current="page"] { color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+  .docs .read { margin: 0; padding: 0; }
+  .guide .read > h1 { margin-bottom: 8px; }
+  .guide .read > ol, .guide .read > ul { padding-left: 1.4em; }
+  .guide .read p, .guide .read li { font-size: var(--fs-body); }
+  .guide .read > p { margin-top: 18px; }
+  .guide .read > h2 { font-size: clamp(24px, 2.6vw, 30px); margin-top: 56px; }
+  .guide .read > p:has(> b:only-child) { margin-top: 32px; }
+  .scroll { overflow-x: auto; margin-top: 22px; }
+  .guide table { border-collapse: collapse; font-size: var(--fs-small); background: var(--card);
+                 border: 1px solid var(--rule); border-radius: 12px; }
+  .guide th, .guide td { padding: 10px 14px; text-align: left; vertical-align: top;
+                         border-bottom: 1px solid var(--rule); }
+  .guide th { font-weight: 600; color: var(--ink); }
+  .guide tr:last-child td { border-bottom: none; }
+  .guide figure { margin: 28px 0 0; }
+  .guide figure img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--rule); }
+  .guide code { background: var(--accent-mist); padding: 1px 6px; border-radius: 6px; }
+  .pager { display: flex; justify-content: space-between; gap: 16px; margin-top: 64px;
+           padding-top: 20px; border-top: 1px solid var(--rule); font-size: var(--fs-small); }
+  .pager a { text-decoration: none; }
+  @media (max-width: 860px) {
+    .docs { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 28px; }
+    .docnav { position: static; flex-direction: row; flex-wrap: wrap; gap: 4px; }
+    .docnav b { width: 100%; margin: 6px 0 0; }
+  }
+  @media print {
+    .mast, .foot, .docnav, .pager { display: none; }
+    .docs { display: block; padding-top: 0; }
+    .guide figure, .guide table { break-inside: avoid; }
+    .guide section + section { break-before: page; }
+  }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="w">
+    <a class="brand" href="../index.html" aria-label="Plato Pod">Plato<span>Pod</span></a>
+    <nav>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../military.html">Military</a>
+      <a href="../technical.html">How it works</a>
+      <a href="../about.html">About</a>
+      <a href="../history.html">History</a>
+    </nav>
+    <a class="btn" href="https://arena.platopod.com/">Sign in</a>
+    <a class="btn solid" href="../index.html#contact">Book a demo</a>
+  </div>
+</header>
+<main><div class="w docs">
+<nav class="docnav" aria-label="Documentation">
+<b>Get started</b>
+<a href="index.html">Start here</a>
+<b>Demo rooms</b>
+<a href="python.html">First programs in Python</a>
+<a href="pid.html">PID line following</a>
+<a href="swarm.html" aria-current="page">A swarm that searches</a>
+<a href="infiltration.html">Infiltration in plain English</a>
+<b>Teachers</b>
+<a href="own-room.html">Run your own room</a>
+<a href="activities.html">Set up activities</a>
+<a href="atak.html">ATAK</a>
+<b>Reference</b>
+<a href="privacy.html">Students and privacy</a>
+<a href="troubleshooting.html">Troubleshooting</a>
+<b>Keep</b>
+<a href="plato-pod-guide.pdf">The whole guide as a PDF</a>
+</nav>
+<article class="article guide"><div class="read">
+<h1>A swarm that searches</h1>
+<p>Room <b>UUDPYD</b>, built for ZEIT4150 Fundamentals of Artificial Intelligence. Notebook: <a href="https://arena.platopod.com/sdk/notebooks/swarm-search.ipynb">swarm-search.ipynb</a>.</p>
+<p>Ten targets are hidden on a 3 m by 2 m floor; nobody, not even the console, shows where. One program commands five pods, each with a detector that reports a target within 15 cm. The swarm keeps one shared map of what it has found.</p>
+<ol><li>Join, and add four more pods to your swarm (<code>arena.spawn()</code>). They leave the room when your notebook closes.</li><li>No plan: each pod drives to random points for 90 s.</li><li>A plan: the floor split into one strip per pod, each swept in lanes 25 cm apart.</li><li>Your turn: compare the two, share out a strip when a pod fails, allocate strips by auction, and use what has been found to choose where to look next.</li></ol>
+<div class="scroll"><table><thead><tr><th>Search (measured on the server)</th><th>Targets found</th><th>Time</th></tr></thead><tbody><tr><td>Random walk</td><td>4 of 10</td><td>90 s</td></tr><tr><td>Planned sweep</td><td>9 of 10</td><td>61 s</td></tr></tbody></table></div>
+<p>The sweep missed one target that sits where two pods' strips meet: a good first question for students.</p>
+<figure><img src="../img/try/r03-swarm-3d.png" alt="The swarm room in 3D during a sweep: five pods of one swarm spread across the floor, each in its own strip" loading="lazy"><figcaption>One notebook's swarm of five early in its sweep, each pod starting its own strip. The targets are not shown anywhere.</figcaption></figure>
+<div class="pager">
+<a href="pid.html">← PID line following</a>
+<a href="infiltration.html">Infiltration in plain English →</a>
+</div>
+</div></article>
+</div></main>
+
+<footer class="foot">
+  <div class="w">
+    <div>
+      <b>Plato Pod</b>
+      Real robots, virtual force, one arena.<br>
+      Office 302, Building 16, UNSW Canberra at ADFA
+    </div>
+    <div>
+      <b>Pages</b>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../military.html">Military</a>
+      <a href="../technical.html">How it works</a>
+      <a href="index.html">Documentation</a>
+      <a href="https://arena.platopod.com/">Online arena</a>
+    </div>
+    <div>
+      <b>Us</b>
+      <a href="../about.html">About</a>
+      <a href="../history.html">History</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>

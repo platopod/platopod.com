@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start here · Plato Pod documentation</title>
+<meta name="description" content="Plato Pod documentation: demo rooms open to anyone, notebooks, running your own room, ATAK, privacy.">
+<meta property="og:title" content="Start here · Plato Pod documentation">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://platopod.com/img/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .docs { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 56px; padding-top: 56px; }
+  .docnav { position: sticky; top: 96px; align-self: start; display: flex; flex-direction: column;
+            gap: 2px; font-size: var(--fs-small); }
+  .docnav b { font-weight: 600; margin: 14px 0 4px; color: var(--ink-3); }
+  .docnav b:first-child { margin-top: 0; }
+  .docnav a { color: var(--ink-2); text-decoration: none; padding: 5px 10px; border-radius: 8px; }
+  .docnav a:hover { background: var(--accent-mist); }
+  .docnav a[aria-current="page"] { color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+  .docs .read { margin: 0; padding: 0; }
+  .guide .read > h1 { margin-bottom: 8px; }
+  .guide .read > ol, .guide .read > ul { padding-left: 1.4em; }
+  .guide .read p, .guide .read li { font-size: var(--fs-body); }
+  .guide .read > p { margin-top: 18px; }
+  .guide .read > h2 { font-size: clamp(24px, 2.6vw, 30px); margin-top: 56px; }
+  .guide .read > p:has(> b:only-child) { margin-top: 32px; }
+  .scroll { overflow-x: auto; margin-top: 22px; }
+  .guide table { border-collapse: collapse; font-size: var(--fs-small); background: var(--card);
+                 border: 1px solid var(--rule); border-radius: 12px; }
+  .guide th, .guide td { padding: 10px 14px; text-align: left; vertical-align: top;
+                         border-bottom: 1px solid var(--rule); }
+  .guide th { font-weight: 600; color: var(--ink); }
+  .guide tr:last-child td { border-bottom: none; }
+  .guide figure { margin: 28px 0 0; }
+  .guide figure img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--rule); }
+  .guide code { background: var(--accent-mist); padding: 1px 6px; border-radius: 6px; }
+  .pager { display: flex; justify-content: space-between; gap: 16px; margin-top: 64px;
+           padding-top: 20px; border-top: 1px solid var(--rule); font-size: var(--fs-small); }
+  .pager a { text-decoration: none; }
+  @media (max-width: 860px) {
+    .docs { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 28px; }
+    .docnav { position: static; flex-direction: row; flex-wrap: wrap; gap: 4px; }
+    .docnav b { width: 100%; margin: 6px 0 0; }
+  }
+  @media print {
+    .mast, .foot, .docnav, .pager { display: none; }
+    .docs { display: block; padding-top: 0; }
+    .guide figure, .guide table { break-inside: avoid; }
+    .guide section + section { break-before: page; }
+  }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="w">
+    <a class="brand" href="../index.html" aria-label="Plato Pod">Plato<span>Pod</span></a>
+    <nav>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../military.html">Military</a>
+      <a href="../technical.html">How it works</a>
+      <a href="../about.html">About</a>
+      <a href="../history.html">History</a>
+    </nav>
+    <a class="btn" href="https://arena.platopod.com/">Sign in</a>
+    <a class="btn solid" href="../index.html#contact">Book a demo</a>
+  </div>
+</header>
+<main><div class="w docs">
+<nav class="docnav" aria-label="Documentation">
+<b>Get started</b>
+<a href="index.html" aria-current="page">Start here</a>
+<b>Demo rooms</b>
+<a href="python.html">First programs in Python</a>
+<a href="pid.html">PID line following</a>
+<a href="swarm.html">A swarm that searches</a>
+<a href="infiltration.html">Infiltration in plain English</a>
+<b>Teachers</b>
+<a href="own-room.html">Run your own room</a>
+<a href="activities.html">Set up activities</a>
+<a href="atak.html">ATAK</a>
+<b>Reference</b>
+<a href="privacy.html">Students and privacy</a>
+<a href="troubleshooting.html">Troubleshooting</a>
+<b>Keep</b>
+<a href="plato-pod-guide.pdf">The whole guide as a PDF</a>
+</nav>
+<article class="article guide"><div class="read">
+<h1>Start here</h1>
+<p>Plato Pod puts small robots on a shared arena that students drive from a browser, in plain English, or from their own Python code. Four demo rooms are open to anyone with the codes below: no account, no install. A teacher who wants rooms of their own <a href="own-room.html">asks for an invite</a>.</p>
+<h2>The four demo rooms</h2>
+<p>Each room is open all the time and keeps its own setup. Join with its code at <a href="https://arena.platopod.com/join.html">arena.platopod.com/join</a>, or follow its link.</p>
+<div class="scroll"><table><thead><tr><th>Room</th><th>Course it was built for</th><th>Code</th><th>What you do</th><th>Teacher needed?</th></tr></thead><tbody><tr><td><a href="python.html">Problem solving: first programs in Python</a></td><td>ZEIT1307 Computational Problem Solving</td><td>TLQGNR</td><td>Drive a pod in a square, find out why it misses, fix it with feedback</td><td>No</td></tr><tr><td><a href="pid.html">Control engineering: PID line following</a></td><td>ZEIT3222 Control Engineering</td><td>GFYFYJ</td><td>Follow tape with a line sensor; tune P, I and D against a real delay</td><td>No</td></tr><tr><td><a href="swarm.html">Artificial intelligence: a swarm that searches</a></td><td>ZEIT4150 Fundamentals of Artificial Intelligence</td><td>UUDPYD</td><td>Five pods search for hidden targets: no plan against a plan</td><td>No</td></tr><tr><td><a href="infiltration.html">Surveillance: outwit the sensors in plain English</a></td><td>ZEIT8205 Fundamentals of Surveillance Technologies</td><td>UBACYD</td><td>Two teams: one hides sensors, the other writes orders to get past them</td><td>Yes, to start each round</td></tr></tbody></table></div>
+<p>The first three run from a Python notebook, at home or in class. The fourth is played live: a teacher at the console starts the rounds.</p>
+<h2>Try it in five minutes</h2>
+<p>All you need is a laptop with a browser and Python 3.10 or later, or a Google account for Colab.</p>
+<ol><li>Download the room's notebook (below) and open it in Jupyter, VS Code, or <a href="https://colab.research.google.com">Google Colab</a> (File, Upload notebook).</li><li>Put your name in the second code cell (<code>MY_NAME</code>). The room's code is already there.</li><li>Run the cells from the top. The first fetches the Plato Pod client from the server; the second joins the room, gives you a pod, and prints a link to watch it in 3D.</li><li>Open that link beside the notebook and watch your pod do what your code says.</li></ol>
+<div class="scroll"><table><thead><tr><th>Notebook</th><th>Room</th></tr></thead><tbody><tr><td><a href="https://arena.platopod.com/sdk/notebooks/first-programs.ipynb">first-programs.ipynb</a></td><td>Problem solving: first programs in Python</td></tr><tr><td><a href="https://arena.platopod.com/sdk/notebooks/pid-line-following.ipynb">pid-line-following.ipynb</a></td><td>Control engineering: PID line following</td></tr><tr><td><a href="https://arena.platopod.com/sdk/notebooks/swarm-search.ipynb">swarm-search.ipynb</a></td><td>Artificial intelligence: a swarm that searches</td></tr></tbody></table></div>
+<p>Your name keeps your pod: run the notebook again tomorrow with the same name and you get the same pod back. A pod nobody has used for 20 minutes leaves the room, so the room never fills up. A room takes 12 people at once (the swarm room 6, as each brings five pods).</p>
+<p>Without a notebook, you can still look in: join from <a href="https://arena.platopod.com/join.html">arena.platopod.com/join</a> with the code and a name, and the page links to your pod on the table and in 3D.</p>
+<div class="pager">
+<span></span>
+<a href="python.html">First programs in Python →</a>
+</div>
+</div></article>
+</div></main>
+
+<footer class="foot">
+  <div class="w">
+    <div>
+      <b>Plato Pod</b>
+      Real robots, virtual force, one arena.<br>
+      Office 302, Building 16, UNSW Canberra at ADFA
+    </div>
+    <div>
+      <b>Pages</b>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../military.html">Military</a>
+      <a href="../technical.html">How it works</a>
+      <a href="index.html">Documentation</a>
+      <a href="https://arena.platopod.com/">Online arena</a>
+    </div>
+    <div>
+      <b>Us</b>
+      <a href="../about.html">About</a>
+      <a href="../history.html">History</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>
