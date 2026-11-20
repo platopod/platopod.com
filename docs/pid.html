@@ -94,7 +94,7 @@
 </nav>
 <article class="article guide"><div class="read">
 <h1>PID line following</h1>
-<p>Room <b>GFYFYJ</b>, built for ZEIT3222 Control Engineering. Notebook: <a href="https://arena.platopod.com/sdk/notebooks/pid-line-following.ipynb">pid-line-following.ipynb</a>.</p>
+<p>Room <b>GFYFYJ</b>. An example of where it fits: ZEIT3222 Control Engineering, at UNSW Canberra. Notebook: <a href="https://arena.platopod.com/sdk/notebooks/pid-line-following.ipynb">pid-line-following.ipynb</a>.</p>
 <p>Tape is drawn on the floor: an oval and a course with square corners and sharp bends. Each pod carries a line sensor, five reflectance cells under its nose that read 0 to 1 with noise, and reports where the line is across the pod (<code>offset_m</code>, positive to the left). Students write the controller.</p>
 <ol><li>The pod drives itself onto the oval by feedback on its pose, at a place of its own so several students share the course.</li><li>P only at 5 cm/s, then the same at 8 cm/s.</li><li>D, smoothed: the textbook cure for snaking, and why it does not cure it here.</li><li>I, capped against windup: the steady error on the curves.</li><li>Your turn: the fastest lap, predicting through the delay, the course with sharp bends, the five raw cells.</li></ol>
 <div class="scroll"><table><thead><tr><th>Controller (measured on the server)</th><th>Mean error</th><th>Line lost</th></tr></thead><tbody><tr><td>P, kp = 40, 5 cm/s</td><td>2.5 mm</td><td>never</td></tr><tr><td>P, kp = 40, 8 cm/s</td><td>7.3 mm</td><td>never</td></tr><tr><td>PD, kp = 40, kd = 0.5</td><td>2.5 mm</td><td>never</td></tr><tr><td>PI, kp = 40, ki = 10</td><td>2.8 mm</td><td>never</td></tr></tbody></table></div>

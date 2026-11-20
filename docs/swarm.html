@@ -94,7 +94,7 @@
 </nav>
 <article class="article guide"><div class="read">
 <h1>A swarm that searches</h1>
-<p>Room <b>UUDPYD</b>, built for ZEIT4150 Fundamentals of Artificial Intelligence. Notebook: <a href="https://arena.platopod.com/sdk/notebooks/swarm-search.ipynb">swarm-search.ipynb</a>.</p>
+<p>Room <b>UUDPYD</b>. An example of where it fits: ZEIT4150 Fundamentals of Artificial Intelligence, at UNSW Canberra. Notebook: <a href="https://arena.platopod.com/sdk/notebooks/swarm-search.ipynb">swarm-search.ipynb</a>.</p>
 <p>Ten targets are hidden on a 3 m by 2 m floor; nobody, not even the console, shows where. One program commands five pods, each with a detector that reports a target within 15 cm. The swarm keeps one shared map of what it has found.</p>
 <ol><li>Join, and add four more pods to your swarm (<code>arena.spawn()</code>). They leave the room when your notebook closes.</li><li>No plan: each pod drives to random points for 90 s.</li><li>A plan: the floor split into one strip per pod, each swept in lanes 25 cm apart.</li><li>Your turn: compare the two, share out a strip when a pod fails, allocate strips by auction, and use what has been found to choose where to look next.</li></ol>
 <div class="scroll"><table><thead><tr><th>Search (measured on the server)</th><th>Targets found</th><th>Time</th></tr></thead><tbody><tr><td>Random walk</td><td>4 of 10</td><td>90 s</td></tr><tr><td>Planned sweep</td><td>9 of 10</td><td>61 s</td></tr></tbody></table></div>
