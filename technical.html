@@ -31,10 +31,11 @@
       <a href="teaching.html">Teaching</a>
       <a href="military.html">Military</a>
       <a href="technical.html" aria-current="page">How it works</a>
+      <a href="docs/index.html">Docs</a>
       <a href="about.html">About</a>
-      <a href="history.html">History</a>
     </nav>
-    <a class="btn" href="https://arena.platopod.com/">Sign in</a>
+    <a class="signin" href="https://arena.platopod.com/">Sign in</a>
+    <a class="btn ink" href="try.html">Try it now</a>
     <a class="btn solid" href="index.html#contact">Book a demo</a>
   </div>
 </header>
@@ -241,14 +242,44 @@
   </figure>
 
   <div class="read">
+    <h2>The console, in 3D</h2>
+    <p>The console opens in 3D in any browser: the pods as they are built, the ground in
+      relief, sensors with their reach. Place things and draw routes on the 3D ground, or
+      switch to the map. On the Mission sheet you draw the exercise itself: zones, cover,
+      sensors, start positions, a gas release, lines of tape, each dragged, sized and
+      turned, and in force at once.</p>
+  </div>
+
+  <figure class="wide">
+    <div class="frame">
+      <video width="1200" height="660" class="autoplay" controls playsinline muted loop preload="metadata"
+             poster="img/console-3d-poster.jpg"
+             aria-label="The console in 3D during a round of the surveillance game: pods crossing from a start strip to an objective strip past cover and a patrol, and a sensor's reach lighting up.">
+        <source src="img/console-3d.webm" type="video/webm">
+        <source src="img/console-3d.mp4" type="video/mp4">
+      </video>
+    </div>
+    <figcaption>A round of the surveillance game in the 3D view, on the hosted arena with
+      virtual pods, three times speed.</figcaption>
+  </figure>
+
+  <figure class="wide">
+    <img src="img/try/r01-mission-lines.png" width="1100" height="648" alt="The Mission sheet: the arena from above with lines of tape drawn on it for the line sensor." loading="lazy">
+    <figcaption>The Mission sheet: lines of tape drawn for the line-following lesson.</figcaption>
+  </figure>
+
+  <div class="read">
     <h2>A world around the pods</h2>
     <p>Real pods and virtual units share one world, and an exercise cannot tell them
       apart. The server simulates what the robots carry and what surrounds them.</p>
     <ul class="facts">
-      <li><b>Sensors</b><span>Eleven, simulated: gas with a real detector's lag, GNSS, sonar,
-        radar, lidar, thermal, rangefinder, IED detector, direction finding, UAV camera and
-        friend-or-foe. Each pod's set, and each sensor's noise, can be changed while an
-        exercise runs.</span></li>
+      <li><b>Sensors</b><span>Twelve, simulated: gas with a real detector's lag, GNSS, sonar,
+        radar, lidar, thermal, rangefinder, IED detector, direction finding, UAV camera,
+        friend-or-foe and a line sensor over tape drawn on the map. Each pod's set, and each
+        sensor's noise, can be changed while an exercise runs.</span></li>
+      <li><b>Ground and radio</b><span>The ground's heights come from real elevation data
+        at the exercise's scale, and a slope slows a pod. Radio links fade with distance
+        and terrain and can be jammed.</span></li>
       <li><b>Engagement</b><span>Every shot is resolved against the weapon, line of sight,
         cover, visibility and the target's armour. Damage slows a unit and degrades its
         fire.</span></li>
@@ -262,101 +293,32 @@
 
     <h2>Your own code, any language</h2>
     <p>Everything a program does, from driving a pod to reading a sensor, travels over one
-      web connection as plain messages, so any language can drive the arena. Small
-      libraries for Python, C, Java and JavaScript make it a few lines. Each example takes
-      a free pod, reads its sonar and turns away from anything closer than 20&nbsp;cm.</p>
+      web connection as plain messages, so any language can drive the arena. Libraries for
+      Python, C, Java and JavaScript make it a few lines, and one program can drive a whole
+      swarm of pods. This one joins a demonstration room and drives a pod in a square,
+      reading where it really is after every step.</p>
     <div class="codetabs">
       <div class="codepane" data-lang="Python">
         <p class="codelabel">Python</p>
-        <pre><code><span class="k">from</span> platopod <span class="k">import</span> <span class="t">Arena</span>
+        <pre><code><span class="k">import</span> math, time
+<span class="k">from</span> platopod <span class="k">import</span> <span class="t">Arena</span>
 
-arena = <span class="t">Arena</span>(<span class="s">"wss://a.arena.platopod.com/api/control"</span>)
-pod = arena.<span class="f">take_pod</span>()                   <span class="c"># waits for a pod no one else is driving</span>
+arena, pod = <span class="t">Arena</span>.<span class="f">join_room</span>(<span class="s">"TLQGNR"</span>, <span class="s">"Ada"</span>)   <span class="c"># the room's code, and your name</span>
 
-arena.<span class="f">subscribe_sensors</span>(pod, [<span class="s">"sonar"</span>])
-
-<span class="k">while</span> <span class="k">True</span>:
-    sonar = arena.<span class="f">get_sensor</span>(pod, <span class="s">"sonar"</span>)
-    <span class="k">if</span> sonar:
-        ahead = sonar[<span class="s">"ranges"</span>][<span class="n">0</span>]         <span class="c"># beam 0 points ahead</span>
-        <span class="k">if</span> ahead &lt; <span class="n">0.20</span>:                   <span class="c"># within 20 cm</span>
-            arena.<span class="f">cmd_vel</span>(pod, <span class="n">0.0</span>, <span class="n">1.2</span>)   <span class="c"># turn on the spot</span>
-        <span class="k">else</span>:
-            arena.<span class="f">cmd_vel</span>(pod, <span class="n">0.10</span>, <span class="n">0.0</span>)  <span class="c"># drive forward</span>
-    arena.<span class="f">sleep</span>(<span class="n">0.1</span>)</code></pre>
-      </div>
-      <div class="codepane" data-lang="C">
-        <p class="codelabel">C</p>
-        <pre><code><span class="k">#include</span> <span class="s">"platopod.h"</span>
-
-<span class="k">int</span> <span class="f">main</span>(<span class="k">void</span>) {
-    <span class="t">pp_arena</span> *arena = <span class="f">pp_connect</span>(<span class="s">"wss://a.arena.platopod.com/api/control"</span>);
-    <span class="k">int</span> pod = <span class="f">pp_take_pod</span>(arena);                    <span class="c">// waits for a pod no one else is driving</span>
-
-    <span class="f">pp_subscribe_sensors</span>(arena, pod, <span class="s">"sonar"</span>);
-
-    <span class="k">while</span> (<span class="n">1</span>) {
-        <span class="k">double</span> ahead;
-        <span class="k">if</span> (<span class="f">pp_sensor_num</span>(arena, pod, <span class="s">"sonar"</span>, <span class="s">"ranges[0]"</span>, &amp;ahead)) {  <span class="c">// beam 0 points ahead</span>
-            <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>)                                             <span class="c">// within 20 cm</span>
-                <span class="f">pp_cmd_vel</span>(arena, pod, <span class="n">0.0</span>, <span class="n">1.2</span>);                         <span class="c">// turn on the spot</span>
-            <span class="k">else</span>
-                <span class="f">pp_cmd_vel</span>(arena, pod, <span class="n">0.10</span>, <span class="n">0.0</span>);                        <span class="c">// drive forward</span>
-        }
-        <span class="f">pp_sleep</span>(arena, <span class="n">0.1</span>);
-    }
-}</code></pre>
-      </div>
-      <div class="codepane" data-lang="Java">
-        <p class="codelabel">Java</p>
-        <pre><code><span class="k">import</span> platopod.<span class="t">Arena</span>;
-<span class="k">import</span> platopod.<span class="t">Json</span>;
-
-<span class="k">public</span> <span class="k">class</span> Avoid {
-    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="f">main</span>(<span class="t">String</span>[] args) {
-        <span class="t">Arena</span> arena = <span class="k">new</span> <span class="t">Arena</span>(<span class="s">"wss://a.arena.platopod.com/api/control"</span>);
-        <span class="k">int</span> pod = arena.<span class="f">takePod</span>();                     <span class="c">// waits for a pod no one else is driving</span>
-
-        arena.<span class="f">subscribeSensors</span>(pod, <span class="s">"sonar"</span>);
-
-        <span class="k">while</span> (<span class="k">true</span>) {
-            <span class="t">Json</span> sonar = arena.<span class="f">getSensor</span>(pod, <span class="s">"sonar"</span>);
-            <span class="k">if</span> (sonar != <span class="k">null</span>) {
-                <span class="k">double</span> ahead = sonar.<span class="f">get</span>(<span class="s">"ranges"</span>).<span class="f">at</span>(<span class="n">0</span>).<span class="f">asDouble</span>();  <span class="c">// beam 0 points ahead</span>
-                <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>) {                                   <span class="c">// within 20 cm</span>
-                    arena.<span class="f">cmdVel</span>(pod, <span class="n">0.0</span>, <span class="n">1.2</span>);                      <span class="c">// turn on the spot</span>
-                } <span class="k">else</span> {
-                    arena.<span class="f">cmdVel</span>(pod, <span class="n">0.10</span>, <span class="n">0.0</span>);                     <span class="c">// drive forward</span>
-                }
-            }
-            arena.<span class="f">sleep</span>(<span class="n">0.1</span>);
-        }
-    }
-}</code></pre>
-      </div>
-      <div class="codepane" data-lang="JavaScript">
-        <p class="codelabel">JavaScript</p>
-        <pre><code><span class="k">import</span> { <span class="t">Arena</span> } <span class="k">from</span> <span class="s">"./platopod.mjs"</span>;
-
-<span class="k">const</span> arena = <span class="k">await</span> <span class="t">Arena</span>.<span class="f">connect</span>(<span class="s">"wss://a.arena.platopod.com/api/control"</span>);
-<span class="k">const</span> pod = <span class="k">await</span> arena.<span class="f">takePod</span>();          <span class="c">// waits for a pod no one else is driving</span>
-
-arena.<span class="f">subscribeSensors</span>(pod, [<span class="s">"sonar"</span>]);
-
-<span class="k">while</span> (<span class="k">true</span>) {
-  <span class="k">const</span> sonar = arena.<span class="f">getSensor</span>(pod, <span class="s">"sonar"</span>);
-  <span class="k">if</span> (sonar) {
-    <span class="k">const</span> ahead = sonar.ranges[<span class="n">0</span>];          <span class="c">// beam 0 points ahead</span>
-    <span class="k">if</span> (ahead &lt; <span class="n">0.20</span>) {                     <span class="c">// within 20 cm</span>
-      arena.<span class="f">cmdVel</span>(pod, <span class="n">0.0</span>, <span class="n">1.2</span>);          <span class="c">// turn on the spot</span>
-    } <span class="k">else</span> {
-      arena.<span class="f">cmdVel</span>(pod, <span class="n">0.10</span>, <span class="n">0.0</span>);         <span class="c">// drive forward</span>
-    }
-  }
-  <span class="k">await</span> arena.<span class="f">sleep</span>(<span class="n">0.1</span>);
-}</code></pre>
+<span class="k">for</span> side <span class="k">in</span> range(<span class="n">4</span>):
+    start = pod.pose
+    <span class="k">while</span> math.dist((start.x, start.y), (pod.pose.x, pod.pose.y)) &lt; <span class="n">0.25</span>:
+        pod.<span class="f">drive</span>(<span class="n">0.1</span>, <span class="n">0.0</span>)                       <span class="c"># forward at 10 cm/s</span>
+        time.sleep(<span class="n">0.1</span>)
+    heading = start.theta + math.pi / <span class="n">2</span>           <span class="c"># a quarter turn left</span>
+    <span class="k">while</span> abs(math.remainder(heading - pod.pose.theta, math.tau)) &gt; <span class="n">0.02</span>:
+        pod.<span class="f">drive</span>(<span class="n">0.0</span>, <span class="n">0.8</span>)                       <span class="c"># turn on the spot</span>
+        time.sleep(<span class="n">0.1</span>)
+pod.<span class="f">stop</span>()</code></pre>
       </div>
     </div>
+    <p><a href="docs/index.html">The documentation</a> has every call and the other three
+      languages.</p>
     <p class="note-line">A real pod has a narrow range of speeds, so the server fits each
       command to what that pod can do.</p>
 
@@ -364,12 +326,15 @@ arena.<span class="f">subscribeSensors</span>(pod, [<span class="s">"sonar"</spa
     <p>The same software runs on a box in your room, on its own Wi-Fi, or on our server,
       several arenas at once, reached from any browser. A laptop in the room can carry a
       webcam's view of real pods up to the hosted arena; that part is being tested. The
-      exercise also reaches ATAK, laid over a real map.</p>
+      exercise also reaches ATAK, laid over a real map, from the box or through our hosted
+      TAK server.</p>
     <p>Built on ROS&nbsp;2, with over three thousand automated tests. Engineering details
       are available on request.</p>
 
     <h2>See it run</h2>
-    <p><a class="btn solid" href="index.html#contact">Book a demonstration <span class="arrow">→</span></a></p>
+    <p><a class="btn ink" href="try.html">Try it now <span class="arrow">→</span></a>
+      <a class="btn solid" href="index.html#contact">Book a demonstration <span class="arrow">→</span></a>
+      <a class="btn" href="docs/index.html">Documentation</a></p>
   </div>
 </article>
 
@@ -387,8 +352,10 @@ arena.<span class="f">subscribeSensors</span>(pod, [<span class="s">"sonar"</spa
       <a href="teaching.html">Teaching</a>
       <a href="military.html">Military</a>
       <a href="technical.html">How it works</a>
+      <a href="try.html">Try it now</a>
       <a href="docs/index.html">Documentation</a>
-      <a href="https://arena.platopod.com/">Online arena</a>
+      <a href="docs/plato-pod-guide.pdf">The guide as a PDF</a>
+      <a href="https://arena.platopod.com/">Sign in to the online arena</a>
     </div>
     <div>
       <b>Us</b>

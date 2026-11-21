@@ -31,10 +31,11 @@
       <a href="teaching.html" aria-current="page">Teaching</a>
       <a href="military.html">Military</a>
       <a href="technical.html">How it works</a>
+      <a href="docs/index.html">Docs</a>
       <a href="about.html">About</a>
-      <a href="history.html">History</a>
     </nav>
-    <a class="btn" href="https://arena.platopod.com/">Sign in</a>
+    <a class="signin" href="https://arena.platopod.com/">Sign in</a>
+    <a class="btn ink" href="try.html">Try it now</a>
     <a class="btn solid" href="index.html#contact">Book a demo</a>
   </div>
 </header>
@@ -46,46 +47,74 @@
     <h1>Teaching with <span class="accent">real robots.</span></h1>
     <p class="lede">Your students write a plan and watch a real robot carry it out. The same
       arena serves a school class with no code, a first programming course, and final-year
-      work on control and planning.</p>
+      work on control and artificial intelligence. Four lessons are open to try today.</p>
   </div>
 
-  <figure class="wide">
-    <div class="frame">
-      <video width="1280" height="720" class="autoplay" controls playsinline muted loop preload="metadata" poster="img/sweep-poster.jpg"
-             aria-label="A phone recording of the console during a cooperative sweep, with a look at the desk: two pods cover the arena and the ground they have searched fills in.">
-        <source src="img/sweep.webm" type="video/webm">
-        <source src="img/sweep.mp4" type="video/mp4">
-      </video>
+  <div class="w">
+    <div class="rooms">
+      <article class="room">
+        <img src="img/try/room-plain.jpg" width="960" height="600" alt="A team's orders in plain English, read back step by step before anything moves." loading="lazy">
+        <div>
+          <p class="tag">No code</p>
+          <h2>Orders in plain English</h2>
+          <p>Teams write orders in words to get their pods past sensors and a patrol. Each
+             plan is read back before anything moves, so the class sees what the machine
+             understood. Used in a postgraduate surveillance course at UNSW Canberra.</p>
+          <p class="links"><a href="try.html">Try it</a> · <a href="docs/infiltration.html">How to play</a></p>
+        </div>
+      </article>
+      <article class="room">
+        <img src="img/try/room-python.jpg" width="960" height="600" alt="A pod's square traced on the arena in the 3D view." loading="lazy">
+        <div>
+          <p class="tag">First programs</p>
+          <h2>A square that will not close</h2>
+          <p>Ten lines of Python drive a pod in a square. It misses the start, and students
+             find out why and fix it by reading where the pod really is.</p>
+          <p class="links"><a href="try.html">Try it</a> · <a href="docs/python.html">The lesson</a></p>
+        </div>
+      </article>
+      <article class="room">
+        <img src="img/try/room-pid.jpg" width="960" height="600" alt="An oval and a zigzag of tape drawn on the arena, with a pod on the oval." loading="lazy">
+        <div>
+          <p class="tag">Control</p>
+          <h2>Following a line</h2>
+          <p>Tape drawn on the arena and a sensor under the pod. Students write the
+             controller, tune it, and watch the pod settle on the line or weave off it.</p>
+          <p class="links"><a href="try.html">Try it</a> · <a href="docs/pid.html">The lesson</a></p>
+        </div>
+      </article>
+      <article class="room">
+        <img src="img/try/room-swarm.jpg" width="960" height="600" alt="Five pods of one program spread over the arena, searching." loading="lazy">
+        <div>
+          <p class="tag">Artificial intelligence</p>
+          <h2>A swarm that searches</h2>
+          <p>One program drives a swarm of pods to find hidden objects, first with no plan,
+             then with one, and the class compares the ground each covers.</p>
+          <p class="links"><a href="try.html">Try it</a> · <a href="docs/swarm.html">The lesson</a></p>
+        </div>
+      </article>
     </div>
-    <figcaption>Two pods share out a desk-sized arena and find all six hidden mines in a
-      little over a minute. That was a fast run; a few minutes is usual. Recorded with the
-      corner markers the arena used to need.</figcaption>
-  </figure>
+    <p class="note centre">All four are open to anyone today, with no account:
+      <a href="try.html">try them</a>. The documentation has a page for each.</p>
+  </div>
 
   <div class="read">
-    <h2>A lesson at three levels</h2>
-    <ul class="facts">
-      <li><b>School</b><span>Students write orders in plain English, such as how to sweep a
-        room or take a flag. The orders are read back before anything moves, so the class
-        sees what the machine understood. No code.</span></li>
-      <li><b>First course</b><span>Ten lines of Python drive a pod: read its sonar, turn
-        away from the wall, try again. Any language works.</span></li>
-      <li><b>Advanced</b><span>Tune a controller and watch a real robot settle. Plan routes
-        round obstacles. Make two pods share a job. Play a team game against sensors and
-        cover.</span></li>
-    </ul>
-
     <h2>How a class runs</h2>
     <ul class="facts">
       <li><b>A room</b><span>You make a room and get a six-letter code, with an arena for
         each group. Your page links each group's console, projector picture and 3D
         view.</span></li>
-      <li><b>A pod each</b><span>A student types the code and their name and gets a pod of
-        their own, with its colour. The same name gets the same pod back.</span></li>
+      <li><b>A pod each</b><span>A student types the code, or scans it from the big screen,
+        and their name, and gets a pod of their own. The same name gets the same pod
+        back. A team game is joined as a team.</span></li>
       <li><b>A referee</b><span>Every exercise tells the students the task, enforces its
         rules, ends on time and marks the result. The same exercise gets harder by
         changing the rules: the keys, a drawn route, orders in plain English, a
         program.</span></li>
+      <li><b>A record</b><span>Every screen shows who won and each round's score, and what
+        the room played is kept as a report.</span></li>
+      <li><b>Any screen</b><span>The console runs in a browser, on a laptop, the big
+        screen or a phone, in 3D or as a map.</span></li>
     </ul>
     <p class="try"><a class="btn solid" href="https://arena.platopod.com/">Teachers: make a room <span class="arrow">→</span></a>
       <a class="btn" href="https://arena.platopod.com/join.html">Students: join with a code</a></p>
@@ -95,6 +124,7 @@
 
   <div class="read">
     <h2>Exercises</h2>
+    <p>The console's catalogue, each with its brief, rules and marks.</p>
   </div>
 
   <div class="read">
@@ -124,45 +154,54 @@
         <p>Two teams, their zones and a flag among obstacles. Each pod has its own set of
           simulated sensors, with their noise, so a team plans around what it can and
           cannot see.</p></div>
-      <div class="span2"><p class="tag">No code</p><h3>The plain-English track</h3>
-        <p>Students write a strategy in plain English. It is turned into a fixed set of
-          orders (go to, patrol, sweep, follow, keep away, wait, stop) and read back before
-          anything moves, so a team sees what the machine understood. Used in October 2026
-          in a postgraduate surveillance course at UNSW Canberra.</p></div>
     </div>
   </div>
 
+  <figure class="wide">
+    <div class="frame">
+      <video width="1280" height="720" class="autoplay" controls playsinline muted loop preload="metadata" poster="img/sweep-poster.jpg"
+             aria-label="A phone recording of the console during a cooperative sweep, with a look at the desk: two pods cover the arena and the ground they have searched fills in.">
+        <source src="img/sweep.webm" type="video/webm">
+        <source src="img/sweep.mp4" type="video/mp4">
+      </video>
+    </div>
+    <figcaption>Route clearance on real pods: two share out a desk-sized arena and find all
+      six hidden mines in a little over a minute. That was a fast run; a few minutes is
+      usual. Recorded with the corner markers the arena used to need.</figcaption>
+  </figure>
+
   <div class="read">
     <h2>Example code</h2>
-    <p>This takes a free pod, reads its sonar and turns away from anything closer than
-      20&nbsp;cm. The same calls exist in C, Java and JavaScript, and any language that
-      can open a web connection can drive the arena: see <a href="technical.html">how it
-      works</a>.</p>
+    <p>This joins the first-programs room and drives a pod in a square, reading where it
+      really is after every step. The same library exists for C, Java and JavaScript, and
+      any language that can open a web connection can drive the arena.</p>
     <div class="codetabs">
       <div class="codepane" data-lang="Python">
         <p class="codelabel">Python</p>
-        <pre><code><span class="k">from</span> platopod <span class="k">import</span> <span class="t">Arena</span>
+        <pre><code><span class="k">import</span> math, time
+<span class="k">from</span> platopod <span class="k">import</span> <span class="t">Arena</span>
 
-arena = <span class="t">Arena</span>(<span class="s">"wss://a.arena.platopod.com/api/control"</span>)
-pod = arena.<span class="f">take_pod</span>()                   <span class="c"># waits for a pod no one else is driving</span>
+arena, pod = <span class="t">Arena</span>.<span class="f">join_room</span>(<span class="s">"TLQGNR"</span>, <span class="s">"Ada"</span>)   <span class="c"># the room's code, and your name</span>
 
-arena.<span class="f">subscribe_sensors</span>(pod, [<span class="s">"sonar"</span>])
-
-<span class="k">while</span> <span class="k">True</span>:
-    sonar = arena.<span class="f">get_sensor</span>(pod, <span class="s">"sonar"</span>)
-    <span class="k">if</span> sonar:
-        ahead = sonar[<span class="s">"ranges"</span>][<span class="n">0</span>]         <span class="c"># beam 0 points ahead</span>
-        <span class="k">if</span> ahead &lt; <span class="n">0.20</span>:                   <span class="c"># within 20 cm</span>
-            arena.<span class="f">cmd_vel</span>(pod, <span class="n">0.0</span>, <span class="n">1.2</span>)   <span class="c"># turn on the spot</span>
-        <span class="k">else</span>:
-            arena.<span class="f">cmd_vel</span>(pod, <span class="n">0.10</span>, <span class="n">0.0</span>)  <span class="c"># drive forward</span>
-    arena.<span class="f">sleep</span>(<span class="n">0.1</span>)</code></pre>
+<span class="k">for</span> side <span class="k">in</span> range(<span class="n">4</span>):
+    start = pod.pose
+    <span class="k">while</span> math.dist((start.x, start.y), (pod.pose.x, pod.pose.y)) &lt; <span class="n">0.25</span>:
+        pod.<span class="f">drive</span>(<span class="n">0.1</span>, <span class="n">0.0</span>)                       <span class="c"># forward at 10 cm/s</span>
+        time.sleep(<span class="n">0.1</span>)
+    heading = start.theta + math.pi / <span class="n">2</span>           <span class="c"># a quarter turn left</span>
+    <span class="k">while</span> abs(math.remainder(heading - pod.pose.theta, math.tau)) &gt; <span class="n">0.02</span>:
+        pod.<span class="f">drive</span>(<span class="n">0.0</span>, <span class="n">0.8</span>)                       <span class="c"># turn on the spot</span>
+        time.sleep(<span class="n">0.1</span>)
+pod.<span class="f">stop</span>()</code></pre>
       </div>
     </div>
+    <p><a href="docs/index.html">The documentation</a> has every call, the other three
+      languages, and the notebooks for the four lessons.</p>
 
     <h2>See it run</h2>
-    <p><a class="btn solid" href="index.html#contact">Book a demonstration <span class="arrow">→</span></a>
-      <a class="btn" href="https://arena.platopod.com/">Open the arena</a></p>
+    <p><a class="btn ink" href="try.html">Try it now <span class="arrow">→</span></a>
+      <a class="btn solid" href="index.html#contact">Book a demonstration <span class="arrow">→</span></a>
+      <a class="btn" href="docs/index.html">Documentation</a></p>
   </div>
 </article>
 
@@ -180,8 +219,10 @@ arena.<span class="f">subscribe_sensors</span>(pod, [<span class="s">"sonar"</sp
       <a href="teaching.html">Teaching</a>
       <a href="military.html">Military</a>
       <a href="technical.html">How it works</a>
+      <a href="try.html">Try it now</a>
       <a href="docs/index.html">Documentation</a>
-      <a href="https://arena.platopod.com/">Online arena</a>
+      <a href="docs/plato-pod-guide.pdf">The guide as a PDF</a>
+      <a href="https://arena.platopod.com/">Sign in to the online arena</a>
     </div>
     <div>
       <b>Us</b>
