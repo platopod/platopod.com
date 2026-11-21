@@ -58,8 +58,8 @@
     arena's walls are drawn in software, and a real pod and virtual units share it. Inside
     the box, vision, the world and the sensors are separate parts. Three face outward: the
     console and student code over the box's own Wi-Fi, the link to ATAK, and the link to
-    each pod over Bluetooth. On the pod, a receiver feeds the motors, which drive the
-    wheels; the camera sees the pod move, which closes the loop.</desc>
+    each pod over Bluetooth. On the pod, a radio feeds the motors, which drive the
+    wheels, and reports how far they turned; the camera sees the pod move, which closes the loop.</desc>
   <defs><marker id="aw-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
     orient="auto-start-reverse"><path class="a-head" d="M0,0 L10,5 L0,10 z"/></marker>
     <marker id="aw-l" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
@@ -91,7 +91,7 @@
   <rect class="a-podp" x="360" y="420" width="580" height="86" rx="16"/>
   <rect class="a-hwn" x="384" y="438" width="160" height="50" rx="10"/><text class="a-ht" x="464" y="468" text-anchor="middle">Wheels</text>
   <rect class="a-hwn" x="570" y="438" width="160" height="50" rx="10"/><text class="a-ht" x="650" y="468" text-anchor="middle">Motors</text>
-  <rect class="a-hwn" x="756" y="438" width="160" height="50" rx="10"/><text class="a-ht" x="836" y="468" text-anchor="middle">Receiver</text>
+  <rect class="a-hwn" x="756" y="438" width="160" height="50" rx="10"/><text class="a-ht" x="836" y="468" text-anchor="middle">Radio</text>
   <path class="a-ink" d="M754 463 H734" marker-end="url(#aw-l)"/>
   <path class="a-ink" d="M568 463 H548" marker-end="url(#aw-l)"/>
   <path class="a-ln" d="M204 66 L378 94" marker-end="url(#aw-a)"/>
@@ -120,8 +120,8 @@
     arena's walls are drawn in software, and a real pod and virtual units share it. Inside
     the box, vision, the world and the sensors are separate parts. Three face outward: the
     console and student code over the box's own Wi-Fi, the link to ATAK, and the link to
-    each pod over Bluetooth. On the pod, a receiver feeds the motors, which drive the
-    wheels; the camera sees the pod move, which closes the loop.</desc>
+    each pod over Bluetooth. On the pod, a radio feeds the motors, which drive the
+    wheels, and reports how far they turned; the camera sees the pod move, which closes the loop.</desc>
   <defs><marker id="at-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
     orient="auto-start-reverse"><path class="a-head" d="M0,0 L10,5 L0,10 z"/></marker>
     <marker id="at-l" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
@@ -153,7 +153,7 @@
   <rect class="a-podp" x="16" y="730" width="368" height="76" rx="16"/>
   <rect class="a-hwn" x="30" y="744" width="96" height="48" rx="10"/><text class="a-ht" x="78" y="773" text-anchor="middle">Wheels</text>
   <rect class="a-hwn" x="150" y="744" width="96" height="48" rx="10"/><text class="a-ht" x="198" y="773" text-anchor="middle">Motors</text>
-  <rect class="a-hwn" x="270" y="744" width="96" height="48" rx="10"/><text class="a-ht" x="318" y="773" text-anchor="middle">Receiver</text>
+  <rect class="a-hwn" x="270" y="744" width="96" height="48" rx="10"/><text class="a-ht" x="318" y="773" text-anchor="middle">Radio</text>
   <path class="a-ink" d="M268 768 H250" marker-end="url(#at-l)"/>
   <path class="a-ink" d="M148 768 H130" marker-end="url(#at-l)"/>
   <path class="a-ln" d="M242 57 H392 V419 H374" marker-end="url(#at-a)"/>
@@ -182,7 +182,8 @@
       to it. The three solid boxes are its only doors to the outside. To everything but
       the pod link, a real pod and a virtual unit look the same.
       The line from the pod back to the table shows how a pod's movement returns to the
-      system, which is by the camera seeing it.</figcaption>
+      system: the camera sees it move, and between the camera's fixes the pod's wheels
+      report how far they have turned.</figcaption>
   </figure>
 
   <div class="read">
@@ -204,7 +205,8 @@
     <h2>The pods</h2>
     <p>Each pod is a round robot 85&nbsp;mm across, with two wheels, a small rechargeable
       battery and a marker on its lid that the camera reads. It is kept simple by design:
-      it takes wheel commands over Bluetooth and stops if they stop arriving. The
+      it takes wheel commands over Bluetooth, reports how far its wheels have turned, and
+      stops if the commands stop arriving. The
       intelligence is on the server, where it can be read, changed and tested.</p>
   </div>
 
@@ -254,13 +256,13 @@
     <div class="frame">
       <video width="1200" height="660" class="autoplay" controls playsinline muted loop preload="metadata"
              poster="img/console-3d-poster.jpg"
-             aria-label="The console in 3D during a round of the surveillance game: pods crossing from a start strip to an objective strip past cover and a patrol, and a sensor's reach lighting up.">
+             aria-label="The console in 3D during a round of the surveillance game: a patrol pod circles two radars among scattered cover, and turns to intercept an intruder the radars spot.">
         <source src="img/console-3d.webm" type="video/webm">
         <source src="img/console-3d.mp4" type="video/mp4">
       </video>
     </div>
-    <figcaption>A round of the surveillance game in the 3D view, on the hosted arena with
-      virtual pods, three times speed.</figcaption>
+    <figcaption>A round of the surveillance game in the 3D view: a patrol circling two
+      radars. On the hosted arena with virtual pods, three times speed.</figcaption>
   </figure>
 
   <figure class="wide">

@@ -360,6 +360,7 @@ figure.wide .tape img { flex: none; height: 380px; width: auto; max-width: none;
 .room { display: flex; flex-direction: column; background: var(--card); border-radius: var(--radius);
         overflow: hidden; box-shadow: 0 1px 2px rgba(23, 20, 15, .05), 0 8px 28px rgba(23, 20, 15, .06); }
 .room img { aspect-ratio: 16 / 10; object-fit: cover; width: 100%; height: auto; background: #0d1117; }
+.room img.fit { object-fit: contain; background: #16181c; }
 .room > div { padding: 22px 26px 26px; }
 .article .room h2 { margin: 4px 0 0; font-size: var(--fs-body); letter-spacing: -.01em; }
 .room .tag { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--fs-small);
