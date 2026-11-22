@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real pods under your camera · Plato Pod documentation</title>
+<meta name="description" content="Plato Pod documentation: demo rooms open to anyone, notebooks, running your own room, ATAK, privacy.">
+<meta property="og:title" content="Real pods under your camera · Plato Pod documentation">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://platopod.com/img/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .docs { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 56px; padding-top: 56px; }
+  .docnav { position: sticky; top: 96px; align-self: start; display: flex; flex-direction: column;
+            gap: 2px; font-size: var(--fs-small); }
+  .docnav b { font-weight: 600; margin: 14px 0 4px; color: var(--ink-3); }
+  .docnav b:first-child { margin-top: 0; }
+  .docnav a { color: var(--ink-2); text-decoration: none; padding: 5px 10px; border-radius: 8px; }
+  .docnav a:hover { background: var(--accent-mist); }
+  .docnav a[aria-current="page"] { color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+  .docs .read { margin: 0; padding: 0; }
+  .guide .read > h1 { margin-bottom: 8px; }
+  .guide .read > ol, .guide .read > ul { padding-left: 1.4em; }
+  .guide .read p, .guide .read li { font-size: var(--fs-body); }
+  .guide .read > p { margin-top: 18px; }
+  .guide .read > h2 { font-size: clamp(24px, 2.6vw, 30px); margin-top: 56px; }
+  .guide .read > p:has(> b:only-child) { margin-top: 32px; }
+  .scroll { overflow-x: auto; margin-top: 22px; }
+  .guide table { border-collapse: collapse; font-size: var(--fs-small); background: var(--card);
+                 border: 1px solid var(--rule); border-radius: 12px; }
+  .guide th, .guide td { padding: 10px 14px; text-align: left; vertical-align: top;
+                         border-bottom: 1px solid var(--rule); }
+  .guide th { font-weight: 600; color: var(--ink); }
+  .guide tr:last-child td { border-bottom: none; }
+  .guide figure { margin: 28px 0 0; }
+  .guide figure img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--rule); }
+  .guide code { background: var(--accent-mist); padding: 1px 6px; border-radius: 6px; }
+  .pager { display: flex; justify-content: space-between; gap: 16px; margin-top: 64px;
+           padding-top: 20px; border-top: 1px solid var(--rule); font-size: var(--fs-small); }
+  .pager a { text-decoration: none; }
+  @media (max-width: 860px) {
+    .docs { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 28px; }
+    .docnav { position: static; flex-direction: row; flex-wrap: wrap; gap: 4px; }
+    .docnav b { width: 100%; margin: 6px 0 0; }
+  }
+  @media print {
+    .mast, .foot, .docnav, .pager { display: none; }
+    .docs { display: block; padding-top: 0; }
+    .guide figure, .guide table { break-inside: avoid; }
+    .guide section + section { break-before: page; }
+  }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="w">
+    <a class="brand" href="../index.html" aria-label="Plato Pod">Plato<span>Pod</span></a>
+    <nav>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../military.html">Military</a>
+      <a href="../technical.html">How it works</a>
+      <a href="index.html" aria-current="page">Docs</a>
+      <a href="../about.html">About</a>
+    </nav>
+    <a class="signin" href="https://arena.platopod.com/">Sign in</a>
+    <a class="btn ink" href="../try.html">Try it now</a>
+    <a class="btn solid" href="../index.html#contact">Book a demo</a>
+  </div>
+</header>
+<main><div class="w docs">
+<nav class="docnav" aria-label="Documentation">
+<b>Get started</b>
+<a href="index.html">Start here</a>
+<b>Demo rooms</b>
+<a href="python.html">First programs in Python</a>
+<a href="pid.html">PID line following</a>
+<a href="swarm.html">A swarm that searches</a>
+<a href="infiltration.html">Infiltration in plain English</a>
+<b>Teachers</b>
+<a href="own-room.html">Run your own room</a>
+<a href="camera.html" aria-current="page">Real pods under your camera</a>
+<a href="activities.html">Set up activities</a>
+<a href="atak.html">ATAK</a>
+<b>Reference</b>
+<a href="privacy.html">Students and privacy</a>
+<a href="troubleshooting.html">Troubleshooting</a>
+<b>Keep</b>
+<a href="plato-pod-guide.pdf">The whole guide as a PDF</a>
+</nav>
+<article class="article guide"><div class="read">
+<h1>Real pods under your camera</h1>
+<p>With a camera over a table and real pods, your laptop is the link: it watches the table, drives the pods over Bluetooth and sends everything to your room's arena. There are no corner markers. One pod drives a small circle to measure the table, and then you draw the arena on the camera's picture.</p>
+<h2>Before the class</h2>
+<ol><li>Make a room (see <a href="own-room.html">Run your own room</a>) and open its <b>console</b> on the laptop with the camera.</li><li>Fix the camera so it cannot move, looking down at the table. It can be tilted. If the camera or the table moves later, the arena has to be measured again.</li><li>Switch the pods on, and put one near the middle of the picture with room around it.</li><li>Start the camera program on the laptop, in a terminal, from the Plato Pod folder:<ul><li><code>python3 tools/agent.py --server https://a.arena.platopod.com --pin &lt;PIN&gt; --camera "Global Shutter" --pods 6 --radio ble</code></li><li><code>--server</code> is your arena's address, the one the console opens on.</li><li><code>--pin</code> is the room's PIN, the number after <code>#pin=</code> in the console's address.</li><li><code>--camera</code> takes the camera's name, or part of it (<code>"Global Shutter"</code> for the IR camera), or its number (<code>0</code>).</li><li><code>--pods</code> lists the tag number on each pod, for example <code>--pods 5 6</code>.</li></ul></li><li>In the console, the top bar says <b>No arena yet</b>, and the pods appear where the camera sees them.</li></ol>
+<h2>Measure the table</h2>
+<ol><li>Open the <b>Arena</b> sheet. It says <i>The table has not been measured</i>.</li><li>Press <b>Calibrate</b>. The pod drives a small circle. The sheet shows <i>Measuring the table…</i> and how far it has got.</li><li>When it finishes, the sheet says <i>Table measured</i>.</li></ol>
+<p>The lap also fits the camera's lens to the pod's wheels, so the measurements get better each time.</p>
+<h2>Draw the arena</h2>
+<ol><li>In the Arena sheet, press <b>Draw the arena</b>. In 3D, the camera's picture is laid on the table seen from above.</li><li>Choose <b>Rectangle</b> and click two opposite corners, or <b>Any shape</b> and click each corner in turn, then <b>Close</b>.<ul><li>Every corner must stay inside the dashed outline: that is what the camera sees. A rectangle turns red when a corner leaves it.</li></ul></li><li>Press <b>Confirm</b>. The top bar shows the arena's size, and the pods are kept inside it.</li></ol>
+<p>To start again, press <b>Draw a new arena</b>. This removes the arena and stops the pods until you draw the new one.</p>
+<h2>The next time</h2>
+<p>The laptop keeps the table's measurement and the arena in the <code>.platopod</code> folder in your home folder. At the next start, the Arena sheet asks <i>Use the previous arena?</i>:</p>
+<ul><li><b>Use it</b> only if the camera and the table have not moved. It is checked as soon as a pod's tag is seen.</li><li><b>Discard it</b> and press <b>Calibrate</b> if anything has moved.</li></ul>
+<p>Leave out <code>--calibration</code> when you start the camera program: a different calibration file given there takes over from the one the last lap kept.</p>
+<h2>Light</h2>
+<p>A dark table hides the tags. In the <b>Layers</b> sheet, set <b>Camera brightness</b> to <i>Set by hand</i>:</p>
+<ul><li><b>Exposure</b>: shorter keeps moving pods sharp.</li><li><b>Gain</b>: in a dim room, raise the gain rather than the exposure.</li></ul>
+<p>You can also give the light at the start, with <code>--exposure</code> and <code>--gain</code>.</p>
+<h2>When it goes wrong</h2>
+<div class="scroll"><table><thead><tr><th>Problem</th><th>Fix</th></tr></thead><tbody><tr><td>The top bar says <b>Camera lost: check its cable</b></td><td>The laptop has had no picture for 2 seconds, and the pods' places are withdrawn. Plug the camera back in, in any port: the program finds it by name within a few seconds.</td></tr><tr><td>The top bar says <b>Camera laptop off the line</b></td><td>The laptop changed network, or the Wi-Fi dropped. Wait: the program reconnects by itself within about 15 seconds.</td></tr><tr><td>Calibration failed: lost sight of the pod</td><td>Keep the pod in the picture and nothing over it, then press <b>Calibrate</b> again.</td></tr><tr><td>Calibration failed: the pod drives the wrong way from its tag</td><td>The lid is on the wrong way round. Turn it, then press <b>Calibrate</b> again.</td></tr><tr><td>Calibration failed: another pod moved, or the pod is not moving</td><td>Check each pod's tag matches the number in <code>--pods</code>, and that it is switched on.</td></tr><tr><td><i>Arena stopped: the camera or table may have moved</i></td><td>Look at the picture. If the dashed outline is still on the table, press <b>It is still right</b>; otherwise <b>Measure again</b>.</td></tr><tr><td>A pod is not seen</td><td>Make the table brighter (see Light), and keep the tag flat and in view.</td></tr><tr><td>The arena sits a little off the table</td><td>Raised things lean away from a tilted camera. Draw the corners where the table's edge is in the picture.</td></tr><tr><td>No Bluetooth on Linux</td><td>Run <code>rfkill unblock bluetooth</code> and start the program again.</td></tr></tbody></table></div>
+<div class="pager">
+<a href="troubleshooting.html">← Troubleshooting</a>
+<span></span>
+</div>
+</div></article>
+</div></main>
+
+<footer class="foot">
+  <div class="w">
+    <div>
+      <b>Plato Pod</b>
+      Real robots, virtual force, one arena.<br>
+      Office 302, Building 16, UNSW Canberra at ADFA
+    </div>
+    <div>
+      <b>Pages</b>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../military.html">Military</a>
+      <a href="../technical.html">How it works</a>
+      <a href="../try.html">Try it now</a>
+      <a href="index.html">Documentation</a>
+      <a href="plato-pod-guide.pdf">The guide as a PDF</a>
+      <a href="https://arena.platopod.com/">Sign in to the online arena</a>
+    </div>
+    <div>
+      <b>Us</b>
+      <a href="../about.html">About</a>
+      <a href="../history.html">History</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>
