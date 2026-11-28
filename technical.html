@@ -303,11 +303,15 @@
         cover, visibility and the target's armour. Damage slows a unit and degrades its
         fire.</span></li>
       <li><b>Rules and opposing force</b><span>Weapons control and the rules of engagement
-        are checked before each shot. The opposing force needs no operator.</span></li>
+        are checked before each shot. The opposing force needs no operator. Both run on a
+        classroom box set up for the tactical exercises, not yet in the hosted
+        rooms.</span></li>
       <li><b>Umpire</b><span>Gas releases, wind shifts and strikes are injected mid-exercise
         and show on sensors and maps straight away.</span></li>
-      <li><b>Safety</b><span>Whatever drives it, a pod will not leave the arena, cross a
-        declared obstacle or drive into another robot.</span></li>
+      <li><b>Safety</b><span>Whatever drives it, every command is checked by the server
+        first: a pod is stopped short of the arena's edge, a declared obstacle and other
+        pods, to within the camera's tracking accuracy. A pod that hears no command for
+        0.6 s stops.</span></li>
     </ul>
 
     <h2>Your own code, any language</h2>
@@ -336,8 +340,8 @@ arena, pod = <span class="t">Arena</span>.<span class="f">join_room</span>(<span
 pod.<span class="f">stop</span>()</code></pre>
       </div>
     </div>
-    <p><a href="docs/index.html">The documentation</a> has every call and the other three
-      languages.</p>
+    <p><a href="docs/index.html">The documentation</a> has a guide to the Python library
+      and a notebook for each lesson.</p>
     <p class="note-line">A real pod has a narrow range of speeds, so the server fits each
       command to what that pod can do.</p>
 
